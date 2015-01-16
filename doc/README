@@ -460,10 +460,10 @@ Here are the steps to run the tutorial on the midway cluster, assuming you have 
 
 1. Ensure you have enable ssh keys for passwordless access to the midway login nodes.
 2. Set MIDWAY_USERNAME to your username in the swift-tutorial/setup.sh file.
-3. Set the following line in the swift-tutorial/swift.conf file:
-----
-sites: [midway]
-----
+3. Set the following line in the swift-tutorial/swift.conf file.
+    ----
+    sites: [midway]
+    ----
 4. Run source setup.sh
 
 OSGConnect at UChicago
@@ -478,9 +478,9 @@ Here are the steps to run the tutorial via OSGConnect on the Open Science Grid, 
 1. Ensure you have enable ssh keys for passwordless access to the OSGConnect login nodes.
 2. Set OSG_USERNAME to your username with OSGConnect in the swift-tutorial/setup.sh file.
 3. Set the following line in the swift-tutorial/swift.conf file:
-----
-sites: [osgc]
-----
+    ----
+    sites: [osgc]
+    ----
 4. Run source setup.sh
 
 Amazon EC2
