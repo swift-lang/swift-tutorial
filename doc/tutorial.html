@@ -791,17 +791,20 @@ portable fashion: The same script runs on multicore computers,
 clusters, clouds, grids, and supercomputers.</p></div>
 <div class="paragraph"><p>In this tutorial, you&#8217;ll be able to first try a few Swift examples
 (parts 1-3) on your local machine, to get a sense of the language.
-Then in parts 4-6 you&#8217;ll run similar workflows on any resource
-you may have access to such as clouds (Amazon Web Services), Cray HPC systems,
+Then, in parts 4-6 you&#8217;ll run similar workflows on any resource
+you may have access to, such as clouds (Amazon Web Services), Cray HPC systems,
 clusters etc, and see how more complex workflows can be expressed
 with Swift scripts.</p></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_running_the_tutorial_on_you_local_machine">Running the tutorial on you local machine</h2>
+<h2 id="_running_the_tutorial">Running the tutorial</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>If you are running the swift-cloud-tutorial on your local machine, ensure that
-you have swift-0.95-RC6 or greater installed.</p></div>
+<div class="paragraph"><p>To run the swift-tutorial, ensure that java (1.7+) and swift-0.96 is installed
+on the machine you would be using to run the tutorials on.</p></div>
+<div class="paragraph"><p>Swift modules are available on Beagle, Midway and OSGConnect. If a module
+is not available the following steps describe the installation procedure.</p></div>
+<div class="paragraph"><p><span class="red">TODO: Ensure latest modules are available on Beagle/Midway/OSGConnect</span></p></div>
 <div class="sect2">
 <h3 id="_swift_installation">Swift installation</h3>
 <div class="listingblock">
@@ -817,15 +820,15 @@ tar xfz swift-<span style="color: #993399">0.96</span><span style="color: #99000
 <span style="font-weight: bold"><span style="color: #0000FF">export</span></span> <span style="color: #009900">PATH</span><span style="color: #990000">=</span><span style="color: #009900">$PATH</span><span style="color: #990000">:</span>/path/to/swift-<span style="color: #993399">0.96</span>/bin</tt></pre></div></div>
 </div>
 <div class="sect2">
-<h3 id="_get_the_swift_tutorial_repository">Get the swift-tutorial repository</h3>
+<h3 id="_setup_the_swift_tutorial">Setup the swift-tutorial</h3>
 <div class="paragraph"><p>Clone the repository from github</p></div>
 <div class="listingblock">
 <div class="content"><!-- Generator: GNU source-highlight 3.1.6
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
-<pre><tt>git clone https<span style="color: #990000">:</span>//github<span style="color: #990000">.</span>com/yadudoc/swift-on-cloud<span style="color: #990000">.</span>git
-cd swift-on-cloud</tt></pre></div></div>
+<pre><tt>git clone https<span style="color: #990000">:</span>//github<span style="color: #990000">.</span>com/swift-lang/swift-tutorial<span style="color: #990000">.</span>git
+cd swift-tutorial</tt></pre></div></div>
 <div class="paragraph"><p>Or, download the zip file from github and unpack.</p></div>
 <div class="listingblock">
 <div class="content"><!-- Generator: GNU source-highlight 3.1.6
@@ -833,10 +836,20 @@ by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
 <pre><tt><span style="font-style: italic"><span style="color: #9A1900"># Download</span></span>
-wget https<span style="color: #990000">:</span>//github<span style="color: #990000">.</span>com/yadudoc/swift-on-cloud/archive/master<span style="color: #990000">.</span>zip
+wget https<span style="color: #990000">:</span>//github<span style="color: #990000">.</span>com/swift-lang/swift-tutorial/archive/master<span style="color: #990000">.</span>zip
 unzip master<span style="color: #990000">.</span>zip
-mv swift-on-cloud-master swift-on-cloud
-cd swift-on-cloud</tt></pre></div></div>
+mv swift-tutorial-master swift-tutorial
+cd swift-tutorial</tt></pre></div></div>
+<div class="paragraph"><p>Now, run the tutorial setup script</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>source setup.sh  # You must run this with "source" !</code></pre>
+</div></div>
+<div class="paragraph"><p>Doing this will add the sample applications simulate and stats
+(explained in the next part) and some other functionalities to
+your local $PATH for you to run the tutorial.</p></div>
+<div class="paragraph"><p>Note: We will come back to the setup.sh script in part4-6 to
+enable remote sites for computation.</p></div>
 </div>
 </div>
 </div>
@@ -844,7 +857,7 @@ cd swift-on-cloud</tt></pre></div></div>
 <h2 id="_simple_science_applications_for_the_workflow_tutorial">Simple "science applications" for the workflow tutorial</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>This tutorial is based on two intentionally trivial example programs,
-<code>simulation.sh</code> and <code>stats.sh</code>, (implemented as bash shell scripts)
+<code>simulate.sh</code> and <code>stats.sh</code>, (implemented as bash shell scripts)
 that serve as easy-to-understand proxies for real science
 applications. These "programs" behave as follows.</p></div>
 <div class="sect2">
@@ -1048,6 +1061,7 @@ app (file o) simulation ()
 file f &lt;"sim.out"&gt;;
 f = simulation();</code></pre>
 </div></div>
+<div class="paragraph"><p>#TODO: Update the following output block</p></div>
 <div class="paragraph"><p>To run this script, run the following command:</p></div>
 <div class="listingblock">
 <div class="content">
@@ -1078,10 +1092,10 @@ http://www.gnu.org/software/src-highlite -->
 <td class="icon">
 <img src="./images/icons/note.png" alt="Note" />
 </td>
-<td class="content">You&#8217;ll also find two Swift configuration files in each <code>partNN</code>
-directory of this tutorial.  These specify the environment-specific
-details of where to find application programs (file <code>apps</code>) and where
-to run them (file <code>sites.xml</code>).  These files will be explained in more
+<td class="content">You&#8217;ll also find a Swift configuration files in each <code>partNN</code>
+directory of this tutorial. These specify the environment-specific
+details of target computational resources where the application programs would be execute.
+These swift configuration file will be explained in more
 detail in parts 4-6, and can be ignored for now.</td>
 </tr></table>
 </div>
@@ -1113,14 +1127,6 @@ foreach i in [0:9] {
 <div class="paragraph"><p>The script also shows an
 example of naming the output files of an ensemble run. In this case, the output files will be named
 <code>output/sim_N.out</code>.</p></div>
-<div class="paragraph"><p>In part 2, we also update the apps file. Instead of using shell script (simulate.sh), we use
-the equivalent python version (simulate.py). The new apps file now looks like this:</p></div>
-<div class="listingblock">
-<div class="content">
-<pre><code></code></pre>
-</div></div>
-<div class="paragraph"><p>Swift does not need to know anything about the language an application is written in. The application
-can be written in Perl, Python, Java, Fortran, or any other language.</p></div>
 <div class="paragraph"><p>To run the script and view the output:</p></div>
 <div class="listingblock">
 <div class="content">
@@ -1281,6 +1287,226 @@ on the site&#8217;s compute nodes.</p></div>
 <div class="sect1">
 <h2 id="_running_applications_on_compute_resources_with_swift">Running applications on compute resources with Swift</h2>
 <div class="sectionbody">
+<div class="paragraph"><p>From the next section onwards, we will run the user-applications on remote
+sites. To do this, go over the steps for the remote site that you have access
+to.</p></div>
+<div class="sect2">
+<h3 id="_midway_cluster_at_uchicago">Midway cluster at UChicago</h3>
+<div class="paragraph"><p>The midway cluster is a shared computational resource administered by the Research
+Computing Center at the University of Chicago. Here&#8217;s documentation on the RCC resources:
+<a href="https://rcc.uchicago.edu/docs/">RCC docs</a></p></div>
+<div class="paragraph"><p>Here are the steps to run the tutorial on the midway cluster, assuming you have access:</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Ensure you have enable ssh keys for passwordless access to the midway login nodes.
+</p>
+</li>
+<li>
+<p>
+Set MIDWAY_USERNAME to your username in the swift-tutorial/setup.sh file.
+</p>
+</li>
+<li>
+<p>
+Set the following line in the swift-tutorial/swift.conf file.
+</p>
+<div class="listingblock">
+<div class="content">
+<pre><code>   sites: [midway]</code></pre>
+</div></div>
+</li>
+<li>
+<p>
+Run source setup.sh
+</p>
+</li>
+</ol></div>
+</div>
+<div class="sect2">
+<h3 id="_beagle_supercomputer_cray">Beagle Supercomputer (Cray)</h3>
+<div class="paragraph"><p>The Beagle supercomputer is a Cray XE6 system at the Computation Institute. Here&#8217;s documentation on Beagle:
+<a href="http://beagle.ci.uchicago.edu/using-beagle/">Beagle docs</a></p></div>
+<div class="paragraph"><p>Here are the steps to run the tutorial on the Beagle supercomputer, assuming you have access:</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Ensure you have enable ssh keys for passwordless access to the Beagle login nodes.
+</p>
+</li>
+<li>
+<p>
+Set BEAGLE_USERNAME to your username in the swift-tutorial/setup.sh file.
+</p>
+</li>
+<li>
+<p>
+Set BEAGLE_PROJECT to the project under which you have allocations on Beagle.
+</p>
+</li>
+<li>
+<p>
+Set the following line in the swift-tutorial/swift.conf file.
+</p>
+<div class="listingblock">
+<div class="content">
+<pre><code>   sites: [beagle]</code></pre>
+</div></div>
+</li>
+<li>
+<p>
+Run source setup.sh
+</p>
+</li>
+</ol></div>
+<div class="paragraph"><p>Note: Run "show_alloc" on Beagle to see your project and allocation balance.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_osgconnect_at_uchicago">OSGConnect at UChicago</h3>
+<div class="paragraph"><p>The Open Science Grid (OSG) and University of Chicago provides a service to access a vast
+pool of opportunistic computational resources spread across the U.S. Here&#8217;s documentation on the OSG Connect resources:
+<a href="https://confluence.grid.iu.edu/display/CON/Home">OSGConnect docs</a>.</p></div>
+<div class="paragraph"><p>Here are the steps to run the tutorial via OSGConnect on the Open Science Grid, assuming you have access:</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Ensure you have enable ssh keys for passwordless access to the OSGConnect login nodes.
+</p>
+</li>
+<li>
+<p>
+Set OSG_USERNAME to your username with OSGConnect in the swift-tutorial/setup.sh file.
+</p>
+</li>
+<li>
+<p>
+Set the following line in the swift-tutorial/swift.conf file:
+</p>
+<div class="listingblock">
+<div class="content">
+<pre><code>   sites: [osgc]</code></pre>
+</div></div>
+</li>
+<li>
+<p>
+Run source setup.sh
+</p>
+</li>
+</ol></div>
+</div>
+<div class="sect2">
+<h3 id="_amazon_ec2">Amazon EC2</h3>
+<div class="paragraph"><p>Amazon Elastic Compute Cloud (Amazon EC2) is a web service that provides resizable compute capacity in the cloud.
+Getting cloud resources on-demand from Amazon is now as simple as setting up an account and attaching a credit card.</p></div>
+<div class="sect3">
+<h4 id="_sign_up_online">Sign up online</h4>
+<div class="paragraph"><p>Sign up for Amazon Web Services (AWS) and create an IAM user by following instructions
+from <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/get-set-up-for-amazon-ec2.html">Amazon&#8217;s Setup Documentation</a>.
+From the documentation you would only need to do the following two steps:</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+<a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/get-set-up-for-amazon-ec2.html#sign-up-for-aws">Sign up for AWS</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/get-set-up-for-amazon-ec2.html#create-an-iam-user">Create and IAM User</a>
+</p>
+</li>
+</ol></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="./images/icons/note.png" alt="Note" />
+</td>
+<td class="content">To create access keys, you must have permissions to perform the required
+IAM actions. For more information, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/ManagingCredentials.html">Managing Credentials using IAM</a>.</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>If you already have an account, here&#8217;s the steps to get you IAM access keys:</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Go to the IAM console.
+</p>
+</li>
+<li>
+<p>
+From the navigation menu, click Users.
+</p>
+</li>
+<li>
+<p>
+Select your IAM user name, or create a new one.
+</p>
+</li>
+<li>
+<p>
+Click User Actions, and then click Manage Access Keys.
+</p>
+</li>
+<li>
+<p>
+Click Create Access Key.
+</p>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="./images/icons/note.png" alt="Note" />
+</td>
+<td class="content">Your keys will look something like this:<br />
+Access key ID example    : AKIAIOSFODNN7*EXAMPLE*<br />
+Secret access key example: wJalrXUtnFEMI/K7MDENG/bPxRfiCY*EXAMPLEKEY*<br /></td>
+</tr></table>
+</div>
+</li>
+<li>
+<p>
+Click Download Credentials, and store the keys (a .csv file) in a secure location.
+</p>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="./images/icons/note.png" alt="Note" />
+</td>
+<td class="content">Your secret key will no longer be available through the AWS Management Console;
+you will have the only copy. Keep it confidential in order to protect your account.</td>
+</tr></table>
+</div>
+</li>
+<li>
+<p>
+Set AWS_CREDENTIALS_FILE in setup.sh to the credentials files downloaded in the previous step.
+</p>
+</li>
+</ol></div>
+<div class="paragraph"><p>Swift requires python and apache-libcloud to talk to the Amazon EC2. To install this package follow these steps:</p></div>
+<div class="paragraph"><p>Install python and libcloud library. The following are steps for <strong>debian</strong> based
+linux distributions such as <strong>Ubuntu</strong>.</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>sudo apt-get instal python python-libcloud</tt></pre></div></div>
+<div class="paragraph"><p>If you machine has python and pip installed, you can install libcloud with <strong>pip</strong>:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-style: italic"><span style="color: #9A1900"># With super-user privileges do following</span></span>
+pip install apache-libcloud</tt></pre></div></div>
+<div class="paragraph"><p>For <strong>OSX</strong>, do the following:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>port install py-libcloud</tt></pre></div></div>
+</div>
+</div>
 <div class="sect2">
 <h3 id="_part_4_running_a_parallel_ensemble_on_compute_nodes">Part 4: Running a parallel ensemble on compute nodes</h3>
 <div class="paragraph"><p><code>p4.swift</code> will run our mock "simulation"
@@ -1570,7 +1796,7 @@ populate WORKER_HOSTS with the IP addresses of all active instances you have run
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-01-13 17:35:14 CST
+Last updated 2015-01-16 13:52:38 CST
 </div>
 </div>
 </body>

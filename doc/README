@@ -421,7 +421,7 @@ output/sim_2.out
 Now try running (`-nsim=`) 100 simulations of (`-steps=`) 1 second each:
 
 -----
-$ swift p3.swift -nsim=100 -steps=1 
+$ swift p3.swift -nsim=100 -steps=1
 Swift 0.94.1 RC2 swift-r6895 cog-r3765
 
 RunID: 20130827-1444-rq809ts6
@@ -461,10 +461,35 @@ Here are the steps to run the tutorial on the midway cluster, assuming you have 
 1. Ensure you have enable ssh keys for passwordless access to the midway login nodes.
 2. Set MIDWAY_USERNAME to your username in the swift-tutorial/setup.sh file.
 3. Set the following line in the swift-tutorial/swift.conf file.
-    ----
-    sites: [midway]
-    ----
++
+----
+   sites: [midway]
+----
++
 4. Run source setup.sh
+
+
+Beagle Supercomputer (Cray)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The Beagle supercomputer is a Cray XE6 system at the Computation Institute. Here's documentation on Beagle:
+link:http://beagle.ci.uchicago.edu/using-beagle/[Beagle docs]
+
+Here are the steps to run the tutorial on the Beagle supercomputer, assuming you have access:
+
+1. Ensure you have enable ssh keys for passwordless access to the Beagle login nodes.
+2. Set BEAGLE_USERNAME to your username in the swift-tutorial/setup.sh file.
+3. Set BEAGLE_PROJECT to the project under which you have allocations on Beagle.
+4. Set the following line in the swift-tutorial/swift.conf file.
++
+----
+   sites: [beagle]
+----
++
+5. Run source setup.sh
+
+Note: Run "show_alloc" on Beagle to see your project and allocation balance.
+
 
 OSGConnect at UChicago
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -478,9 +503,11 @@ Here are the steps to run the tutorial via OSGConnect on the Open Science Grid, 
 1. Ensure you have enable ssh keys for passwordless access to the OSGConnect login nodes.
 2. Set OSG_USERNAME to your username with OSGConnect in the swift-tutorial/setup.sh file.
 3. Set the following line in the swift-tutorial/swift.conf file:
-    ----
-    sites: [osgc]
-    ----
++
+----
+   sites: [osgc]
+----
++
 4. Run source setup.sh
 
 Amazon EC2
@@ -510,16 +537,16 @@ If you already have an account, here's the steps to get you IAM access keys:
 3. Select your IAM user name, or create a new one.
 4. Click User Actions, and then click Manage Access Keys.
 5. Click Create Access Key.
-
++
 NOTE: Your keys will look something like this: +
 Access key ID example    : AKIAIOSFODNN7*EXAMPLE* +
 Secret access key example: wJalrXUtnFEMI/K7MDENG/bPxRfiCY*EXAMPLEKEY* +
-
++
 6. Click Download Credentials, and store the keys (a .csv file) in a secure location.
-
++
 NOTE: Your secret key will no longer be available through the AWS Management Console;
 you will have the only copy. Keep it confidential in order to protect your account.
-
++
 7. Set AWS_CREDENTIALS_FILE in setup.sh to the credentials files downloaded in the previous step.
 
 Swift requires python and apache-libcloud to talk to the Amazon EC2. To install this package follow these steps:
