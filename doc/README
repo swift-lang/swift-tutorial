@@ -11,11 +11,13 @@ Swift is a simple scripting language for executing many instances of
 ordinary application programs on distributed parallel resources.
 Swift scripts run many copies of ordinary programs concurrently, using
 statements like this:
+
 -----
 foreach protein in proteinList {
   runBLAST(protein);
 }
 -----
+
 Swift acts like a structured "shell" language. It runs programs
 concurrently as soon as their inputs are available, reducing the need
 for complex parallel programming.  Swift expresses your workflow in a
@@ -24,8 +26,8 @@ clusters, clouds, grids, and supercomputers.
 
 In this tutorial, you'll be able to first try a few Swift examples
 (parts 1-3) on your local machine, to get a sense of the language.
-Then in parts 4-6 you'll run similar workflows on any resource
-you may have access to such as clouds (Amazon Web Services), Cray HPC systems,
+Then, in parts 4-6 you'll run similar workflows on any resource
+you may have access to, such as clouds (Amazon Web Services), Cray HPC systems,
 clusters etc, and see how more complex workflows can be expressed
 with Swift scripts.
 
@@ -54,25 +56,37 @@ export PATH=$PATH:/path/to/swift-0.96/bin
 -----
 
 
-Get the swift-tutorial repository
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Setup the swift-tutorial
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 Clone the repository from github
 [source,bash]
 ----
-git clone https://github.com/yadudoc/swift-on-cloud.git
-cd swift-on-cloud
+git clone https://github.com/swift-lang/swift-tutorial.git
+cd swift-tutorial
 ----
 
 Or, download the zip file from github and unpack.
 [source,bash]
 ----
 # Download
-wget https://github.com/yadudoc/swift-on-cloud/archive/master.zip
+wget https://github.com/swift-lang/swift-tutorial/archive/master.zip
 unzip master.zip
-mv swift-on-cloud-master swift-on-cloud
-cd swift-on-cloud
+mv swift-tutorial-master swift-tutorial
+cd swift-tutorial
 ----
+
+Now, run the tutorial setup script
+----
+source setup.sh  # You must run this with "source" !
+----
+
+Doing this will add the sample applications simulate and stats
+(explained in the next part) and some other functionalities to
+your local $PATH for you to run the tutorial.
+
+Note: We will come back to the setup.sh script in part4-6 to
+enable remote sites for computation.
 
 
 Simple "science applications" for the workflow tutorial
@@ -245,6 +259,8 @@ sys::[cat ../part01/p1.swift]
 -----
 
 
+#TODO: Update the following output block
+
 To run this script, run the following command:
 -----
 $ cd part01
@@ -293,16 +309,6 @@ sys::[cat ../part02/p2.swift]
 The script also shows an
 example of naming the output files of an ensemble run. In this case, the output files will be named
 `output/sim_N.out`.
-
-In part 2, we also update the apps file. Instead of using shell script (simulate.sh), we use
-the equivalent python version (simulate.py). The new apps file now looks like this:
-
------
-sys::[cat ../part02/apps]
------
-
-Swift does not need to know anything about the language an application is written in. The application 
-can be written in Perl, Python, Java, Fortran, or any other language.
 
 To run the script and view the output:
 -----
@@ -438,6 +444,108 @@ on the site's compute nodes.
 
 Running applications on compute resources with Swift
 ----------------------------------------------------
+
+From the next section onwards, we will run the user-applications on remote
+sites. To do this, go over the steps for the remote site that you have access
+to.
+
+Midway cluster at UChicago
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The midway cluster is a shared computational resource administered by the Research
+Computing Center at the University of Chicago. Here's documentation on the RCC resources:
+link:https://rcc.uchicago.edu/docs/[RCC docs]
+
+Here are the steps to run the tutorial on the midway cluster, assuming you have access:
+
+1. Ensure you have enable ssh keys for passwordless access to the midway login nodes.
+2. Set MIDWAY_USERNAME to your username in the swift-tutorial/setup.sh file.
+3. Set the following line in the swift-tutorial/swift.conf file:
+----
+sites: [midway]
+----
+4. Run source setup.sh
+
+OSGConnect at UChicago
+~~~~~~~~~~~~~~~~~~~~~~
+
+The Open Science Grid (OSG) and University of Chicago provides a service to access a vast
+pool of opportunistic computational resources spread across the U.S. Here's documentation on the OSG Connect resources:
+link:https://confluence.grid.iu.edu/display/CON/Home[OSGConnect docs].
+
+Here are the steps to run the tutorial via OSGConnect on the Open Science Grid, assuming you have access:
+
+1. Ensure you have enable ssh keys for passwordless access to the OSGConnect login nodes.
+2. Set OSG_USERNAME to your username with OSGConnect in the swift-tutorial/setup.sh file.
+3. Set the following line in the swift-tutorial/swift.conf file:
+----
+sites: [osgc]
+----
+4. Run source setup.sh
+
+Amazon EC2
+~~~~~~~~~~
+
+Amazon Elastic Compute Cloud (Amazon EC2) is a web service that provides resizable compute capacity in the cloud.
+Getting cloud resources on-demand from Amazon is now as simple as setting up an account and attaching a credit card.
+
+Sign up online
+^^^^^^^^^^^^^^
+
+Sign up for Amazon Web Services (AWS) and create an IAM user by following instructions
+from http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/get-set-up-for-amazon-ec2.html[Amazon's Setup Documentation].
+From the documentation you would only need to do the following two steps:
+
+1. http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/get-set-up-for-amazon-ec2.html#sign-up-for-aws[Sign up for AWS]
+
+2. http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/get-set-up-for-amazon-ec2.html#create-an-iam-user[Create and IAM User]
+
+NOTE: To create access keys, you must have permissions to perform the required
+IAM actions. For more information, see http://docs.aws.amazon.com/IAM/latest/UserGuide/ManagingCredentials.html[Managing Credentials using IAM].
+
+If you already have an account, here's the steps to get you IAM access keys:
+
+1. Go to the IAM console.
+2. From the navigation menu, click Users.
+3. Select your IAM user name, or create a new one.
+4. Click User Actions, and then click Manage Access Keys.
+5. Click Create Access Key.
+
+NOTE: Your keys will look something like this: +
+Access key ID example    : AKIAIOSFODNN7*EXAMPLE* +
+Secret access key example: wJalrXUtnFEMI/K7MDENG/bPxRfiCY*EXAMPLEKEY* +
+
+6. Click Download Credentials, and store the keys (a .csv file) in a secure location.
+
+NOTE: Your secret key will no longer be available through the AWS Management Console;
+you will have the only copy. Keep it confidential in order to protect your account.
+
+7. Set AWS_CREDENTIALS_FILE in setup.sh to the credentials files downloaded in the previous step.
+
+Swift requires python and apache-libcloud to talk to the Amazon EC2. To install this package follow these steps:
+
+Install python and libcloud library. The following are steps for *debian* based
+linux distributions such as *Ubuntu*.
+[source,bash]
+-----
+sudo apt-get instal python python-libcloud
+-----
+
+If you machine has python and pip installed, you can install libcloud with *pip*:
+[source,bash]
+-----
+# With super-user privileges do following
+pip install apache-libcloud
+-----
+
+For *OSX*, do the following:
+[source,bash]
+-----
+port install py-libcloud
+-----
+
+
+
 
 Part 4: Running a parallel ensemble on compute nodes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
