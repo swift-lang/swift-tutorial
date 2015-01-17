@@ -1325,8 +1325,7 @@ Run source setup.sh
 </div>
 <div class="sect2">
 <h3 id="_beagle_supercomputer_cray">Beagle Supercomputer (Cray)</h3>
-<div class="paragraph"><p>The Beagle supercomputer is a Cray XE6 system at the Computation Institute. Here&#8217;s documentation on Beagle:
-<a href="http://beagle.ci.uchicago.edu/using-beagle/">Beagle docs</a></p></div>
+<div class="paragraph"><p>The Beagle supercomputer is a Cray XE6 system at the Computation Institute. Here&#8217;s documentation on Beagle:</p></div>
 <div class="paragraph"><p>Here are the steps to run the tutorial on the Beagle supercomputer, assuming you have access:</p></div>
 <div class="olist arabic"><ol class="arabic">
 <li>
@@ -1398,114 +1397,13 @@ Run source setup.sh
 <h3 id="_amazon_ec2">Amazon EC2</h3>
 <div class="paragraph"><p>Amazon Elastic Compute Cloud (Amazon EC2) is a web service that provides resizable compute capacity in the cloud.
 Getting cloud resources on-demand from Amazon is now as simple as setting up an account and attaching a credit card.</p></div>
-<div class="sect3">
-<h4 id="_sign_up_online">Sign up online</h4>
-<div class="paragraph"><p>Sign up for Amazon Web Services (AWS) and create an IAM user by following instructions
-from <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/get-set-up-for-amazon-ec2.html">Amazon&#8217;s Setup Documentation</a>.
-From the documentation you would only need to do the following two steps:</p></div>
 <div class="olist arabic"><ol class="arabic">
 <li>
 <p>
-<a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/get-set-up-for-amazon-ec2.html#sign-up-for-aws">Sign up for AWS</a>
-</p>
-</li>
-<li>
-<p>
-<a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/get-set-up-for-amazon-ec2.html#create-an-iam-user">Create and IAM User</a>
+Follow steps outlined in <a href="./amazon_ec2.html">Amazon docs</a>
 </p>
 </li>
 </ol></div>
-<div class="admonitionblock">
-<table><tr>
-<td class="icon">
-<img src="./images/icons/note.png" alt="Note" />
-</td>
-<td class="content">To create access keys, you must have permissions to perform the required
-IAM actions. For more information, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/ManagingCredentials.html">Managing Credentials using IAM</a>.</td>
-</tr></table>
-</div>
-<div class="paragraph"><p>If you already have an account, here&#8217;s the steps to get you IAM access keys:</p></div>
-<div class="olist arabic"><ol class="arabic">
-<li>
-<p>
-Go to the IAM console.
-</p>
-</li>
-<li>
-<p>
-From the navigation menu, click Users.
-</p>
-</li>
-<li>
-<p>
-Select your IAM user name, or create a new one.
-</p>
-</li>
-<li>
-<p>
-Click User Actions, and then click Manage Access Keys.
-</p>
-</li>
-<li>
-<p>
-Click Create Access Key.
-</p>
-<div class="admonitionblock">
-<table><tr>
-<td class="icon">
-<img src="./images/icons/note.png" alt="Note" />
-</td>
-<td class="content">Your keys will look something like this:<br />
-Access key ID example    : AKIAIOSFODNN7*EXAMPLE*<br />
-Secret access key example: wJalrXUtnFEMI/K7MDENG/bPxRfiCY*EXAMPLEKEY*<br /></td>
-</tr></table>
-</div>
-</li>
-<li>
-<p>
-Click Download Credentials, and store the keys (a .csv file) in a secure location.
-</p>
-<div class="admonitionblock">
-<table><tr>
-<td class="icon">
-<img src="./images/icons/note.png" alt="Note" />
-</td>
-<td class="content">Your secret key will no longer be available through the AWS Management Console;
-you will have the only copy. Keep it confidential in order to protect your account.</td>
-</tr></table>
-</div>
-</li>
-<li>
-<p>
-Set AWS_CREDENTIALS_FILE in setup.sh to the credentials files downloaded in the previous step.
-</p>
-</li>
-</ol></div>
-<div class="paragraph"><p>Swift requires python and apache-libcloud to talk to the Amazon EC2. To install this package follow these steps:</p></div>
-<div class="paragraph"><p>Install python and libcloud library. The following are steps for <strong>debian</strong> based
-linux distributions such as <strong>Ubuntu</strong>.</p></div>
-<div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>sudo apt-get instal python python-libcloud</tt></pre></div></div>
-<div class="paragraph"><p>If you machine has python and pip installed, you can install libcloud with <strong>pip</strong>:</p></div>
-<div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt><span style="font-style: italic"><span style="color: #9A1900"># With super-user privileges do following</span></span>
-pip install apache-libcloud</tt></pre></div></div>
-<div class="paragraph"><p>For <strong>OSX</strong>, do the following:</p></div>
-<div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>port install py-libcloud</tt></pre></div></div>
-</div>
 </div>
 <div class="sect2">
 <h3 id="_part_4_running_a_parallel_ensemble_on_compute_nodes">Part 4: Running a parallel ensemble on compute nodes</h3>
@@ -1796,7 +1694,7 @@ populate WORKER_HOSTS with the IP addresses of all active instances you have run
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-01-16 13:52:38 CST
+Last updated 2015-01-16 18:18:50 CST
 </div>
 </div>
 </body>
