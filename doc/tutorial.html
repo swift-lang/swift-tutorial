@@ -819,7 +819,10 @@ wget http<span style="color: #990000">:</span>//swiftlang<span style="color: #99
 <span style="font-style: italic"><span style="color: #9A1900"># Extract package</span></span>
 tar xfz swift-<span style="color: #993399">0.96</span><span style="color: #990000">.</span>tar<span style="color: #990000">.</span>gz
 <span style="font-style: italic"><span style="color: #9A1900"># Add swift to the PATH environment variable</span></span>
-<span style="font-weight: bold"><span style="color: #0000FF">export</span></span> <span style="color: #009900">PATH</span><span style="color: #990000">=</span><span style="color: #009900">$PATH</span><span style="color: #990000">:</span>/path/to/swift-<span style="color: #993399">0.96</span>/bin</tt></pre></div></div>
+<span style="font-weight: bold"><span style="color: #0000FF">export</span></span> <span style="color: #009900">PATH</span><span style="color: #990000">=</span><span style="color: #009900">$PATH</span><span style="color: #990000">:</span>/path/to/swift-<span style="color: #993399">0.96</span>/bin
+<span style="font-style: italic"><span style="color: #9A1900"># To verify that Swift has successfully loaded, run:</span></span>
+$ swift -version
+<span style="font-style: italic"><span style="color: #9A1900"># This should print Swift 0.96</span></span></tt></pre></div></div>
 </div>
 <div class="sect2">
 <h3 id="_setup_the_swift_tutorial">Setup the swift-tutorial</h3>
@@ -1038,193 +1041,12 @@ Run source setup.sh
 </div>
 </div>
 <div class="sect1">
-<h2 id="_simple_science_applications_for_the_workflow_tutorial">Simple "science applications" for the workflow tutorial</h2>
+<h2 id="_strong_tutorial_section_one_strong"><strong>Tutorial Section One</strong></h2>
 <div class="sectionbody">
-<div class="paragraph"><p>This tutorial is based on two intentionally trivial example programs,
-<code>simulate.sh</code> and <code>stats.sh</code>, (implemented as bash shell scripts)
-that serve as easy-to-understand proxies for real science
-applications. These "programs" behave as follows.</p></div>
+<div class="paragraph"><p>This section will be a walkthrough of the getting a simple science application running with swift on
+your local machine(localhost).</p></div>
 <div class="sect2">
-<h3 id="_simulate_sh">simulate.sh</h3>
-<div class="paragraph"><p>The simulation.sh script serves as a trivial proxy for any more
-complex scientific simulation application. It generates and prints a
-set of one or more random integers in the range [0-2^62) as controlled
-by its command line arguments, which are:</p></div>
-<div class="listingblock">
-<div class="content">
-<pre><code>$ ./app/simulate.sh --help
-./app/simulate.sh: usage:
-    -b|--bias       offset bias: add this integer to all results [0]
-    -B|--biasfile   file of integer biases to add to results [none]
-    -l|--log        generate a log in stderr if not null [y]
-    -n|--nvalues    print this many values per simulation [1]
-    -r|--range      range (limit) of generated results [100]
-    -s|--seed       use this integer [0..32767] as a seed [none]
-    -S|--seedfile   use this file (containing integer seeds [0..32767]) one per line [none]
-    -t|--timesteps  number of simulated "timesteps" in seconds (determines runtime) [1]
-    -x|--scale      scale the results by this integer [1]
-    -h|-?|?|--help  print this help
-$</code></pre>
-</div></div>
-<div class="paragraph"><p>All of thess arguments are optional, with default values indicated above as <code>[n]</code>.</p></div>
-<div class="paragraph"><p>With no arguments, simulate.sh prints 1 number in the range of
-1-100. Otherwise it generates n numbers of the form (R*scale)+bias
-where R is a random integer. By default it logs information about its
-execution environment to stderr.  Here&#8217;s some examples of its usage:</p></div>
-<div class="listingblock">
-<div class="content">
-<pre><code>$ simulate.sh 2&gt;log
-       5
-$ head -4 log
-
-Called as: /home/wilde/swift/tut/CIC_2013-08-09/app/simulate.sh:
-Start time: Thu Aug 22 12:40:24 CDT 2013
-Running on node: login01.osgconnect.net
-
-$ simulate.sh -n 4 -r 1000000 2&gt;log
-  239454
-  386702
-   13849
-  873526
-
-$ simulate.sh -n 3 -r 1000000 -x 100 2&gt;log
- 6643700
-62182300
- 5230600
-
-$ simulate.sh -n 2 -r 1000 -x 1000 2&gt;log
-  565000
-  636000
-
-$ time simulate.sh -n 2 -r 1000 -x 1000 -t 3 2&gt;log
-  336000
-  320000
-real    0m3.012s
-user    0m0.005s
-sys     0m0.006s</code></pre>
-</div></div>
-</div>
-<div class="sect2">
-<h3 id="_stats_sh">stats.sh</h3>
-<div class="paragraph"><p>The stats.sh script serves as a trivial model of an "analysis"
-program. It reads N files each containing M integers and simply prints
-the\ average of all those numbers to stdout. Similarly to simulate.sh
-it logs environmental information to the stderr.</p></div>
-<div class="listingblock">
-<div class="content">
-<pre><code>$ ls f*
-f1  f2  f3  f4
-
-$ cat f*
-25
-60
-40
-75
-
-$ stats.sh f* 2&gt;log
-50</code></pre>
-</div></div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_basic_of_the_swift_language_with_local_execution">Basic of the Swift language with local execution</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_a_summary_of_swift_in_a_nutshell">A Summary of Swift in a nutshell</h3>
-<div class="ulist"><ul>
-<li>
-<p>
-Swift scripts are text files ending in <code>.swift</code> The <code>swift</code> command
-runs on any host, and executes these scripts. <code>swift</code> is a Java
-application, which you can install almost anywhere.  On Linux, just
-unpack the distribution <code>tar</code> file and add its <code>bin/</code> directory to
-your <code>PATH</code>.
-</p>
-</li>
-<li>
-<p>
-Swift scripts run ordinary applications, just like shell scripts
-do. Swift makes it easy to run these applications on parallel and
-remote computers (from laptops to supercomputers). If you can <code>ssh</code> to
-the system, Swift can likely run applications there.
-</p>
-</li>
-<li>
-<p>
-The details of where to run applications and how to get files back
-and forth are described in configuration files separate from your
-program. Swift speaks ssh, PBS, Condor, SLURM, LSF, SGE, Cobalt, and
-Globus to run applications, and scp, http, ftp, and GridFTP to move
-data.
-</p>
-</li>
-<li>
-<p>
-The Swift language has 5 main data types: <code>boolean</code>, <code>int</code>,
-<code>string</code>, <code>float</code>, and <code>file</code>. Collections of these are dynamic,
-sparse arrays of arbitrary dimension and structures of scalars and/or
-arrays defined by the <code>type</code> declaration.
-</p>
-</li>
-<li>
-<p>
-Swift file variables are "mapped" to external files. Swift sends
-files to and from remote systems for you automatically.
-</p>
-</li>
-<li>
-<p>
-Swift variables are "single assignment": once you set them you can&#8217;t
-change them (in a given block of code).  This makes Swift a natural,
-"parallel data flow" language. This programming model keeps your
-workflow scripts simple and easy to write and understand.
-</p>
-</li>
-<li>
-<p>
-Swift lets you define functions to "wrap" application programs, and
-to cleanly structure more complex scripts. Swift <code>app</code> functions take
-files and parameters as inputs and return files as outputs.
-</p>
-</li>
-<li>
-<p>
-A compact set of built-in functions for string and file
-manipulation, type conversions, high level IO, etc. is provided.
-Swift&#8217;s equivalent of <code>printf()</code> is <code>tracef()</code>, with limited and
-slightly different format codes.
-</p>
-</li>
-<li>
-<p>
-Swift&#8217;s <code>foreach {}</code> statement is the main parallel workhorse of the
-language, and executes all iterations of the loop concurrently. The
-actual number of parallel tasks executed is based on available
-resources and settable "throttles".
-</p>
-</li>
-<li>
-<p>
-In fact, Swift conceptually executes <strong>all</strong> the statements,
-expressions and function calls in your program in parallel, based on
-data flow. These are similarly throttled based on available resources
-and settings.
-</p>
-</li>
-<li>
-<p>
-Swift also has <code>if</code> and <code>switch</code> statements for conditional
-execution. These are seldom needed in simple workflows but they enable
-very dynamic workflow patterns to be specified.
-</p>
-</li>
-</ul></div>
-<div class="paragraph"><p>We&#8217;ll see many of these points in action in the examples below. Lets
-get started!</p></div>
-</div>
-<div class="sect2">
-<h3 id="_part_1_run_a_single_application_under_swift">Part 1: Run a single application under Swift</h3>
+<h3 id="_example_1_run_a_single_application_under_swift">Example 1: Run a single application under Swift</h3>
 <div class="paragraph"><p>The first swift script, p1.swift, runs simulate.sh to generate a
 single random number. It writes the number to a file.</p></div>
 <div class="imageblock" style="text-align:center;">
@@ -1287,9 +1109,8 @@ detail in parts 4-6, and can be ignored for now.</td>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_part_2_running_an_ensemble_of_many_apps_in_parallel_with_a_foreach_loop">Part 2: Running an ensemble of many apps in parallel with a "foreach" loop</h3>
-<div class="paragraph"><p>The <code>p2.swift</code> script introduces the <code>foreach</code> parallel iteration
-construct to run many concurrent simulations.</p></div>
+<h3 id="_example_2_running_an_ensemble_of_many_apps_in_parallel_with_a_foreach_loop">Example 2: Running an ensemble of many apps in parallel with a "foreach" loop</h3>
+<div class="paragraph"><p>The <code>p2.swift</code> script introduces the <code>foreach</code> parallel iteration construct to run many concurrent simulations.</p></div>
 <div class="imageblock" style="text-align:center;">
 <div class="content">
 <img src="part02.png" alt="part02.png" />
@@ -1312,8 +1133,8 @@ foreach i <span style="font-weight: bold"><span style="color: #0000FF">in</span>
   file f <span style="color: #990000">&lt;</span>single_file_mapper<span style="color: #990000">;</span> file<span style="color: #990000">=</span><span style="font-weight: bold"><span style="color: #000000">strcat</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"output/sim_"</span><span style="color: #990000">,</span>i<span style="color: #990000">,</span><span style="color: #FF0000">".out"</span><span style="color: #990000">)&gt;;</span>
   f <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">simulation</span></span><span style="color: #990000">();</span>
 <span style="color: #990000">}</span></tt></pre></div></div>
-<div class="paragraph"><p>The script also shows an
-example of naming the output files of an ensemble run. In this case, the output files will be named
+<div class="paragraph"><p>The script also shows an example of naming the output files of an ensemble run. In this case,
+the output files will be named
 <code>output/sim_N.out</code>.</p></div>
 <div class="paragraph"><p>To run the script and view the output:</p></div>
 <div class="listingblock">
@@ -1481,11 +1302,11 @@ on the site&#8217;s compute nodes.</p></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_running_applications_on_compute_resources_with_swift">Running applications on compute resources with Swift</h2>
+<h2 id="_strong_tutorial_section_two_strong"><strong>Tutorial Section Two</strong></h2>
 <div class="sectionbody">
-<div class="paragraph"><p>From the next section onwards, we will run the user-applications on remote
-sites. To do this, go over the steps for the remote site that you have access
-to.</p></div>
+<div class="paragraph"><p>This section introduces the configuration aspects that allow swift to run your applications
+on computation resources. To do this, go over the steps for the remote site that you have
+access to.</p></div>
 <div class="sect2">
 <h3 id="_part_4_running_a_parallel_ensemble_on_compute_nodes">Part 4: Running a parallel ensemble on compute nodes</h3>
 <div class="paragraph"><p><code>p4.swift</code> will run our mock "simulation"
@@ -1768,6 +1589,197 @@ populate WORKER_HOSTS with the IP addresses of all active instances you have run
 <div class="content">
 <pre><code>export WORKER_HOSTS=$( nova list | grep ACTIVE | sed -e 's/^.*private=//' -e 's/ .*//' |sed ':a;N;$!ba;s/\n/ /g' )</code></pre>
 </div></div>
+<div class="paragraph"><p>#red[TODO] The following blocks slow down the flow of the tutorial. SIMPLIFY OR DELETE</p></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_simple_science_applications_for_the_workflow_tutorial">Simple "science applications" for the workflow tutorial</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>This tutorial is based on two intentionally trivial example programs,
+<code>simulate.sh</code> and <code>stats.sh</code>, (implemented as bash shell scripts)
+that serve as easy-to-understand proxies for real science
+applications. These "programs" behave as follows.</p></div>
+<div class="sect2">
+<h3 id="_simulate_sh">simulate.sh</h3>
+<div class="paragraph"><p>The simulation.sh script serves as a trivial proxy for any more
+complex scientific simulation application. It generates and prints a
+set of one or more random integers in the range [0-2^62) as controlled
+by its command line arguments, which are:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>$ ./app/simulate.sh --help
+./app/simulate.sh: usage:
+    -b|--bias       offset bias: add this integer to all results [0]
+    -B|--biasfile   file of integer biases to add to results [none]
+    -l|--log        generate a log in stderr if not null [y]
+    -n|--nvalues    print this many values per simulation [1]
+    -r|--range      range (limit) of generated results [100]
+    -s|--seed       use this integer [0..32767] as a seed [none]
+    -S|--seedfile   use this file (containing integer seeds [0..32767]) one per line [none]
+    -t|--timesteps  number of simulated "timesteps" in seconds (determines runtime) [1]
+    -x|--scale      scale the results by this integer [1]
+    -h|-?|?|--help  print this help
+$</code></pre>
+</div></div>
+<div class="paragraph"><p>All of thess arguments are optional, with default values indicated above as <code>[n]</code>.</p></div>
+<div class="paragraph"><p>With no arguments, simulate.sh prints 1 number in the range of
+1-100. Otherwise it generates n numbers of the form (R*scale)+bias
+where R is a random integer. By default it logs information about its
+execution environment to stderr.  Here&#8217;s some examples of its usage:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>$ simulate.sh 2&gt;log
+       5
+$ head -4 log
+
+Called as: /home/wilde/swift/tut/CIC_2013-08-09/app/simulate.sh:
+Start time: Thu Aug 22 12:40:24 CDT 2013
+Running on node: login01.osgconnect.net
+
+$ simulate.sh -n 4 -r 1000000 2&gt;log
+  239454
+  386702
+   13849
+  873526
+
+$ simulate.sh -n 3 -r 1000000 -x 100 2&gt;log
+ 6643700
+62182300
+ 5230600
+
+$ simulate.sh -n 2 -r 1000 -x 1000 2&gt;log
+  565000
+  636000
+
+$ time simulate.sh -n 2 -r 1000 -x 1000 -t 3 2&gt;log
+  336000
+  320000
+real    0m3.012s
+user    0m0.005s
+sys     0m0.006s</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_stats_sh">stats.sh</h3>
+<div class="paragraph"><p>The stats.sh script serves as a trivial model of an "analysis"
+program. It reads N files each containing M integers and simply prints
+the\ average of all those numbers to stdout. Similarly to simulate.sh
+it logs environmental information to the stderr.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>$ ls f*
+f1  f2  f3  f4
+
+$ cat f*
+25
+60
+40
+75
+
+$ stats.sh f* 2&gt;log
+50</code></pre>
+</div></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_basic_of_the_swift_language_with_local_execution">Basic of the Swift language with local execution</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>[red]#TODO: The following wall of text is intimidating. This disrupts the flow needed to
+get this tutorial done in 30 mins.</p></div>
+<div class="sect2">
+<h3 id="_a_summary_of_swift_in_a_nutshell">A Summary of Swift in a nutshell</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Swift scripts are text files ending in <code>.swift</code> The <code>swift</code> command
+runs on any host, and executes these scripts. <code>swift</code> is a Java
+application, which you can install almost anywhere.  On Linux, just
+unpack the distribution <code>tar</code> file and add its <code>bin/</code> directory to
+your <code>PATH</code>.
+</p>
+</li>
+<li>
+<p>
+Swift scripts run ordinary applications, just like shell scripts
+do. Swift makes it easy to run these applications on parallel and
+remote computers (from laptops to supercomputers). If you can <code>ssh</code> to
+the system, Swift can likely run applications there.
+</p>
+</li>
+<li>
+<p>
+The details of where to run applications and how to get files back
+and forth are described in configuration files separate from your
+program. Swift speaks ssh, PBS, Condor, SLURM, LSF, SGE, Cobalt, and
+Globus to run applications, and scp, http, ftp, and GridFTP to move
+data.
+</p>
+</li>
+<li>
+<p>
+The Swift language has 5 main data types: <code>boolean</code>, <code>int</code>,
+<code>string</code>, <code>float</code>, and <code>file</code>. Collections of these are dynamic,
+sparse arrays of arbitrary dimension and structures of scalars and/or
+arrays defined by the <code>type</code> declaration.
+</p>
+</li>
+<li>
+<p>
+Swift file variables are "mapped" to external files. Swift sends
+files to and from remote systems for you automatically.
+</p>
+</li>
+<li>
+<p>
+Swift variables are "single assignment": once you set them you can&#8217;t
+change them (in a given block of code).  This makes Swift a natural,
+"parallel data flow" language. This programming model keeps your
+workflow scripts simple and easy to write and understand.
+</p>
+</li>
+<li>
+<p>
+Swift lets you define functions to "wrap" application programs, and
+to cleanly structure more complex scripts. Swift <code>app</code> functions take
+files and parameters as inputs and return files as outputs.
+</p>
+</li>
+<li>
+<p>
+A compact set of built-in functions for string and file
+manipulation, type conversions, high level IO, etc. is provided.
+Swift&#8217;s equivalent of <code>printf()</code> is <code>tracef()</code>, with limited and
+slightly different format codes.
+</p>
+</li>
+<li>
+<p>
+Swift&#8217;s <code>foreach {}</code> statement is the main parallel workhorse of the
+language, and executes all iterations of the loop concurrently. The
+actual number of parallel tasks executed is based on available
+resources and settable "throttles".
+</p>
+</li>
+<li>
+<p>
+In fact, Swift conceptually executes <strong>all</strong> the statements,
+expressions and function calls in your program in parallel, based on
+data flow. These are similarly throttled based on available resources
+and settings.
+</p>
+</li>
+<li>
+<p>
+Swift also has <code>if</code> and <code>switch</code> statements for conditional
+execution. These are seldom needed in simple workflows but they enable
+very dynamic workflow patterns to be specified.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>We&#8217;ll see many of these points in action in the examples below. Lets
+get started!</p></div>
 </div>
 </div>
 </div>
@@ -1775,7 +1787,7 @@ populate WORKER_HOSTS with the IP addresses of all active instances you have run
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-01-20 16:21:01 CST
+Last updated 2015-01-20 16:43:44 CST
 </div>
 </div>
 </body>

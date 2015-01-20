@@ -54,6 +54,9 @@ wget http://swiftlang.org/packages/swift-0.96.tar.gz
 tar xfz swift-0.96.tar.gz
 # Add swift to the PATH environment variable
 export PATH=$PATH:/path/to/swift-0.96/bin
+# To verify that Swift has successfully loaded, run:
+$ swift -version
+# This should print Swift 0.96
 -----
 
 
@@ -193,167 +196,15 @@ Let's say you would like to run you applications on Midway and Beagle.
 +
 4. Run source setup.sh
 
+*Tutorial Section One*
+----------------------
+
+This section will be a walkthrough of the getting a simple science application running with swift on
+your local machine(localhost).
 
 
-
-Simple "science applications" for the workflow tutorial
--------------------------------------------------------
-
-This tutorial is based on two intentionally trivial example programs,
-`simulate.sh` and `stats.sh`, (implemented as bash shell scripts)
-that serve as easy-to-understand proxies for real science
-applications. These "programs" behave as follows.
-
-simulate.sh
-~~~~~~~~~~~
-
-The simulation.sh script serves as a trivial proxy for any more
-complex scientific simulation application. It generates and prints a
-set of one or more random integers in the range [0-2^62) as controlled
-by its command line arguments, which are:
-
------
-$ ./app/simulate.sh --help
-./app/simulate.sh: usage:
-    -b|--bias       offset bias: add this integer to all results [0]
-    -B|--biasfile   file of integer biases to add to results [none]
-    -l|--log        generate a log in stderr if not null [y]
-    -n|--nvalues    print this many values per simulation [1]
-    -r|--range      range (limit) of generated results [100]
-    -s|--seed       use this integer [0..32767] as a seed [none]
-    -S|--seedfile   use this file (containing integer seeds [0..32767]) one per line [none]
-    -t|--timesteps  number of simulated "timesteps" in seconds (determines runtime) [1]
-    -x|--scale      scale the results by this integer [1]
-    -h|-?|?|--help  print this help
-$
------
-
-All of thess arguments are optional, with default values indicated above as `[n]`.
-
-With no arguments, simulate.sh prints 1 number in the range of
-1-100. Otherwise it generates n numbers of the form (R*scale)+bias
-where R is a random integer. By default it logs information about its
-execution environment to stderr.  Here's some examples of its usage:
-
------
-$ simulate.sh 2>log
-       5
-$ head -4 log
-
-Called as: /home/wilde/swift/tut/CIC_2013-08-09/app/simulate.sh:
-Start time: Thu Aug 22 12:40:24 CDT 2013
-Running on node: login01.osgconnect.net
-
-$ simulate.sh -n 4 -r 1000000 2>log
-  239454
-  386702
-   13849
-  873526
-
-$ simulate.sh -n 3 -r 1000000 -x 100 2>log
- 6643700
-62182300
- 5230600
-
-$ simulate.sh -n 2 -r 1000 -x 1000 2>log
-  565000
-  636000
-
-$ time simulate.sh -n 2 -r 1000 -x 1000 -t 3 2>log
-  336000
-  320000
-real    0m3.012s
-user    0m0.005s
-sys     0m0.006s
------
-
-stats.sh
-~~~~~~~~
-
-The stats.sh script serves as a trivial model of an "analysis"
-program. It reads N files each containing M integers and simply prints
-the\ average of all those numbers to stdout. Similarly to simulate.sh
-it logs environmental information to the stderr.
-
------
-$ ls f*
-f1  f2  f3  f4
-
-$ cat f*
-25
-60
-40
-75
-
-$ stats.sh f* 2>log
-50
------
-
-
-Basic of the Swift language with local execution
-------------------------------------------------
-
-A Summary of Swift in a nutshell
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-* Swift scripts are text files ending in `.swift` The `swift` command
-runs on any host, and executes these scripts. `swift` is a Java
-application, which you can install almost anywhere.  On Linux, just
-unpack the distribution `tar` file and add its `bin/` directory to
-your `PATH`.
-
-* Swift scripts run ordinary applications, just like shell scripts
-do. Swift makes it easy to run these applications on parallel and
-remote computers (from laptops to supercomputers). If you can `ssh` to
-the system, Swift can likely run applications there.
-
-* The details of where to run applications and how to get files back
-and forth are described in configuration files separate from your
-program. Swift speaks ssh, PBS, Condor, SLURM, LSF, SGE, Cobalt, and
-Globus to run applications, and scp, http, ftp, and GridFTP to move
-data.
-
-* The Swift language has 5 main data types: `boolean`, `int`,
-`string`, `float`, and `file`. Collections of these are dynamic,
-sparse arrays of arbitrary dimension and structures of scalars and/or
-arrays defined by the `type` declaration.
-
-* Swift file variables are "mapped" to external files. Swift sends
-files to and from remote systems for you automatically.
-
-* Swift variables are "single assignment": once you set them you can't
-change them (in a given block of code).  This makes Swift a natural,
-"parallel data flow" language. This programming model keeps your
-workflow scripts simple and easy to write and understand.
-
-* Swift lets you define functions to "wrap" application programs, and
-to cleanly structure more complex scripts. Swift `app` functions take
-files and parameters as inputs and return files as outputs.
-
-* A compact set of built-in functions for string and file
-manipulation, type conversions, high level IO, etc. is provided.
-Swift's equivalent of `printf()` is `tracef()`, with limited and
-slightly different format codes.
-
-* Swift's `foreach {}` statement is the main parallel workhorse of the
-language, and executes all iterations of the loop concurrently. The
-actual number of parallel tasks executed is based on available
-resources and settable "throttles".
-
-* In fact, Swift conceptually executes *all* the statements,
-expressions and function calls in your program in parallel, based on
-data flow. These are similarly throttled based on available resources
-and settings.
-
-* Swift also has `if` and `switch` statements for conditional
-execution. These are seldom needed in simple workflows but they enable
-very dynamic workflow patterns to be specified.
-
-We'll see many of these points in action in the examples below. Lets
-get started!
-
-Part 1: Run a single application under Swift
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Example 1: Run a single application under Swift
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The first swift script, p1.swift, runs simulate.sh to generate a
 single random number. It writes the number to a file.
@@ -401,11 +252,10 @@ These swift configuration file will be explained in more
 detail in parts 4-6, and can be ignored for now.
 
 
-Part 2: Running an ensemble of many apps in parallel with a "foreach" loop
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Example 2: Running an ensemble of many apps in parallel with a "foreach" loop
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The `p2.swift` script introduces the `foreach` parallel iteration
-construct to run many concurrent simulations.
+The `p2.swift` script introduces the `foreach` parallel iteration construct to run many concurrent simulations.
 
 image::part02.png[align="center"]
 
@@ -415,8 +265,8 @@ image::part02.png[align="center"]
 sys::[cat ../part02/p2.swift]
 -----
 
-The script also shows an
-example of naming the output files of an ensemble run. In this case, the output files will be named
+The script also shows an example of naming the output files of an ensemble run. In this case,
+the output files will be named
 `output/sim_N.out`.
 
 To run the script and view the output:
@@ -555,12 +405,12 @@ this in more detail in the next sections where we execute applications
 on the site's compute nodes.
 
 
-Running applications on compute resources with Swift
-----------------------------------------------------
+*Tutorial Section Two*
+----------------------
 
-From the next section onwards, we will run the user-applications on remote
-sites. To do this, go over the steps for the remote site that you have access
-to.
+This section introduces the configuration aspects that allow swift to run your applications
+on computation resources. To do this, go over the steps for the remote site that you have
+access to.
 
 
 Part 4: Running a parallel ensemble on compute nodes
@@ -855,3 +705,165 @@ populate WORKER_HOSTS with the IP addresses of all active instances you have run
 -----
 export WORKER_HOSTS=$( nova list | grep ACTIVE | sed -e 's/^.*private=//' -e 's/ .*//' |sed ':a;N;$!ba;s/\n/ /g' )
 -----
+
+#red[TODO] The following blocks slow down the flow of the tutorial. SIMPLIFY OR DELETE
+
+
+Simple "science applications" for the workflow tutorial
+-------------------------------------------------------
+
+This tutorial is based on two intentionally trivial example programs,
+`simulate.sh` and `stats.sh`, (implemented as bash shell scripts)
+that serve as easy-to-understand proxies for real science
+applications. These "programs" behave as follows.
+
+simulate.sh
+~~~~~~~~~~~
+
+The simulation.sh script serves as a trivial proxy for any more
+complex scientific simulation application. It generates and prints a
+set of one or more random integers in the range [0-2^62) as controlled
+by its command line arguments, which are:
+
+-----
+$ ./app/simulate.sh --help
+./app/simulate.sh: usage:
+    -b|--bias       offset bias: add this integer to all results [0]
+    -B|--biasfile   file of integer biases to add to results [none]
+    -l|--log        generate a log in stderr if not null [y]
+    -n|--nvalues    print this many values per simulation [1]
+    -r|--range      range (limit) of generated results [100]
+    -s|--seed       use this integer [0..32767] as a seed [none]
+    -S|--seedfile   use this file (containing integer seeds [0..32767]) one per line [none]
+    -t|--timesteps  number of simulated "timesteps" in seconds (determines runtime) [1]
+    -x|--scale      scale the results by this integer [1]
+    -h|-?|?|--help  print this help
+$
+-----
+
+All of thess arguments are optional, with default values indicated above as `[n]`.
+
+With no arguments, simulate.sh prints 1 number in the range of
+1-100. Otherwise it generates n numbers of the form (R*scale)+bias
+where R is a random integer. By default it logs information about its
+execution environment to stderr.  Here's some examples of its usage:
+
+-----
+$ simulate.sh 2>log
+       5
+$ head -4 log
+
+Called as: /home/wilde/swift/tut/CIC_2013-08-09/app/simulate.sh:
+Start time: Thu Aug 22 12:40:24 CDT 2013
+Running on node: login01.osgconnect.net
+
+$ simulate.sh -n 4 -r 1000000 2>log
+  239454
+  386702
+   13849
+  873526
+
+$ simulate.sh -n 3 -r 1000000 -x 100 2>log
+ 6643700
+62182300
+ 5230600
+
+$ simulate.sh -n 2 -r 1000 -x 1000 2>log
+  565000
+  636000
+
+$ time simulate.sh -n 2 -r 1000 -x 1000 -t 3 2>log
+  336000
+  320000
+real    0m3.012s
+user    0m0.005s
+sys     0m0.006s
+-----
+
+stats.sh
+~~~~~~~~
+
+The stats.sh script serves as a trivial model of an "analysis"
+program. It reads N files each containing M integers and simply prints
+the\ average of all those numbers to stdout. Similarly to simulate.sh
+it logs environmental information to the stderr.
+
+-----
+$ ls f*
+f1  f2  f3  f4
+
+$ cat f*
+25
+60
+40
+75
+
+$ stats.sh f* 2>log
+50
+-----
+
+
+Basic of the Swift language with local execution
+------------------------------------------------
+
+[red]#TODO: The following wall of text is intimidating. This disrupts the flow needed to
+get this tutorial done in 30 mins.
+
+A Summary of Swift in a nutshell
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Swift scripts are text files ending in `.swift` The `swift` command
+runs on any host, and executes these scripts. `swift` is a Java
+application, which you can install almost anywhere.  On Linux, just
+unpack the distribution `tar` file and add its `bin/` directory to
+your `PATH`.
+
+* Swift scripts run ordinary applications, just like shell scripts
+do. Swift makes it easy to run these applications on parallel and
+remote computers (from laptops to supercomputers). If you can `ssh` to
+the system, Swift can likely run applications there.
+
+* The details of where to run applications and how to get files back
+and forth are described in configuration files separate from your
+program. Swift speaks ssh, PBS, Condor, SLURM, LSF, SGE, Cobalt, and
+Globus to run applications, and scp, http, ftp, and GridFTP to move
+data.
+
+* The Swift language has 5 main data types: `boolean`, `int`,
+`string`, `float`, and `file`. Collections of these are dynamic,
+sparse arrays of arbitrary dimension and structures of scalars and/or
+arrays defined by the `type` declaration.
+
+* Swift file variables are "mapped" to external files. Swift sends
+files to and from remote systems for you automatically.
+
+* Swift variables are "single assignment": once you set them you can't
+change them (in a given block of code).  This makes Swift a natural,
+"parallel data flow" language. This programming model keeps your
+workflow scripts simple and easy to write and understand.
+
+* Swift lets you define functions to "wrap" application programs, and
+to cleanly structure more complex scripts. Swift `app` functions take
+files and parameters as inputs and return files as outputs.
+
+* A compact set of built-in functions for string and file
+manipulation, type conversions, high level IO, etc. is provided.
+Swift's equivalent of `printf()` is `tracef()`, with limited and
+slightly different format codes.
+
+* Swift's `foreach {}` statement is the main parallel workhorse of the
+language, and executes all iterations of the loop concurrently. The
+actual number of parallel tasks executed is based on available
+resources and settable "throttles".
+
+* In fact, Swift conceptually executes *all* the statements,
+expressions and function calls in your program in parallel, based on
+data flow. These are similarly throttled based on available resources
+and settings.
+
+* Swift also has `if` and `switch` statements for conditional
+execution. These are seldom needed in simple workflows but they enable
+very dynamic workflow patterns to be specified.
+
+We'll see many of these points in action in the examples below. Lets
+get started!
