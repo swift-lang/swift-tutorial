@@ -1,7 +1,7 @@
 Swift Tutorial
 --------------
 
-This tutorial is viewable at: <TODO> http://swiftlang.org/tutorials/swift-tutorial-0.96 <FIX>
+This tutorial is viewable at: [red]#TODO> http://swiftlang.org/tutorials/swift-tutorial-0.96
 
 
 Introduction: Why Parallel Scripting?
@@ -367,7 +367,7 @@ sys::[cat ../part01/p1.swift]
 -----
 
 
-#TODO: Update the following output block
+[red]#TODO: Update the following output block
 
 To run this script, run the following command:
 -----
