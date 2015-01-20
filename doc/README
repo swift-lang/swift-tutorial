@@ -473,7 +473,6 @@ Beagle Supercomputer (Cray)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The Beagle supercomputer is a Cray XE6 system at the Computation Institute. Here's documentation on Beagle:
-link:http://beagle.ci.uchicago.edu/using-beagle/[Beagle docs]
 
 Here are the steps to run the tutorial on the Beagle supercomputer, assuming you have access:
 
@@ -516,63 +515,9 @@ Amazon EC2
 Amazon Elastic Compute Cloud (Amazon EC2) is a web service that provides resizable compute capacity in the cloud.
 Getting cloud resources on-demand from Amazon is now as simple as setting up an account and attaching a credit card.
 
-Sign up online
-^^^^^^^^^^^^^^
 
-Sign up for Amazon Web Services (AWS) and create an IAM user by following instructions
-from http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/get-set-up-for-amazon-ec2.html[Amazon's Setup Documentation].
-From the documentation you would only need to do the following two steps:
-
-1. http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/get-set-up-for-amazon-ec2.html#sign-up-for-aws[Sign up for AWS]
-
-2. http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/get-set-up-for-amazon-ec2.html#create-an-iam-user[Create and IAM User]
-
-NOTE: To create access keys, you must have permissions to perform the required
-IAM actions. For more information, see http://docs.aws.amazon.com/IAM/latest/UserGuide/ManagingCredentials.html[Managing Credentials using IAM].
-
-If you already have an account, here's the steps to get you IAM access keys:
-
-1. Go to the IAM console.
-2. From the navigation menu, click Users.
-3. Select your IAM user name, or create a new one.
-4. Click User Actions, and then click Manage Access Keys.
-5. Click Create Access Key.
-+
-NOTE: Your keys will look something like this: +
-Access key ID example    : AKIAIOSFODNN7*EXAMPLE* +
-Secret access key example: wJalrXUtnFEMI/K7MDENG/bPxRfiCY*EXAMPLEKEY* +
-+
-6. Click Download Credentials, and store the keys (a .csv file) in a secure location.
-+
-NOTE: Your secret key will no longer be available through the AWS Management Console;
-you will have the only copy. Keep it confidential in order to protect your account.
-+
-7. Set AWS_CREDENTIALS_FILE in setup.sh to the credentials files downloaded in the previous step.
-
-Swift requires python and apache-libcloud to talk to the Amazon EC2. To install this package follow these steps:
-
-Install python and libcloud library. The following are steps for *debian* based
-linux distributions such as *Ubuntu*.
-[source,bash]
------
-sudo apt-get instal python python-libcloud
------
-
-If you machine has python and pip installed, you can install libcloud with *pip*:
-[source,bash]
------
-# With super-user privileges do following
-pip install apache-libcloud
------
-
-For *OSX*, do the following:
-[source,bash]
------
-port install py-libcloud
------
-
-
-
+1. Follow steps outlined in link:./amazon_ec2.html[Amazon docs] to set up an account and install local dependencies.
+2. Set the 
 
 Part 4: Running a parallel ensemble on compute nodes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
