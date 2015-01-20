@@ -12,6 +12,7 @@ ordinary application programs on distributed parallel resources.
 Swift scripts run many copies of ordinary programs concurrently, using
 statements like this:
 
+[source, python]
 -----
 foreach protein in proteinList {
   runBLAST(protein);
@@ -76,7 +77,8 @@ mv swift-tutorial-master swift-tutorial
 cd swift-tutorial
 ----
 
-Now, run the tutorial setup script
+Now, run the tutorial setup script:
+[source,bash]
 ----
 source setup.sh  # You must run this with "source" !
 ----
@@ -87,6 +89,111 @@ your local $PATH for you to run the tutorial.
 
 Note: We will come back to the setup.sh script in part4-6 to
 enable remote sites for computation.
+
+Configuring Swift to run on remote sites
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Part04 onwards, the tutorial is designed to run on remote computational resources.
+The following sections outline the steps required to enable swift to run tasks remotely.
+
+Midway cluster at UChicago
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The midway cluster is a shared computational resource administered by the Research
+Computing Center at the University of Chicago. Here's documentation on the RCC resources:
+link:https://rcc.uchicago.edu/docs/[RCC docs]
+
+Here are the steps to run the tutorial on the midway cluster, assuming you have access:
+
+1. Ensure you have enable ssh keys for passwordless access to the midway login nodes.
+2. Set MIDWAY_USERNAME to your username in the swift-tutorial/setup.sh file.
+3. Set the following line in the swift-tutorial/swift.conf file.
++
+[source, bash]
+----
+   sites: [midway]
+----
++
+4. Run source setup.sh
+
+
+Beagle Supercomputer (Cray)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The Beagle supercomputer is a Cray XE6 system at the Computation Institute. Here's documentation on Beagle:
+
+Here are the steps to run the tutorial on the Beagle supercomputer, assuming you have access:
+
+1. Ensure you have enable ssh keys for passwordless access to the Beagle login nodes.
+2. Set BEAGLE_USERNAME to your username in the swift-tutorial/setup.sh file.
+3. Set BEAGLE_PROJECT to the project under which you have allocations on Beagle.
+4. Set the following line in the swift-tutorial/swift.conf file.
++
+[source, bash]
+----
+   sites: [beagle]
+----
++
+5. Run source setup.sh
+
+Note: Run "show_alloc" on Beagle to see your project and allocation balance.
+
+
+OSGConnect at UChicago
+^^^^^^^^^^^^^^^^^^^^^^
+
+The Open Science Grid (OSG) and University of Chicago provides a service to access a vast
+pool of opportunistic computational resources spread across the U.S. Here's documentation on the OSG Connect resources:
+link:https://confluence.grid.iu.edu/display/CON/Home[OSGConnect docs].
+
+Here are the steps to run the tutorial via OSGConnect on the Open Science Grid, assuming you have access:
+
+1. Ensure you have enable ssh keys for passwordless access to the OSGConnect login nodes.
+2. Set OSG_USERNAME to your username with OSGConnect in the swift-tutorial/setup.sh file.
+3. Set the following line in the swift-tutorial/swift.conf file:
++
+[source, bash]
+----
+   sites: [osgc]
+----
++
+4. Run source setup.sh
+
+Amazon EC2
+^^^^^^^^^^
+
+Amazon Elastic Compute Cloud (Amazon EC2) is a web service that provides resizable compute capacity in the cloud.
+Getting cloud resources on-demand from Amazon is now as simple as setting up an account and attaching a credit card.
+
+1. Follow steps outlined in link:./amazon_ec2.html[Amazon docs] to set up an account and install local dependencies.
+2. Set the AWS_CREDENTIALS_FILE is swift-tutorial/setup.sh file.
+3. Set the following line in the swift-tutorial/swift.conf file:
++
+[source, bash]
+----
+   sites: [aws]
+----
++
+4. Run source setup.sh
+
+Multiple sites
+^^^^^^^^^^^^^^
+
+Swift allows you to run you applications on multiple sites that you have access to.
+Let's say you would like to run you applications on Midway and Beagle.
+
+1. Ensure you have enable ssh keys for passwordless access to the both Midway and Beagle
+2. Set the site specific variables for both sites in the swift-tutorial/setup.sh file.
+3. Set the following line in the swift-tutorial/swift.conf file:
++
+[source, bash]
+----
+   sites: [midway, beagle]
+----
++
+4. Run source setup.sh
+
+
 
 
 Simple "science applications" for the workflow tutorial
@@ -254,6 +361,7 @@ single random number. It writes the number to a file.
 image::part01.png["p1 workflow",align="center"]
 
 .p1.swift
+[source, python]
 -----
 sys::[cat ../part01/p1.swift]
 -----
@@ -302,6 +410,7 @@ construct to run many concurrent simulations.
 image::part02.png[align="center"]
 
 .p2.swift
+[source,python]
 -----
 sys::[cat ../part02/p2.swift]
 -----
@@ -345,19 +454,22 @@ the trivial "analysis application" `stats.sh`:
 image::part03.png[align="center"]
 
 .p3.swift
+[source, python]
 ----
 sys::[cat ../part03/p3.swift]
 ----
 
 To run:
+[source, bash]
 ----
-$ cd part03
-$ swift p3.swift
+cd part03
+swift p3.swift
 ----
 
 Note that in `p3.swift` we expose more of the capabilities of the
 `simulate.sh` application to the `simulation()` app function:
 
+[source,python]
 -----
 app (file o) simulation (int sim_steps, int sim_range, int sim_values)
 {
@@ -369,6 +481,7 @@ app (file o) simulation (int sim_steps, int sim_range, int sim_values)
 the `swift` command line in a Swift script using `arg()` which
 accepts a keyword-style argument and its default value:
 
+[source,python]
 -----
 int nsim   = toInt(arg("nsim","10"));
 int steps  = toInt(arg("steps","1"));
@@ -449,75 +562,6 @@ From the next section onwards, we will run the user-applications on remote
 sites. To do this, go over the steps for the remote site that you have access
 to.
 
-Midway cluster at UChicago
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The midway cluster is a shared computational resource administered by the Research
-Computing Center at the University of Chicago. Here's documentation on the RCC resources:
-link:https://rcc.uchicago.edu/docs/[RCC docs]
-
-Here are the steps to run the tutorial on the midway cluster, assuming you have access:
-
-1. Ensure you have enable ssh keys for passwordless access to the midway login nodes.
-2. Set MIDWAY_USERNAME to your username in the swift-tutorial/setup.sh file.
-3. Set the following line in the swift-tutorial/swift.conf file.
-+
-----
-   sites: [midway]
-----
-+
-4. Run source setup.sh
-
-
-Beagle Supercomputer (Cray)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The Beagle supercomputer is a Cray XE6 system at the Computation Institute. Here's documentation on Beagle:
-
-Here are the steps to run the tutorial on the Beagle supercomputer, assuming you have access:
-
-1. Ensure you have enable ssh keys for passwordless access to the Beagle login nodes.
-2. Set BEAGLE_USERNAME to your username in the swift-tutorial/setup.sh file.
-3. Set BEAGLE_PROJECT to the project under which you have allocations on Beagle.
-4. Set the following line in the swift-tutorial/swift.conf file.
-+
-----
-   sites: [beagle]
-----
-+
-5. Run source setup.sh
-
-Note: Run "show_alloc" on Beagle to see your project and allocation balance.
-
-
-OSGConnect at UChicago
-~~~~~~~~~~~~~~~~~~~~~~
-
-The Open Science Grid (OSG) and University of Chicago provides a service to access a vast
-pool of opportunistic computational resources spread across the U.S. Here's documentation on the OSG Connect resources:
-link:https://confluence.grid.iu.edu/display/CON/Home[OSGConnect docs].
-
-Here are the steps to run the tutorial via OSGConnect on the Open Science Grid, assuming you have access:
-
-1. Ensure you have enable ssh keys for passwordless access to the OSGConnect login nodes.
-2. Set OSG_USERNAME to your username with OSGConnect in the swift-tutorial/setup.sh file.
-3. Set the following line in the swift-tutorial/swift.conf file:
-+
-----
-   sites: [osgc]
-----
-+
-4. Run source setup.sh
-
-Amazon EC2
-~~~~~~~~~~
-
-Amazon Elastic Compute Cloud (Amazon EC2) is a web service that provides resizable compute capacity in the cloud.
-Getting cloud resources on-demand from Amazon is now as simple as setting up an account and attaching a credit card.
-
-
-1. Follow steps outlined in link:./amazon_ec2.html[Amazon docs] to set up an account and install local dependencies.
-2. Set the 
 
 Part 4: Running a parallel ensemble on compute nodes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
