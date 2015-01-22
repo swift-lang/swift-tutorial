@@ -858,193 +858,13 @@ your local $PATH for you to run the tutorial.</p></div>
 <div class="paragraph"><p>Note: We will come back to the setup.sh script in part4-6 to
 enable remote sites for computation.</p></div>
 </div>
-<div class="sect2">
-<h3 id="_configuring_swift_to_run_on_remote_sites">Configuring Swift to run on remote sites</h3>
-<div class="paragraph"><p>Part04 onwards, the tutorial is designed to run on remote computational resources.
-The following sections outline the steps required to enable swift to run tasks remotely.</p></div>
-<div class="sect3">
-<h4 id="_midway_cluster_at_uchicago">Midway cluster at UChicago</h4>
-<div class="paragraph"><p>The midway cluster is a shared computational resource administered by the Research
-Computing Center at the University of Chicago. Here&#8217;s documentation on the RCC resources:
-<a href="https://rcc.uchicago.edu/docs/">RCC docs</a></p></div>
-<div class="paragraph"><p>Here are the steps to run the tutorial on the midway cluster, assuming you have access:</p></div>
-<div class="olist arabic"><ol class="arabic">
-<li>
-<p>
-Ensure you have enable ssh keys for passwordless access to the midway login nodes.
-</p>
-</li>
-<li>
-<p>
-Set MIDWAY_USERNAME to your username in the swift-tutorial/setup.sh file.
-</p>
-</li>
-<li>
-<p>
-Set the following line in the swift-tutorial/swift.conf file.
-</p>
-<div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>   sites<span style="color: #990000">:</span> <span style="color: #990000">[</span>midway<span style="color: #990000">]</span></tt></pre></div></div>
-</li>
-<li>
-<p>
-Run source setup.sh
-</p>
-</li>
-</ol></div>
-</div>
-<div class="sect3">
-<h4 id="_beagle_supercomputer_cray">Beagle Supercomputer (Cray)</h4>
-<div class="paragraph"><p>The Beagle supercomputer is a Cray XE6 system at the Computation Institute. Here&#8217;s documentation on Beagle:</p></div>
-<div class="paragraph"><p>Here are the steps to run the tutorial on the Beagle supercomputer, assuming you have access:</p></div>
-<div class="olist arabic"><ol class="arabic">
-<li>
-<p>
-Ensure you have enable ssh keys for passwordless access to the Beagle login nodes.
-</p>
-</li>
-<li>
-<p>
-Set BEAGLE_USERNAME to your username in the swift-tutorial/setup.sh file.
-</p>
-</li>
-<li>
-<p>
-Set BEAGLE_PROJECT to the project under which you have allocations on Beagle.
-</p>
-</li>
-<li>
-<p>
-Set the following line in the swift-tutorial/swift.conf file.
-</p>
-<div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>   sites<span style="color: #990000">:</span> <span style="color: #990000">[</span>beagle<span style="color: #990000">]</span></tt></pre></div></div>
-</li>
-<li>
-<p>
-Run source setup.sh
-</p>
-</li>
-</ol></div>
-<div class="paragraph"><p>Note: Run "show_alloc" on Beagle to see your project and allocation balance.</p></div>
-</div>
-<div class="sect3">
-<h4 id="_osgconnect_at_uchicago">OSGConnect at UChicago</h4>
-<div class="paragraph"><p>The Open Science Grid (OSG) and University of Chicago provides a service to access a vast
-pool of opportunistic computational resources spread across the U.S. Here&#8217;s documentation on the OSG Connect resources:
-<a href="https://confluence.grid.iu.edu/display/CON/Home">OSGConnect docs</a>.</p></div>
-<div class="paragraph"><p>Here are the steps to run the tutorial via OSGConnect on the Open Science Grid, assuming you have access:</p></div>
-<div class="olist arabic"><ol class="arabic">
-<li>
-<p>
-Ensure you have enable ssh keys for passwordless access to the OSGConnect login nodes.
-</p>
-</li>
-<li>
-<p>
-Set OSG_USERNAME to your username with OSGConnect in the swift-tutorial/setup.sh file.
-</p>
-</li>
-<li>
-<p>
-Set the following line in the swift-tutorial/swift.conf file:
-</p>
-<div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>   sites<span style="color: #990000">:</span> <span style="color: #990000">[</span>osgc<span style="color: #990000">]</span></tt></pre></div></div>
-</li>
-<li>
-<p>
-Run source setup.sh
-</p>
-</li>
-</ol></div>
-</div>
-<div class="sect3">
-<h4 id="_amazon_ec2">Amazon EC2</h4>
-<div class="paragraph"><p>Amazon Elastic Compute Cloud (Amazon EC2) is a web service that provides resizable compute capacity in the cloud.
-Getting cloud resources on-demand from Amazon is now as simple as setting up an account and attaching a credit card.</p></div>
-<div class="olist arabic"><ol class="arabic">
-<li>
-<p>
-Follow steps outlined in <a href="./amazon_ec2.html">Amazon docs</a> to set up an account and install local dependencies.
-</p>
-</li>
-<li>
-<p>
-Set the AWS_CREDENTIALS_FILE is swift-tutorial/setup.sh file.
-</p>
-</li>
-<li>
-<p>
-Set the following line in the swift-tutorial/swift.conf file:
-</p>
-<div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>   sites<span style="color: #990000">:</span> <span style="color: #990000">[</span>aws<span style="color: #990000">]</span></tt></pre></div></div>
-</li>
-<li>
-<p>
-Run source setup.sh
-</p>
-</li>
-</ol></div>
-</div>
-<div class="sect3">
-<h4 id="_multiple_sites">Multiple sites</h4>
-<div class="paragraph"><p>Swift allows you to run you applications on multiple sites that you have access to.
-Let&#8217;s say you would like to run you applications on Midway and Beagle.</p></div>
-<div class="olist arabic"><ol class="arabic">
-<li>
-<p>
-Ensure you have enable ssh keys for passwordless access to the both Midway and Beagle
-</p>
-</li>
-<li>
-<p>
-Set the site specific variables for both sites in the swift-tutorial/setup.sh file.
-</p>
-</li>
-<li>
-<p>
-Set the following line in the swift-tutorial/swift.conf file:
-</p>
-<div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>   sites<span style="color: #990000">:</span> <span style="color: #990000">[</span>midway<span style="color: #990000">,</span> beagle<span style="color: #990000">]</span></tt></pre></div></div>
-</li>
-<li>
-<p>
-Run source setup.sh
-</p>
-</li>
-</ol></div>
-</div>
-</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_strong_tutorial_section_one_strong"><strong>Tutorial Section One</strong></h2>
 <div class="sectionbody">
 <div class="paragraph"><p>This section will be a walkthrough of the getting a simple science application running with swift on
-your local machine(localhost).</p></div>
+your local machine (localhost).</p></div>
 <div class="sect2">
 <h3 id="_example_1_run_a_single_application_under_swift">Example 1: Run a single application under Swift</h3>
 <div class="paragraph"><p>The first swift script, p1.swift, runs simulate.sh to generate a
@@ -1073,18 +893,7 @@ f <span style="color: #990000">=</span> <span style="font-weight: bold"><span st
 <div class="paragraph"><p>To run this script, run the following command:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><code>$ cd part01
-$ swift p1.swift
-Swift 0.94.1 RC2 swift-r6895 cog-r3765
-
-RunID: 20130827-1413-oa6fdib2
-Progress:  time: Tue, 27 Aug 2013 14:13:33 -0500
-Final status: Tue, 27 Aug 2013 14:13:33 -0500  Finished successfully:1
-$ cat sim.out
-      84
-$ swift p1.swift
-$ cat sim.out
-      36</code></pre>
+<pre><code>[TODO] Fill with actual run results</code></pre>
 </div></div>
 <div class="paragraph"><p>To cleanup the directory and remove all outputs (including the log
 files and directories that Swift generates), run the cleanup script
@@ -1139,28 +948,11 @@ the output files will be named
 <div class="paragraph"><p>To run the script and view the output:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><code>$ cd ../part02
-$ swift p2.swift
-$ ls output
-sim_0.out  sim_1.out  sim_2.out  sim_3.out  sim_4.out  sim_5.out  sim_6.out  sim_7.out  sim_8.out  sim_9.out
-$ more output/*
-::::::::::::::
-output/sim_0.out
-::::::::::::::
-      44
-::::::::::::::
-output/sim_1.out
-::::::::::::::
-      55
-...
-::::::::::::::
-output/sim_9.out
-::::::::::::::
-      82</code></pre>
+<pre><code>[TODO] Fill with actual run results</code></pre>
 </div></div>
 </div>
 <div class="sect2">
-<h3 id="_part_3_analyzing_results_of_a_parallel_ensemble">Part 3: Analyzing results of a parallel ensemble</h3>
+<h3 id="_example_3_analyzing_results_of_a_parallel_ensemble">Example 3: Analyzing results of a parallel ensemble</h3>
 <div class="paragraph"><p>After all the parallel simulations in an ensemble run have completed,
 its typically necessary to gather and analyze their results with some
 kind of post-processing analysis program or script.  p3.swift
@@ -1236,65 +1028,21 @@ http://www.gnu.org/software/src-highlite -->
 int steps  <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">toInt</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">arg</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"steps"</span><span style="color: #990000">,</span><span style="color: #FF0000">"1"</span><span style="color: #990000">));</span>
 int range  <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">toInt</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">arg</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"range"</span><span style="color: #990000">,</span><span style="color: #FF0000">"100"</span><span style="color: #990000">));</span>
 int values <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">toInt</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">arg</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"values"</span><span style="color: #990000">,</span><span style="color: #FF0000">"5"</span><span style="color: #990000">));</span></tt></pre></div></div>
-<div class="paragraph"><p>Now we can specify that more runs should be performed and that each should run for more timesteps, and produce more that one value each, within a specified range, using command line arguments placed after the Swift script name in the form <code>-parameterName=value</code>:</p></div>
+<div class="paragraph"><p>Now we can specify that more runs should be performed and that each should run for more
+timesteps, and produce more that one value each, within a specified range, using command line
+arguments placed after the Swift script name in the form <code>-parameterName=value</code>:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><code>$ swift p3.swift -nsim=3 -steps=10 -values=4 -range=1000000
-
-Swift 0.94.1 RC2 swift-r6895 cog-r3765
-
-RunID: 20130827-1439-s3vvo809
-Progress:  time: Tue, 27 Aug 2013 14:39:42 -0500
-Progress:  time: Tue, 27 Aug 2013 14:39:53 -0500  Active:2  Stage out:1
-Final status: Tue, 27 Aug 2013 14:39:53 -0500  Finished successfully:4
-
-$ ls output/
-average.out  sim_0.out  sim_1.out  sim_2.out
-$ more output/*
-::::::::::::::
-output/average.out
-::::::::::::::
-651368
-::::::::::::::
-output/sim_0.out
-::::::::::::::
-  735700
-  886206
-  997391
-  982970
-::::::::::::::
-output/sim_1.out
-::::::::::::::
-  260071
-  264195
-  869198
-  933537
-::::::::::::::
-output/sim_2.out
-::::::::::::::
-  201806
-  213540
-  527576
-  944233</code></pre>
+<pre><code>[TODO] Fill with actual run results</code></pre>
 </div></div>
 <div class="paragraph"><p>Now try running (<code>-nsim=</code>) 100 simulations of (<code>-steps=</code>) 1 second each:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><code>$ swift p3.swift -nsim=100 -steps=1
-Swift 0.94.1 RC2 swift-r6895 cog-r3765
-
-RunID: 20130827-1444-rq809ts6
-Progress:  time: Tue, 27 Aug 2013 14:44:55 -0500
-Progress:  time: Tue, 27 Aug 2013 14:44:56 -0500  Selecting site:79  Active:20  Stage out:1
-Progress:  time: Tue, 27 Aug 2013 14:44:58 -0500  Selecting site:58  Active:20  Stage out:1  Finished successfully:21
-Progress:  time: Tue, 27 Aug 2013 14:44:59 -0500  Selecting site:37  Active:20  Stage out:1  Finished successfully:42
-Progress:  time: Tue, 27 Aug 2013 14:45:00 -0500  Selecting site:16  Active:20  Stage out:1  Finished successfully:63
-Progress:  time: Tue, 27 Aug 2013 14:45:02 -0500  Active:15  Stage out:1  Finished successfully:84
-Progress:  time: Tue, 27 Aug 2013 14:45:03 -0500  Finished successfully:101
-Final status: Tue, 27 Aug 2013 14:45:03 -0500  Finished successfully:101</code></pre>
+<pre><code>[TODO] Fill with actual run results
+$ swift p3.swift -nsim=100 -steps=1</code></pre>
 </div></div>
 <div class="paragraph"><p>We can see from Swift&#8217;s "progress" status that the tutorial&#8217;s default
-<code>swift.properties</code> parameters for local execution allow Swift to run up to 20
+<code>swift.conf</code> parameters for local execution allow Swift to run up to 20
 application invocations concurrently on the login node. We&#8217;ll look at
 this in more detail in the next sections where we execute applications
 on the site&#8217;s compute nodes.</p></div>
@@ -1304,51 +1052,142 @@ on the site&#8217;s compute nodes.</p></div>
 <div class="sect1">
 <h2 id="_strong_tutorial_section_two_strong"><strong>Tutorial Section Two</strong></h2>
 <div class="sectionbody">
-<div class="paragraph"><p>This section introduces the configuration aspects that allow swift to run your applications
-on computation resources. To do this, go over the steps for the remote site that you have
-access to.</p></div>
+<div class="paragraph"><p>This section introduces the aspects of running on remote computational resources.
+We will go into the configuration aspects that allow swift to run your applications
+on computation resources. The <code>swift.conf</code> file contains definitions of various aspects
+of different remote computational resources that swift can run your tasks on.</p></div>
+<div class="paragraph"><p>The examples 4-6, are designed to run on remote sites, and require configurations to be set in
+the <code>swift.conf</code>. There are 5 remote sites defined in the swift.conf:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Beagle
+</p>
+</li>
+<li>
+<p>
+Midway
+</p>
+</li>
+<li>
+<p>
+OSGConnect
+</p>
+</li>
+<li>
+<p>
+Amazon EC2
+</p>
+</li>
+<li>
+<p>
+Collection of Ad-hoc nodes (ad-hoc-1..N).
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>There are detailed instructions for each of the sites in the <a href="#remote-configuration">Remote site configuration</a>section</p></div>
 <div class="sect2">
-<h3 id="_part_4_running_a_parallel_ensemble_on_compute_nodes">Part 4: Running a parallel ensemble on compute nodes</h3>
-<div class="paragraph"><p><code>p4.swift</code> will run our mock "simulation"
-applications on compute nodes.  The script is similar to as
-<code>p3.swift</code>, but specifies that each simulation app invocation should
-additionally return the log file which the application writes to
-<code>stderr</code>.</p></div>
-<div class="paragraph"><p>Now when you run <code>swift p4.swift</code> you&#8217;ll see that two types output
-files will placed in the <code>output/</code> directory: <code>sim_N.out</code> and
-<code>sim_N.log</code>.  The log files provide data on the runtime environment of
-each app invocation. For example:</p></div>
+<h3 id="_example_4_running_a_simple_app_on_remote_node">Example 4: Running a simple app on remote node</h3>
+<div class="paragraph"><p>In <code>p4.swift</code>, there is a simple <code>app</code> which takes a file containing random numbers and <code>sort</code> them before returning a sorted output. In the <code>part04</code>
+folder  we have a file, <code>unsorted.txt</code>, which contains 100 random integers ranging from 0 to 99 and we wish to run the job on a remote computational resource.
+Ensure that you have configured the <code>swift.conf</code> for your target remote site.</p></div>
+<div class="listingblock">
+<div class="title">p4.swift</div>
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>type file<span style="color: #990000">;</span>
+
+<span style="font-weight: bold"><span style="color: #000000">app</span></span> <span style="color: #990000">(</span>file out<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #000000">sortdata</span></span> <span style="color: #990000">(</span>file unsorted<span style="color: #990000">)</span>
+<span style="color: #990000">{</span>
+    sort <span style="color: #FF0000">"-n"</span> <span style="font-weight: bold"><span style="color: #000000">filename</span></span><span style="color: #990000">(</span>unsorted<span style="color: #990000">)</span> stdout<span style="color: #990000">=</span><span style="font-weight: bold"><span style="color: #000000">filename</span></span><span style="color: #990000">(</span>out<span style="color: #990000">);</span>
+<span style="color: #990000">}</span>
+
+file unsorted <span style="color: #990000">&lt;</span><span style="color: #FF0000">"unsorted.txt"</span><span style="color: #990000">&gt;;</span>
+file sorted   <span style="color: #990000">&lt;</span><span style="color: #FF0000">"sorted.txt"</span><span style="color: #990000">&gt;;</span>
+
+sorted <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">sortdata</span></span><span style="color: #990000">(</span>unsorted<span style="color: #990000">);</span></tt></pre></div></div>
+<div class="paragraph"><p>We rely on the very common <code>sort</code> commandline utility in this example. When a remote site is set as the execution target,
+swift will connect to it and start swift-workers which in turn will execute tasks, in this case <code>sort</code>. Swift handles the
+staging or moving of the necessary input and output files between the target systems and the machine you are running swift on.</p></div>
+<div class="paragraph"><p>Once Swift completes execution, you should see a new <code>sorted.txt</code> file in the folder containing numerically sorted
+results.</p></div>
+<div class="paragraph"><p>For example, to run the job remotely on Midway and to view the output:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><code>$ cat output/sim_0.log
+<pre><code>[TODO] Fill with actual run results</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_example_5_running_a_parallel_ensemble_on_compute_nodes">Example 5: Running a parallel ensemble on compute nodes</h3>
+<div class="paragraph"><p><code>p5.swift</code> will run our mock "simulation" applications on compute nodes.
+The script is similar to as <code>p3.swift</code>, but specifies that each simulation app invocation should
+additionally return the log file which the application writes to <code>stderr</code>.</p></div>
+<div class="imageblock" style="text-align:center;">
+<div class="content">
+<img src="part05.png" alt="part05.png" />
+</div>
+</div>
+<div class="listingblock">
+<div class="title">p5.swift</div>
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>type file<span style="color: #990000">;</span>
 
-Called as: simulate.sh: --timesteps 1 --range 100 --nvalues 5
+<span style="font-weight: bold"><span style="color: #000000">app</span></span> <span style="color: #990000">(</span>file out<span style="color: #990000">,</span> file log<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #000000">simulation</span></span> <span style="color: #990000">(</span>int sim_steps<span style="color: #990000">,</span> int sim_range<span style="color: #990000">,</span> int sim_values<span style="color: #990000">,</span> file sim_script<span style="color: #990000">)</span>
+<span style="color: #990000">{</span>
+  bash @sim_script <span style="color: #FF0000">"--timesteps"</span> sim_steps <span style="color: #FF0000">"--range"</span> sim_range <span style="color: #FF0000">"--nvalues"</span> sim_values stdout<span style="color: #990000">=</span>@out stderr<span style="color: #990000">=</span>@log<span style="color: #990000">;</span>
+<span style="color: #990000">}</span>
 
-Start time: Tue Oct 22 14:54:11 CDT 2013
-Running as user: uid=5116(davidk) gid=311(collab) groups=311(collab),104(fuse),1349(swift),45053(swat)
-Running on node: stomp
-Node IP address: 140.221.9.237
+<span style="font-weight: bold"><span style="color: #000000">app</span></span> <span style="color: #990000">(</span>file out<span style="color: #990000">,</span> file log<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #000000">analyze</span></span> <span style="color: #990000">(</span>file s<span style="color: #990000">[],</span> file stat_script<span style="color: #990000">)</span>
+<span style="color: #990000">{</span>
+  bash @stat_script <span style="font-weight: bold"><span style="color: #000000">filenames</span></span><span style="color: #990000">(</span>s<span style="color: #990000">)</span> stdout<span style="color: #990000">=</span>@out stderr<span style="color: #990000">=</span>@log<span style="color: #990000">;</span>
+<span style="color: #990000">}</span>
 
-Simulation parameters:
+int nsim   <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">toInt</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">arg</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"nsim"</span><span style="color: #990000">,</span>   <span style="color: #FF0000">"10"</span><span style="color: #990000">));</span>
+int steps  <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">toInt</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">arg</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"steps"</span><span style="color: #990000">,</span>  <span style="color: #FF0000">"1"</span><span style="color: #990000">));</span>
+int range  <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">toInt</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">arg</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"range"</span><span style="color: #990000">,</span>  <span style="color: #FF0000">"100"</span><span style="color: #990000">));</span>
+int values <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">toInt</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">arg</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"values"</span><span style="color: #990000">,</span> <span style="color: #FF0000">"5"</span><span style="color: #990000">));</span>
 
-bias=0
-biasfile=none
-initseed=none
-log=yes
-paramfile=none
-range=100
-scale=1
-seedfile=none
-timesteps=1
-output width=8
+file sims<span style="color: #990000">[];</span>
+file simulate_script <span style="color: #990000">&lt;</span><span style="color: #FF0000">"simulate.sh"</span><span style="color: #990000">&gt;;</span>
+file stats_script <span style="color: #990000">&lt;</span><span style="color: #FF0000">"stats.sh"</span><span style="color: #990000">&gt;;</span>
 
-Environment:
+foreach i <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> <span style="color: #990000">[</span><span style="color: #993399">0</span><span style="color: #990000">:</span>nsim<span style="color: #990000">-</span><span style="color: #993399">1</span><span style="color: #990000">]</span> <span style="color: #990000">{</span>
+  file simout <span style="color: #990000">&lt;</span>single_file_mapper<span style="color: #990000">;</span> file<span style="color: #990000">=</span><span style="font-weight: bold"><span style="color: #000000">strcat</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"output/sim_"</span><span style="color: #990000">,</span>i<span style="color: #990000">,</span><span style="color: #FF0000">".out"</span><span style="color: #990000">)&gt;;</span>
+  file simlog <span style="color: #990000">&lt;</span>single_file_mapper<span style="color: #990000">;</span> file<span style="color: #990000">=</span><span style="font-weight: bold"><span style="color: #000000">strcat</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"output/sim_"</span><span style="color: #990000">,</span>i<span style="color: #990000">,</span><span style="color: #FF0000">".log"</span><span style="color: #990000">)&gt;;</span>
+  <span style="color: #990000">(</span>simout<span style="color: #990000">,</span>simlog<span style="color: #990000">)</span> <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">simulation</span></span><span style="color: #990000">(</span>steps<span style="color: #990000">,</span>range<span style="color: #990000">,</span>values<span style="color: #990000">,</span>simulate_script<span style="color: #990000">);</span>
+  sims<span style="color: #990000">[</span>i<span style="color: #990000">]</span> <span style="color: #990000">=</span> simout<span style="color: #990000">;</span>
+<span style="color: #990000">}</span>
 
-EDITOR=vim
-HOME=/homes/davidk
-JAVA_HOME=/nfs/proj-davidk/jdk1.7.0_01
-LANG=C
-....</code></pre>
+file stats_out<span style="color: #990000">&lt;</span><span style="color: #FF0000">"output/average.out"</span><span style="color: #990000">&gt;;</span>
+file stats_log<span style="color: #990000">&lt;</span><span style="color: #FF0000">"output/average.log"</span><span style="color: #990000">&gt;;</span>
+<span style="color: #990000">(</span>stats_out<span style="color: #990000">,</span> stats_log<span style="color: #990000">)</span> <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">analyze</span></span><span style="color: #990000">(</span>sims<span style="color: #990000">,</span>stats_script<span style="color: #990000">);</span></tt></pre></div></div>
+<div class="paragraph"><p>To run:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>cd part05
+swift p5<span style="color: #990000">.</span>swift</tt></pre></div></div>
+<div class="listingblock">
+<div class="title">p4.swift</div>
+<div class="content">
+<pre><code>type file;
+
+app (file out) sortdata (file unsorted)
+{
+    sort "-n" filename(unsorted) stdout=filename(out);
+}
+
+file unsorted &lt;"unsorted.txt"&gt;;
+file sorted   &lt;"sorted.txt"&gt;;
+
+sorted = sortdata(unsorted);</code></pre>
 </div></div>
 </div>
 <div class="sect2">
@@ -1781,13 +1620,193 @@ very dynamic workflow patterns to be specified.
 <div class="paragraph"><p>We&#8217;ll see many of these points in action in the examples below. Lets
 get started!</p></div>
 </div>
+<div class="sect2">
+<h3 id="remote-configuration">Remote site configuration</h3>
+<div class="paragraph"><p>Part04 onwards, the tutorial is designed to run on remote computational resources.
+The following sections outline the steps required to enable swift to run tasks remotely.</p></div>
+<div class="sect3">
+<h4 id="_midway_cluster_at_uchicago">Midway cluster at UChicago</h4>
+<div class="paragraph"><p>The midway cluster is a shared computational resource administered by the Research
+Computing Center at the University of Chicago. Here&#8217;s documentation on the RCC resources:
+<a href="https://rcc.uchicago.edu/docs/">RCC docs</a></p></div>
+<div class="paragraph"><p>Here are the steps to run the tutorial on the midway cluster, assuming you have access:</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Ensure you have enable ssh keys for passwordless access to the midway login nodes.
+</p>
+</li>
+<li>
+<p>
+Set MIDWAY_USERNAME to your username in the swift-tutorial/setup.sh file.
+</p>
+</li>
+<li>
+<p>
+Set the following line in the swift-tutorial/swift.conf file.
+</p>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>   sites<span style="color: #990000">:</span> <span style="color: #990000">[</span>midway<span style="color: #990000">]</span></tt></pre></div></div>
+</li>
+<li>
+<p>
+Run source setup.sh
+</p>
+</li>
+</ol></div>
+</div>
+<div class="sect3">
+<h4 id="_beagle_supercomputer_cray">Beagle Supercomputer (Cray)</h4>
+<div class="paragraph"><p>The Beagle supercomputer is a Cray XE6 system at the Computation Institute. Here&#8217;s documentation on Beagle:</p></div>
+<div class="paragraph"><p>Here are the steps to run the tutorial on the Beagle supercomputer, assuming you have access:</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Ensure you have enable ssh keys for passwordless access to the Beagle login nodes.
+</p>
+</li>
+<li>
+<p>
+Set BEAGLE_USERNAME to your username in the swift-tutorial/setup.sh file.
+</p>
+</li>
+<li>
+<p>
+Set BEAGLE_PROJECT to the project under which you have allocations on Beagle.
+</p>
+</li>
+<li>
+<p>
+Set the following line in the swift-tutorial/swift.conf file.
+</p>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>   sites<span style="color: #990000">:</span> <span style="color: #990000">[</span>beagle<span style="color: #990000">]</span></tt></pre></div></div>
+</li>
+<li>
+<p>
+Run source setup.sh
+</p>
+</li>
+</ol></div>
+<div class="paragraph"><p>Note: Run "show_alloc" on Beagle to see your project and allocation balance.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_osgconnect_at_uchicago">OSGConnect at UChicago</h4>
+<div class="paragraph"><p>The Open Science Grid (OSG) and University of Chicago provides a service to access a vast
+pool of opportunistic computational resources spread across the U.S. Here&#8217;s documentation on the OSG Connect resources:
+<a href="https://confluence.grid.iu.edu/display/CON/Home">OSGConnect docs</a>.</p></div>
+<div class="paragraph"><p>Here are the steps to run the tutorial via OSGConnect on the Open Science Grid, assuming you have access:</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Ensure you have enable ssh keys for passwordless access to the OSGConnect login nodes.
+</p>
+</li>
+<li>
+<p>
+Set OSG_USERNAME to your username with OSGConnect in the swift-tutorial/setup.sh file.
+</p>
+</li>
+<li>
+<p>
+Set the following line in the swift-tutorial/swift.conf file:
+</p>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>   sites<span style="color: #990000">:</span> <span style="color: #990000">[</span>osgc<span style="color: #990000">]</span></tt></pre></div></div>
+</li>
+<li>
+<p>
+Run source setup.sh
+</p>
+</li>
+</ol></div>
+</div>
+<div class="sect3">
+<h4 id="_amazon_ec2">Amazon EC2</h4>
+<div class="paragraph"><p>Amazon Elastic Compute Cloud (Amazon EC2) is a web service that provides resizable compute capacity in the cloud.
+Getting cloud resources on-demand from Amazon is now as simple as setting up an account and attaching a credit card.</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Follow steps outlined in <a href="./amazon_ec2.html">Amazon docs</a> to set up an account and install local dependencies.
+</p>
+</li>
+<li>
+<p>
+Set the AWS_CREDENTIALS_FILE is swift-tutorial/setup.sh file.
+</p>
+</li>
+<li>
+<p>
+Set the following line in the swift-tutorial/swift.conf file:
+</p>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>   sites<span style="color: #990000">:</span> <span style="color: #990000">[</span>aws<span style="color: #990000">]</span></tt></pre></div></div>
+</li>
+<li>
+<p>
+Run source setup.sh
+</p>
+</li>
+</ol></div>
+</div>
+<div class="sect3">
+<h4 id="_multiple_sites">Multiple sites</h4>
+<div class="paragraph"><p>Swift allows you to run you applications on multiple sites that you have access to.
+Let&#8217;s say you would like to run you applications on Midway and Beagle.</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Ensure you have enable ssh keys for passwordless access to the both Midway and Beagle
+</p>
+</li>
+<li>
+<p>
+Set the site specific variables for both sites in the swift-tutorial/setup.sh file.
+</p>
+</li>
+<li>
+<p>
+Set the following line in the swift-tutorial/swift.conf file:
+</p>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>   sites<span style="color: #990000">:</span> <span style="color: #990000">[</span>midway<span style="color: #990000">,</span> beagle<span style="color: #990000">]</span></tt></pre></div></div>
+</li>
+<li>
+<p>
+Run source setup.sh
+</p>
+</li>
+</ol></div>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-01-20 16:43:44 CST
+Last updated 2015-01-21 17:24:58 CST
 </div>
 </div>
 </body>

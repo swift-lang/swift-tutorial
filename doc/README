@@ -93,114 +93,12 @@ your local $PATH for you to run the tutorial.
 Note: We will come back to the setup.sh script in part4-6 to
 enable remote sites for computation.
 
-Configuring Swift to run on remote sites
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Part04 onwards, the tutorial is designed to run on remote computational resources.
-The following sections outline the steps required to enable swift to run tasks remotely.
-
-Midway cluster at UChicago
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-The midway cluster is a shared computational resource administered by the Research
-Computing Center at the University of Chicago. Here's documentation on the RCC resources:
-link:https://rcc.uchicago.edu/docs/[RCC docs]
-
-Here are the steps to run the tutorial on the midway cluster, assuming you have access:
-
-1. Ensure you have enable ssh keys for passwordless access to the midway login nodes.
-2. Set MIDWAY_USERNAME to your username in the swift-tutorial/setup.sh file.
-3. Set the following line in the swift-tutorial/swift.conf file.
-+
-[source, bash]
-----
-   sites: [midway]
-----
-+
-4. Run source setup.sh
-
-
-Beagle Supercomputer (Cray)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-The Beagle supercomputer is a Cray XE6 system at the Computation Institute. Here's documentation on Beagle:
-
-Here are the steps to run the tutorial on the Beagle supercomputer, assuming you have access:
-
-1. Ensure you have enable ssh keys for passwordless access to the Beagle login nodes.
-2. Set BEAGLE_USERNAME to your username in the swift-tutorial/setup.sh file.
-3. Set BEAGLE_PROJECT to the project under which you have allocations on Beagle.
-4. Set the following line in the swift-tutorial/swift.conf file.
-+
-[source, bash]
-----
-   sites: [beagle]
-----
-+
-5. Run source setup.sh
-
-Note: Run "show_alloc" on Beagle to see your project and allocation balance.
-
-
-OSGConnect at UChicago
-^^^^^^^^^^^^^^^^^^^^^^
-
-The Open Science Grid (OSG) and University of Chicago provides a service to access a vast
-pool of opportunistic computational resources spread across the U.S. Here's documentation on the OSG Connect resources:
-link:https://confluence.grid.iu.edu/display/CON/Home[OSGConnect docs].
-
-Here are the steps to run the tutorial via OSGConnect on the Open Science Grid, assuming you have access:
-
-1. Ensure you have enable ssh keys for passwordless access to the OSGConnect login nodes.
-2. Set OSG_USERNAME to your username with OSGConnect in the swift-tutorial/setup.sh file.
-3. Set the following line in the swift-tutorial/swift.conf file:
-+
-[source, bash]
-----
-   sites: [osgc]
-----
-+
-4. Run source setup.sh
-
-Amazon EC2
-^^^^^^^^^^
-
-Amazon Elastic Compute Cloud (Amazon EC2) is a web service that provides resizable compute capacity in the cloud.
-Getting cloud resources on-demand from Amazon is now as simple as setting up an account and attaching a credit card.
-
-1. Follow steps outlined in link:./amazon_ec2.html[Amazon docs] to set up an account and install local dependencies.
-2. Set the AWS_CREDENTIALS_FILE is swift-tutorial/setup.sh file.
-3. Set the following line in the swift-tutorial/swift.conf file:
-+
-[source, bash]
-----
-   sites: [aws]
-----
-+
-4. Run source setup.sh
-
-Multiple sites
-^^^^^^^^^^^^^^
-
-Swift allows you to run you applications on multiple sites that you have access to.
-Let's say you would like to run you applications on Midway and Beagle.
-
-1. Ensure you have enable ssh keys for passwordless access to the both Midway and Beagle
-2. Set the site specific variables for both sites in the swift-tutorial/setup.sh file.
-3. Set the following line in the swift-tutorial/swift.conf file:
-+
-[source, bash]
-----
-   sites: [midway, beagle]
-----
-+
-4. Run source setup.sh
 
 *Tutorial Section One*
 ----------------------
 
 This section will be a walkthrough of the getting a simple science application running with swift on
-your local machine(localhost).
+your local machine (localhost).
 
 
 Example 1: Run a single application under Swift
@@ -222,18 +120,7 @@ sys::[cat ../part01/p1.swift]
 
 To run this script, run the following command:
 -----
-$ cd part01
-$ swift p1.swift
-Swift 0.94.1 RC2 swift-r6895 cog-r3765
-
-RunID: 20130827-1413-oa6fdib2
-Progress:  time: Tue, 27 Aug 2013 14:13:33 -0500
-Final status: Tue, 27 Aug 2013 14:13:33 -0500  Finished successfully:1
-$ cat sim.out
-      84
-$ swift p1.swift
-$ cat sim.out
-      36
+[TODO] Fill with actual run results
 -----
 
 To cleanup the directory and remove all outputs (including the log
@@ -271,28 +158,11 @@ the output files will be named
 
 To run the script and view the output:
 -----
-$ cd ../part02
-$ swift p2.swift
-$ ls output
-sim_0.out  sim_1.out  sim_2.out  sim_3.out  sim_4.out  sim_5.out  sim_6.out  sim_7.out  sim_8.out  sim_9.out
-$ more output/*
-::::::::::::::
-output/sim_0.out
-::::::::::::::
-      44
-::::::::::::::
-output/sim_1.out
-::::::::::::::
-      55
-...
-::::::::::::::
-output/sim_9.out
-::::::::::::::
-      82
+[TODO] Fill with actual run results
 -----
 
-Part 3: Analyzing results of a parallel ensemble
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Example 3: Analyzing results of a parallel ensemble
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 After all the parallel simulations in an ensemble run have completed,
 its typically necessary to gather and analyze their results with some
@@ -339,67 +209,23 @@ int range  = toInt(arg("range","100"));
 int values = toInt(arg("values","5"));
 -----
 
-Now we can specify that more runs should be performed and that each should run for more timesteps, and produce more that one value each, within a specified range, using command line arguments placed after the Swift script name in the form `-parameterName=value`:
+Now we can specify that more runs should be performed and that each should run for more
+timesteps, and produce more that one value each, within a specified range, using command line
+arguments placed after the Swift script name in the form `-parameterName=value`:
 
 -----
-$ swift p3.swift -nsim=3 -steps=10 -values=4 -range=1000000
-
-Swift 0.94.1 RC2 swift-r6895 cog-r3765
-
-RunID: 20130827-1439-s3vvo809
-Progress:  time: Tue, 27 Aug 2013 14:39:42 -0500
-Progress:  time: Tue, 27 Aug 2013 14:39:53 -0500  Active:2  Stage out:1
-Final status: Tue, 27 Aug 2013 14:39:53 -0500  Finished successfully:4
-
-$ ls output/
-average.out  sim_0.out  sim_1.out  sim_2.out
-$ more output/*
-::::::::::::::
-output/average.out
-::::::::::::::
-651368
-::::::::::::::
-output/sim_0.out
-::::::::::::::
-  735700
-  886206
-  997391
-  982970
-::::::::::::::
-output/sim_1.out
-::::::::::::::
-  260071
-  264195
-  869198
-  933537
-::::::::::::::
-output/sim_2.out
-::::::::::::::
-  201806
-  213540
-  527576
-  944233
+[TODO] Fill with actual run results
 -----
 
 Now try running (`-nsim=`) 100 simulations of (`-steps=`) 1 second each:
 
 -----
+[TODO] Fill with actual run results
 $ swift p3.swift -nsim=100 -steps=1
-Swift 0.94.1 RC2 swift-r6895 cog-r3765
-
-RunID: 20130827-1444-rq809ts6
-Progress:  time: Tue, 27 Aug 2013 14:44:55 -0500
-Progress:  time: Tue, 27 Aug 2013 14:44:56 -0500  Selecting site:79  Active:20  Stage out:1
-Progress:  time: Tue, 27 Aug 2013 14:44:58 -0500  Selecting site:58  Active:20  Stage out:1  Finished successfully:21
-Progress:  time: Tue, 27 Aug 2013 14:44:59 -0500  Selecting site:37  Active:20  Stage out:1  Finished successfully:42
-Progress:  time: Tue, 27 Aug 2013 14:45:00 -0500  Selecting site:16  Active:20  Stage out:1  Finished successfully:63
-Progress:  time: Tue, 27 Aug 2013 14:45:02 -0500  Active:15  Stage out:1  Finished successfully:84
-Progress:  time: Tue, 27 Aug 2013 14:45:03 -0500  Finished successfully:101
-Final status: Tue, 27 Aug 2013 14:45:03 -0500  Finished successfully:101
 -----
 
 We can see from Swift's "progress" status that the tutorial's default
-`swift.properties` parameters for local execution allow Swift to run up to 20
+`swift.conf` parameters for local execution allow Swift to run up to 20
 application invocations concurrently on the login node. We'll look at
 this in more detail in the next sections where we execute applications
 on the site's compute nodes.
@@ -408,140 +234,77 @@ on the site's compute nodes.
 *Tutorial Section Two*
 ----------------------
 
-This section introduces the configuration aspects that allow swift to run your applications
-on computation resources. To do this, go over the steps for the remote site that you have
-access to.
+This section introduces the aspects of running on remote computational resources.
+We will go into the configuration aspects that allow swift to run your applications
+on computation resources. The `swift.conf` file contains definitions of various aspects
+of different remote computational resources that swift can run your tasks on.
+
+The examples 4-6, are designed to run on remote sites, and require configurations to be set in
+the `swift.conf`. There are 5 remote sites defined in the swift.conf:
+
+* Beagle
+* Midway
+* OSGConnect
+* Amazon EC2
+* Collection of Ad-hoc nodes (ad-hoc-1..N).
+
+There are detailed instructions for each of the sites in the xref:remote-configuration[Remote site configuration]section
 
 
-Part 4: Running a parallel ensemble on compute nodes
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Example 4: Running a simple app on remote node
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-`p4.swift` will run our mock "simulation"
-applications on compute nodes.  The script is similar to as
-`p3.swift`, but specifies that each simulation app invocation should
-additionally return the log file which the application writes to
-`stderr`.
+In `p4.swift`, there is a simple `app` which takes a file containing random numbers and `sort` them before returning a sorted output. In the `part04`
+folder  we have a file, `unsorted.txt`, which contains 100 random integers ranging from 0 to 99 and we wish to run the job on a remote computational resource.
+Ensure that you have configured the `swift.conf` for your target remote site.
 
-////
+.p4.swift
+[source, python]
+----
+sys::[cat ../part04/p4.swift]
+----
 
-FIXME: need to revise this figure: drop prog:
+We rely on the very common `sort` commandline utility in this example. When a remote site is set as the execution target,
+swift will connect to it and start swift-workers which in turn will execute tasks, in this case `sort`. Swift handles the
+staging or moving of the necessary input and output files between the target systems and the machine you are running swift on.
 
-, making the parallel portion of the script behave like this:
+Once Swift completes execution, you should see a new `sorted.txt` file in the folder containing numerically sorted
+results.
 
-image::part04.png[align="center"]
+For example, to run the job remotely on Midway and to view the output:
+-----
+[TODO] Fill with actual run results
+-----
+
+
+Example 5: Running a parallel ensemble on compute nodes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+`p5.swift` will run our mock "simulation" applications on compute nodes.
+The script is similar to as `p3.swift`, but specifies that each simulation app invocation should
+additionally return the log file which the application writes to `stderr`.
+
+image::part05.png[align="center"]
+
+.p5.swift
+[source, python]
+----
+sys::[cat ../part05/p5.swift]
+----
+
+To run:
+[source, bash]
+----
+cd part05
+swift p5.swift
+----
+
 
 .p4.swift
 ----
 sys::[cat ../part04/p4.swift]
 ----
-////
 
-Now when you run `swift p4.swift` you'll see that two types output
-files will placed in the `output/` directory: `sim_N.out` and
-`sim_N.log`.  The log files provide data on the runtime environment of
-each app invocation. For example:
-
------
-$ cat output/sim_0.log 
-
-Called as: simulate.sh: --timesteps 1 --range 100 --nvalues 5
-
-Start time: Tue Oct 22 14:54:11 CDT 2013
-Running as user: uid=5116(davidk) gid=311(collab) groups=311(collab),104(fuse),1349(swift),45053(swat)
-Running on node: stomp
-Node IP address: 140.221.9.237 
-
-Simulation parameters:
-
-bias=0
-biasfile=none
-initseed=none
-log=yes
-paramfile=none
-range=100
-scale=1
-seedfile=none
-timesteps=1
-output width=8
-
-Environment:
-
-EDITOR=vim
-HOME=/homes/davidk
-JAVA_HOME=/nfs/proj-davidk/jdk1.7.0_01
-LANG=C
-....
------
-
-/////
-To tell Swift to run the apps on compute nodes, we specify in the
-`apps` file that the apps should be executed on the `cloud` site
-(instead of the `localhost` site).  We can specify the location of
-each app in the third field of the `apps` file, with either an
-absolute pathname or the name of an executable to be located in
-`PATH`). Here we use the latter form:
-
------
-$ cat apps
-cloud simulate simulate.sh
-cloud stats    stats.sh
------
-
-You can experiment, for example, with an alternate version of stats.sh by specfying that app's location explicitly:
-
------
-$ cat apps
-cloud simulate simulate.sh
-cloud stats    /home/users/p01532/bin/my-alt-stats.sh
------
-
-We can see that when we run many apps requesting a larger set of nodes (6), we are indeed running on the compute nodes:
------
-$ swift p4.swift -nsim=1000 -steps=1 
-Swift 0.94.1 RC2 swift-r6895 cog-r3765
-
-RunID: 20130827-1638-t23ax37a
-Progress:  time: Tue, 27 Aug 2013 16:38:11 -0500
-Progress:  time: Tue, 27 Aug 2013 16:38:12 -0500  Initializing:966
-Progress:  time: Tue, 27 Aug 2013 16:38:13 -0500  Selecting site:499  Submitting:500  Submitted:1
-Progress:  time: Tue, 27 Aug 2013 16:38:14 -0500  Selecting site:499  Stage in:1  Submitted:500
-Progress:  time: Tue, 27 Aug 2013 16:38:16 -0500  Selecting site:499  Submitted:405  Active:95  Stage out:1
-Progress:  time: Tue, 27 Aug 2013 16:38:17 -0500  Selecting site:430  Submitted:434  Active:66  Stage out:1  Finished successfully:69
-Progress:  time: Tue, 27 Aug 2013 16:38:18 -0500  Selecting site:388  Submitted:405  Active:95  Stage out:1  Finished successfully:111
-...
-Progress:  time: Tue, 27 Aug 2013 16:38:30 -0500  Stage in:1  Submitted:93  Active:94  Finished successfully:812
-Progress:  time: Tue, 27 Aug 2013 16:38:31 -0500  Submitted:55  Active:95  Stage out:1  Finished successfully:849
-Progress:  time: Tue, 27 Aug 2013 16:38:32 -0500  Active:78  Stage out:1  Finished successfully:921
-Progress:  time: Tue, 27 Aug 2013 16:38:34 -0500  Active:70  Stage out:1  Finished successfully:929
-Progress:  time: Tue, 27 Aug 2013 16:38:37 -0500  Stage in:1  Finished successfully:1000
-Progress:  time: Tue, 27 Aug 2013 16:38:38 -0500  Stage out:1  Finished successfully:1000
-Final status: Tue, 27 Aug 2013 16:38:38 -0500  Finished successfully:1001
-
-$ grep "on node:" output/*log | head
-output/sim_0.log:Running on node: nid00063
-output/sim_100.log:Running on node: nid00060
-output/sim_101.log:Running on node: nid00061
-output/sim_102.log:Running on node: nid00032
-output/sim_103.log:Running on node: nid00060
-output/sim_104.log:Running on node: nid00061
-output/sim_105.log:Running on node: nid00032
-output/sim_106.log:Running on node: nid00060
-output/sim_107.log:Running on node: nid00061
-output/sim_108.log:Running on node: nid00062
-
-$ grep "on node:" output/*log | awk '{print $4}' | sort | uniq -c
-    158 nid00032
-    156 nid00033
-    171 nid00060
-    178 nid00061
-    166 nid00062
-    171 nid00063
-$ hostname
-raven
-$ hostname -f
-nid00008
------
-/////
 Performing larger Swift runs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -867,3 +630,107 @@ very dynamic workflow patterns to be specified.
 
 We'll see many of these points in action in the examples below. Lets
 get started!
+
+[[remote-configuration]]
+Remote site configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Part04 onwards, the tutorial is designed to run on remote computational resources.
+The following sections outline the steps required to enable swift to run tasks remotely.
+
+Midway cluster at UChicago
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The midway cluster is a shared computational resource administered by the Research
+Computing Center at the University of Chicago. Here's documentation on the RCC resources:
+link:https://rcc.uchicago.edu/docs/[RCC docs]
+
+Here are the steps to run the tutorial on the midway cluster, assuming you have access:
+
+1. Ensure you have enable ssh keys for passwordless access to the midway login nodes.
+2. Set MIDWAY_USERNAME to your username in the swift-tutorial/setup.sh file.
+3. Set the following line in the swift-tutorial/swift.conf file.
++
+[source, bash]
+----
+   sites: [midway]
+----
++
+4. Run source setup.sh
+
+
+Beagle Supercomputer (Cray)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The Beagle supercomputer is a Cray XE6 system at the Computation Institute. Here's documentation on Beagle:
+
+Here are the steps to run the tutorial on the Beagle supercomputer, assuming you have access:
+
+1. Ensure you have enable ssh keys for passwordless access to the Beagle login nodes.
+2. Set BEAGLE_USERNAME to your username in the swift-tutorial/setup.sh file.
+3. Set BEAGLE_PROJECT to the project under which you have allocations on Beagle.
+4. Set the following line in the swift-tutorial/swift.conf file.
++
+[source, bash]
+----
+   sites: [beagle]
+----
++
+5. Run source setup.sh
+
+Note: Run "show_alloc" on Beagle to see your project and allocation balance.
+
+
+OSGConnect at UChicago
+^^^^^^^^^^^^^^^^^^^^^^
+
+The Open Science Grid (OSG) and University of Chicago provides a service to access a vast
+pool of opportunistic computational resources spread across the U.S. Here's documentation on the OSG Connect resources:
+link:https://confluence.grid.iu.edu/display/CON/Home[OSGConnect docs].
+
+Here are the steps to run the tutorial via OSGConnect on the Open Science Grid, assuming you have access:
+
+1. Ensure you have enable ssh keys for passwordless access to the OSGConnect login nodes.
+2. Set OSG_USERNAME to your username with OSGConnect in the swift-tutorial/setup.sh file.
+3. Set the following line in the swift-tutorial/swift.conf file:
++
+[source, bash]
+----
+   sites: [osgc]
+----
++
+4. Run source setup.sh
+
+Amazon EC2
+^^^^^^^^^^
+
+Amazon Elastic Compute Cloud (Amazon EC2) is a web service that provides resizable compute capacity in the cloud.
+Getting cloud resources on-demand from Amazon is now as simple as setting up an account and attaching a credit card.
+
+1. Follow steps outlined in link:./amazon_ec2.html[Amazon docs] to set up an account and install local dependencies.
+2. Set the AWS_CREDENTIALS_FILE is swift-tutorial/setup.sh file.
+3. Set the following line in the swift-tutorial/swift.conf file:
++
+[source, bash]
+----
+   sites: [aws]
+----
++
+4. Run source setup.sh
+
+Multiple sites
+^^^^^^^^^^^^^^
+
+Swift allows you to run you applications on multiple sites that you have access to.
+Let's say you would like to run you applications on Midway and Beagle.
+
+1. Ensure you have enable ssh keys for passwordless access to the both Midway and Beagle
+2. Set the site specific variables for both sites in the swift-tutorial/setup.sh file.
+3. Set the following line in the swift-tutorial/swift.conf file:
++
+[source, bash]
+----
+   sites: [midway, beagle]
+----
++
+4. Run source setup.sh

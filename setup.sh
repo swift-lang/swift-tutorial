@@ -6,6 +6,7 @@ export MIDWAY_USERNAME=""
 export AWS_CREDENTIALS_FILE=""
 export URL_OF_AD_HOC_MACHINE_1=""
 export AD_HOC_1_USERNAME=""
+export AD_HOC_N_USERNAME=""
 export OSG_USERNAME=""
 export OSG_PROJECT=""
 
