@@ -9,6 +9,7 @@ export AD_HOC_1_USERNAME=""
 export AD_HOC_N_USERNAME=""
 export OSG_USERNAME=""
 export OSG_PROJECT=""
+export BLUES_USERNAME=""
 
 #############################################################
 
