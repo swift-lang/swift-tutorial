@@ -3,6 +3,7 @@
 source setup.sh
 
 export BEAGLE_USERNAME="yadunandb"
+export BEAGLE_PROJECT="CI-CCR000013"
 export MIDWAY_USERNAME="yadunand"
 export AWS_CREDENTIALS_FILE="/home/yadu/.ssh/swift-grant-credentials.csv"
 export URL_OF_AD_HOC_MACHINE_1="crank"
@@ -38,7 +39,7 @@ do
     for SITE in ${SITES[*]}
     do
         echo "Running on SITE : $SITE"
-        swift p$i.swift -site=$SITE
+        swift -site=$SITE p$i.swift
         if [[ $? == 0 ]]
         then
             echo "Cleaning up!"
