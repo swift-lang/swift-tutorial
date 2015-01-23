@@ -1102,11 +1102,16 @@ We will go into the configuration aspects that allow swift to run your applicati
 on computation resources. The <code>swift.conf</code> file contains definitions of various aspects
 of different remote computational resources that swift can run your tasks on.</p></div>
 <div class="paragraph"><p>The examples 4-6, are designed to run on remote sites, and require configurations to be set in
-the <code>swift.conf</code>. There are 5 remote sites defined in the swift.conf:</p></div>
+the <code>swift.conf</code>. There are 6 remote sites defined in the swift.conf:</p></div>
 <div class="ulist"><ul>
 <li>
 <p>
 Beagle
+</p>
+</li>
+<li>
+<p>
+Blues
 </p>
 </li>
 <li>
@@ -1873,6 +1878,53 @@ qstat -u <span style="color: #009900">$USER</span>
 xtnodestat -d</tt></pre></div></div>
 </div>
 <div class="sect3">
+<h4 id="_blues_cluster_at_lcrc">Blues cluster at LCRC</h4>
+<div class="paragraph"><p>Blues is a compute cluster at the Laboratory Computing Resource Center (LCRC) at Argonne National Laboratory.
+The blues cluster features 310 nodes, with 16 cores per node (Intel Sandy Bridge).
+Here&#8217;s documentation on Blues: <a href="http://www.lcrc.anl.gov/info/Blues">Blues docs</a></p></div>
+<div class="paragraph"><p>Here are the steps to run the tutorial on the Blues cluster</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Ensure you have enabled ssh keys for passwordless access to the Blues login nodes (blues.lcrc.anl.gov).
+</p>
+</li>
+<li>
+<p>
+If you are ru    nning on the blues login nodes, set jobManager: "local:pbs"
+</p>
+</li>
+<li>
+<p>
+Set workDirectory : "/home/YOUR_USERNAME_ON_BLUES/swiftwork"
+</p>
+</li>
+<li>
+<p>
+Set the following line in the swift-tutorial/swift.conf file.
+</p>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>   sites<span style="color: #990000">:</span> <span style="color: #990000">[</span>blues<span style="color: #990000">]</span></tt></pre></div></div>
+</li>
+</ol></div>
+<div class="paragraph"><p>Notes for blues:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-style: italic"><span style="color: #9A1900"># The following commands should be executed on a beagle login node</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># List queues</span></span>
+qstat -q
+
+<span style="font-style: italic"><span style="color: #9A1900"># List your jobs and state</span></span>
+qstat -u <span style="color: #009900">$USER</span></tt></pre></div></div>
+</div>
+<div class="sect3">
 <h4 id="_osgconnect_at_uchicago">OSGConnect at UChicago</h4>
 <div class="paragraph"><p>The Open Science Grid (OSG) and University of Chicago provides a service to access a vast
 pool of opportunistic computational resources spread across the U.S. Here&#8217;s documentation on the OSG Connect resources:
@@ -2043,7 +2095,7 @@ http://www.gnu.org/software/src-highlite -->
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-01-23 15:57:41 CST
+Last updated 2015-01-23 16:49:03 CST
 </div>
 </div>
 </body>

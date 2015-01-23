@@ -282,9 +282,10 @@ on computation resources. The `swift.conf` file contains definitions of various 
 of different remote computational resources that swift can run your tasks on.
 
 The examples 4-6, are designed to run on remote sites, and require configurations to be set in
-the `swift.conf`. There are 5 remote sites defined in the swift.conf:
+the `swift.conf`. There are 6 remote sites defined in the swift.conf:
 
 * Beagle
+* Blues
 * Midway
 * OSGConnect
 * Amazon EC2
@@ -850,6 +851,37 @@ qstat -u $USER
 # Visual representation of current node allocation status
 xtnodestat -d
 -----
+
+Blues cluster at LCRC
+^^^^^^^^^^^^^^^^^^^^^
+
+Blues is a compute cluster at the Laboratory Computing Resource Center (LCRC) at Argonne National Laboratory.
+The blues cluster features 310 nodes, with 16 cores per node (Intel Sandy Bridge).
+Here's documentation on Blues: link:http://www.lcrc.anl.gov/info/Blues[Blues docs]
+
+Here are the steps to run the tutorial on the Blues cluster
+
+1. Ensure you have enabled ssh keys for passwordless access to the Blues login nodes (blues.lcrc.anl.gov).
+2. If you are ru    nning on the blues login nodes, set jobManager: "local:pbs"
+3. Set workDirectory : "/home/YOUR_USERNAME_ON_BLUES/swiftwork"
+4. Set the following line in the swift-tutorial/swift.conf file.
++
+[source, bash]
+----
+   sites: [blues]
+----
+
+Notes for blues:
+[source, bash]
+-----
+# The following commands should be executed on a beagle login node
+# List queues
+qstat -q
+
+# List your jobs and state
+qstat -u $USER
+-----
+
 
 OSGConnect at UChicago
 ^^^^^^^^^^^^^^^^^^^^^^
