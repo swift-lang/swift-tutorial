@@ -97,7 +97,7 @@ in part4-6 to enable remote sites for computation.
 *Tutorial Section One*
 ----------------------
 
-This section will be a walkthrough of the getting a simple "mock" science application
+This section will be a walk through of the getting a simple "mock" science application
 running with swift on your local machine (localhost).
 
 
@@ -344,7 +344,7 @@ Ensure that you have configured the `swift.conf` for your target remote site.
 sys::[cat ../part04/p4.swift]
 ----
 
-We rely on the very common `sort` commandline utility in this example. When a remote site is set as the execution target,
+We rely on the very common `sort` command line utility in this example. When a remote site is set as the execution target,
 swift will connect to it and start swift-workers which in turn will execute tasks, in this case `sort`. Swift handles the
 staging or moving of the necessary input and output files between the target systems and the machine you are running swift on.
 
