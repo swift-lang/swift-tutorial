@@ -1,14 +1,16 @@
 Swift Tutorial
 ==============
 
-This tutorial is viewable at: [red]#TODO> http://swiftlang.org/tutorials/swift-tutorial-0.96
+This tutorial is viewable at:
+
+[red]#TODO> http://swiftlang.org/tutorials/swift-tutorial-0.96
 
 
 Introduction: Why Parallel Scripting?
 -------------------------------------
 
 Swift is a simple scripting language for executing many instances of
-ordinary application programs on distributed parallel resources.
+ordinary application programs on distributed and parallel resources.
 Swift scripts run many copies of ordinary programs concurrently, using
 statements like this:
 
@@ -19,27 +21,26 @@ foreach protein in proteinList {
 }
 -----
 
-Swift acts like a structured "shell" language. It runs programs
-concurrently as soon as their inputs are available, reducing the need
-for complex parallel programming.  Swift expresses your workflow in a
-portable fashion: The same script runs on multicore computers,
-clusters, clouds, grids, and supercomputers.
+Swift acts like a structured "shell" language. It runs programs concurrently as
+soon as their inputs are available, reducing the need for complex parallel
+programming.  Swift expresses workflow in a portable fashion: The same script
+can run on multicore computers, clusters, clouds, grids, and supercomputers.
 
-In this tutorial, you'll be able to first try a few Swift examples
-(examples 1-3) on your local machine, to get a sense of the language.
-Then, in examples 4-6 you'll run similar workflows on any resource
-you may have access to, such as clouds (Amazon Web Services), Cray HPC systems,
-clusters etc, and see how more complex workflows can be expressed
-with Swift scripts.
+In this tutorial, you will be able to first try a few Swift examples (examples
+1-3) on your local machine, to get a sense of the language.  Then, in examples
+4-6 you will run similar workflows on any resource you may have access to, such
+as clouds (Amazon Web Services), Cray HPC systems, clusters etc, and see how
+more complex workflows can be expressed with Swift scripts.
 
 Running the tutorial
 --------------------
 
-To run the swift-tutorial, ensure that java (1.7+) and swift-0.96 is installed
-on the machine you would be using to run the tutorials on.
+To run the tutorial, ensure that (Oracle/Sun) java (1.7+) and swift-0.96 is
+installed on the machine you would be using to run the tutorial on.
 
-Swift modules are available on Beagle, Midway and OSGConnect. If a module
-is not available the following steps describe the installation procedure.
+Swift is available as loadable software module on Beagle, Midway and
+OSGConnect. If a module is not available the following steps describe the
+installation procedure.
 
 [red]#TODO: Ensure latest modules are available on Beagle/Midway/OSGConnect#
 
@@ -50,10 +51,13 @@ Swift installation
 -----
 # Download the swift-0.96 package
 wget http://swiftlang.org/packages/swift-0.96.tar.gz
+
 # Extract package
 tar xfz swift-0.96.tar.gz
+
 # Add swift to the PATH environment variable
 export PATH=$PATH:/path/to/swift-0.96/bin
+
 # To verify that Swift has successfully loaded, run:
 $ swift -version
 # This should print Swift 0.96
@@ -86,7 +90,7 @@ Now, run the tutorial setup script:
 source setup.sh  # You must run this with "source" !
 ----
 
-Doing this will add the sample applications simulate and stats
+Doing this will add the sample applications +simulate+ and +stats+
 (explained in the next part) and some other functionalities to
 your local $PATH for you to run the tutorial.
 
@@ -97,7 +101,7 @@ in part4-6 to enable remote sites for computation.
 *Tutorial Section One*
 ----------------------
 
-This section will be a walk through of the getting a simple "mock" science application
+This section will be a walk-through of the getting a simple "mock" science application
 running with swift on your local machine (localhost).
 
 
@@ -142,11 +146,11 @@ which is located in the tutorial PATH:
 $ cleanup
 -----
 
-NOTE: You'll also find a Swift configuration files in each `partNN`
-directory of this tutorial. These specify the environment-specific
-details of target computational resources where the application programs would be execute.
-These swift configuration file will be explained in more
-detail in parts 4-6, and can be ignored for now.
+NOTE: You will also find a Swift configuration file in each `partNN` directory
+of this tutorial. This specify the environment-specific details of target
+computational resource where the application programs would be executed.  This
+swift configuration file will be explained in more detail in parts 4-6, and can
+be ignored for now.
 
 
 Example 2: Running an ensemble of many apps in parallel with a "foreach" loop
@@ -191,10 +195,10 @@ Example 3: Analyzing results of a parallel ensemble
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 After all the parallel simulations in an ensemble run have completed,
-its typically necessary to gather and analyze their results with some
+it is typically necessary to gather and analyze their results with some
 kind of post-processing analysis program or script.  p3.swift
 introduces such a postprocessing step. In this case, the files created
-by all of the parallel runs of `simulation.sh` will be averaged by by
+by all of the parallel runs of `simulation.sh` will be averaged by
 the trivial "analysis application" `stats.sh`:
 
 image::part03.png[align="center"]
@@ -268,7 +272,7 @@ Final status:Thu, 22 Jan 2015 16:31:31-0600  Finished successfully:101
 
 We can see from Swift's "progress" status that the tutorial's default
 `swift.conf` parameters for local execution allow Swift to run up to 20
-application invocations concurrently on the login node. We'll look at
+application invocations concurrently on the login node. We will look at
 this in more detail in the next sections where we execute applications
 on the site's compute nodes.
 
@@ -292,11 +296,11 @@ the `swift.conf`. There are 6 remote sites defined in the swift.conf:
 * Collection of Ad-hoc nodes (ad-hoc-1..N).
 
 To configure the remote site definition for a particular site, open the swift-tutorial/swift.conf file
-and edit the site entry for that site. For example, if you would like to run the tutorial on the Midway
+and edit the site entry for that site. For example, if you like to run the tutorial on the Midway
 cluster, edit the site.midway entry in the swift-tutorial/swift.conf file and follow the instructions
 given for midway in the config file.
 
-Here's a snippet from the swift.conf for the midway cluster:
+Here is a snippet from the swift.conf for the midway cluster:
 
 [source, python]
 -----
@@ -335,7 +339,7 @@ Example 4: Running a simple app on remote node
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In `p4.swift`, there is a simple `app` which takes a file containing random numbers and `sort` them before returning a sorted output. In the `part04`
-folder  we have a file, `unsorted.txt`, which contains 100 random integers ranging from 0 to 99 and we wish to run the job on a remote computational resource.
+folder we have a file, `unsorted.txt`, which contains 100 random integers ranging from 0 to 99 and we wish to run the job on a remote computational resource.
 Ensure that you have configured the `swift.conf` for your target remote site.
 
 .p4.swift
@@ -344,9 +348,9 @@ Ensure that you have configured the `swift.conf` for your target remote site.
 sys::[cat ../part04/p4.swift]
 ----
 
-We rely on the very common `sort` command line utility in this example. When a remote site is set as the execution target,
-swift will connect to it and start swift-workers which in turn will execute tasks, in this case `sort`. Swift handles the
-staging or moving of the necessary input and output files between the target systems and the machine you are running swift on.
+We rely on the common `sort` command line utility in this example. When a remote site is set as the execution target,
+Swift will connect to it and start swift-workers which in turn will execute tasks, in this case `sort`. Swift handles the
+staging or moving of the necessary input and output files between the target systems and the machine you are running Swift on.
 
 Once Swift completes execution, you should see a new `sorted.txt` file in the folder containing numerically sorted
 results.
@@ -384,7 +388,7 @@ $ more sorted.txt
 
 -----
 
-IMPORTANT: Once the swift status shows the jobs to be "Submitted", the time
+IMPORTANT: Once the Swift status shows the jobs to be "Submitted", the time
 to completion of jobs can vary based on how busy the queues are on the target resource.
 
 TIP: The xref:remote-configuration[Remote configuration] section explains how to check
@@ -393,12 +397,12 @@ the status of your jobs in the queue for systems with PBS, Condor or Slurm sched
 Example 5: Running a parallel ensemble on compute resources
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-`p5.swift` will run our mock "simulation" applications on compute nodes.
-The script is similar to as `p3.swift`, but specifies that each simulation app invocation should
-additionally return the log file which the application writes to `stderr`. In `p3.swift` the apps
-simulation and stas called the binaries stats and simulate which are available on the local machine
-and is present in the system path. The `p5.swift`
-script 
+`p5.swift` will run our mock "simulation" applications on compute nodes.  The
+script is similar to `p3.swift`, but specifies that each simulation app
+invocation should additionally return the log file which the application writes
+to `stderr`. In `p3.swift` the apps simulation and stats called the binaries
+stats and simulate which are available on the local machine and is present in
+the system path. The `p5.swift` script 
 
 [source,python]
 ----
@@ -451,13 +455,13 @@ Running on node: nid00116
 Performing larger Swift runs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To test with larger runs, there are two changes that are required. The first is a
-change to the command line arguments. The example below will run 1000 simulations
-with each simulation taking 5 seconds.
+To test with larger runs, there are two changes that are required. The first is
+a change to the command line arguments. The example below will run 1000
+simulations with each simulation taking 5 seconds.
 
 [source,bash]
 -----
-# You can increase maxJobs or tasksPerNode to increase the resources available to swift
+# You can increase maxJobs or tasksPerNode to increase the resources available to Swift
 # With the default swift.conf, the following will be processed 4 tasks at a time :
 $ swift p5.swift -steps=5 -nsim=100
 Swift 0.96
@@ -511,7 +515,7 @@ Example 6: Specifying more complex workflow patterns
 p6.swift expands the workflow pattern of p5.swift to add additional
 stages to the workflow. Here, we generate a dynamic seed value that
 will be used by all of the simulations, and for each simulation, we
-run an pre-processing application to generate a unique "bias
+run a pre-processing application to generate a unique "bias
 file". This pattern is shown below, followed by the Swift script.
 
 image::part06.png[align="center"]
@@ -607,11 +611,10 @@ $ cat output/sim_0.out
 
 We produce 20 values in each bias file. Simulations of less than that
 number of values ignore the unneeded number, while simualtions of more
-than 20 will use the last bias number for all remoaining values past
-20.  As an exercise, adjust the code to produce the same number of
-bias values as is needed for each simulation.  As a further exercise,
-modify the script to generate a unique seed value for each simulation,
-which is a common practice in ensemble computations.
+than 20 will use the last bias number for all remaining values past
+20.  
+
+NOTE: As an exercise, adjust the code to produce the same number of bias values as is needed for each simulation.  As a further exercise, modify the script to generate a unique seed value for each simulation, which is a common practice in ensemble computations.
 
 Additional information and references
 -------------------------------------
@@ -619,7 +622,7 @@ Additional information and references
 Mock "science applications" used in the workflow tutorial
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This tutorial is based on two intentionally trivial example programs,
+This tutorial is based on two trivial example programs,
 `simulate.sh` and `stats.sh`, (implemented as bash shell scripts)
 that serve as easy-to-understand proxies for real science
 applications. These "programs" behave as follows.
@@ -649,12 +652,12 @@ $ ./app/simulate.sh --help
 $
 -----
 
-All of thess arguments are optional, with default values indicated above as `[n]`.
+All of these arguments are optional, with default values indicated above as `[n]`.
 
 With no arguments, simulate.sh prints 1 number in the range of
 1-100. Otherwise it generates n numbers of the form (R*scale)+bias
 where R is a random integer. By default it logs information about its
-execution environment to stderr.  Here's some examples of its usage:
+execution environment to stderr.  Here is some examples of its usage:
 
 [source, bash]
 -----
@@ -694,7 +697,7 @@ stats.sh
 
 The stats.sh script serves as a trivial model of an "analysis"
 program. It reads N files each containing M integers and simply prints
-the\ average of all those numbers to stdout. Similarly to simulate.sh
+the average of all those numbers to stdout. Similar to simulate.sh
 it logs environmental information to the stderr.
 
 [source, bash]
@@ -741,10 +744,10 @@ arrays defined by the `type` declaration.
 * Swift file variables are "mapped" to external files. Swift sends
 files to and from remote systems for you automatically.
 
-* Swift variables are "single assignment": once you set them you can't
-change them (in a given block of code).  This makes Swift a natural,
-"parallel data flow" language. This programming model keeps your
-workflow scripts simple and easy to write and understand.
+* Swift variables are "single assignment": once you set them you can not change
+them (in a given block of code).  This makes Swift a natural, "parallel data
+flow" language. This programming model keeps your workflow scripts simple and
+easy to write and understand.
 
 * Swift lets you define functions to "wrap" application programs, and
 to cleanly structure more complex scripts. Swift `app` functions take
@@ -755,12 +758,12 @@ manipulation, type conversions, high level IO, etc. is provided.
 Swift's equivalent of `printf()` is `tracef()`, with limited and
 slightly different format codes.
 
-* Swift's `foreach {}` statement is the main parallel workhorse of the
+* Swift's parallel `foreach {}` statement is the workhorse of the
 language, and executes all iterations of the loop concurrently. The
 actual number of parallel tasks executed is based on available
 resources and settable "throttles".
 
-* In fact, Swift conceptually executes *all* the statements,
+* Swift conceptually executes *all* the statements,
 expressions and function calls in your program in parallel, based on
 data flow. These are similarly throttled based on available resources
 and settings.
@@ -769,7 +772,7 @@ and settings.
 execution. These are seldom needed in simple workflows but they enable
 very dynamic workflow patterns to be specified.
 
-We'll see many of these points in action in the examples below. Lets
+We will see many of these points in action in the examples below. Lets
 get started!
 
 [[remote-configuration]]
@@ -784,13 +787,13 @@ Setting up ssh-keys for password-less acccess : link:http://hortonworks.com/kb/g
 Midway cluster at UChicago
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The midway cluster is a shared computational resource administered by the Research
+The Midway cluster is a shared computational resource administered by the Research
 Computing Center at the University of Chicago. Here's documentation on the RCC resources:
 link:https://rcc.uchicago.edu/docs/[RCC docs]
 
-Here are the steps to run the tutorial on the midway cluster:
+Here are the steps to run the tutorial on the Midway cluster:
 
-1. Ensure you have enabled ssh keys for passwordless access to the midway login nodes.
+1. Ensure you have enabled ssh keys for passwordless access to the Midway login nodes.
 2. If you are running on the midway login nodes you set jobManager: "local:slurm"
 3. Set workDirectory to /tmp/your_username_on_midway
 4. Set the following line in the swift-tutorial/swift.conf file.
@@ -803,7 +806,7 @@ Here are the steps to run the tutorial on the midway cluster:
 Notes:
 [source, bash]
 -----
-# The following commands are to be executed on the midway login node
+# The following commands are to be executed on the Midway login node
 # Check your account and balance
 accounts balance
 
@@ -819,7 +822,7 @@ Beagle Supercomputer (Cray)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The Beagle supercomputer is a Cray XE6 system at the Computation Institute.
-Here's documentation on Beagle: link:http://beagle.ci.uchicago.edu/using-beagle/[Beagle docs]
+Here is documentation on Beagle: link:http://beagle.ci.uchicago.edu/using-beagle/[Beagle docs]
 
 Here are the steps to run the tutorial on the Beagle supercomputer:
 
@@ -856,7 +859,7 @@ Blues cluster at LCRC
 ^^^^^^^^^^^^^^^^^^^^^
 
 Blues is a compute cluster at the Laboratory Computing Resource Center (LCRC) at Argonne National Laboratory.
-The blues cluster features 310 nodes, with 16 cores per node (Intel Sandy Bridge).
+The blues cluster features 310 nodes, with 16 cores per node (Intel Sandybridge).
 Here's documentation on Blues: link:http://www.lcrc.anl.gov/info/Blues[Blues docs]
 
 Here are the steps to run the tutorial on the Blues cluster

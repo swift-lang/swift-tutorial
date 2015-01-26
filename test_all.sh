@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# This script seems to be customized for user 'yadunandb', intentional?
+
 source setup.sh
 
 export BEAGLE_USERNAME="yadunandb"
