@@ -996,23 +996,23 @@ export WORKER_HOSTS=$( nova list | grep ACTIVE | sed -e 's/^.*private=//' -e 's/
 TACC Stampede(XSEDE)
 ^^^^^^^^^^^^^^^^^^^^
 
-The TACC Stampede* system is a 10 PFLOPS (PF) Dell Linux Cluster based on 6400+ Dell 
+The TACC Stampede* system is a 10 PFLOPS (PF) Dell Linux Cluster based on 6400+ Dell
 PowerEdge server nodes, each outfitted with 2 Intel Xeon E5 (Sandy Bridge) processors
 and an Intel Xeon Phi Coprocessor (MIC Architecture). Here's a great reference for stampede:
 link:https://portal.tacc.utexas.edu/user-guides/stampede[Stampede User Guide]
 
 Here are the steps to run the tutorial on Stampede:
 
-The preferred way to run the tutorial is from the stampede login nodes rather than from
-a remote system. 
+NOTE: The preferred way to run the tutorial is from the stampede login nodes rather than from
+a remote system.
 
-1. Ensure you have enabled ssh keys for passwordless access to the Midway login nodes (Only necessary if running from remote)
+1. Ensure you have enabled ssh keys for passwordless access to the Stampede login nodes (Only necessary if running from remote)
 2. If you are running on login<ID>.stampede.tacc.utexas.edu, you set jobManager: "local:slurm"
 3. Set workDirectory to /tmp/your_username_on_stampede
 4. Set the following line in the swift-tutorial/swift.conf file.
 [source, bash]
 ----
-   sites: [midway]
+   sites: [stampede]
 ----
 
 TIP: The network between Stampede and UChicago is unusually slow, avoid network traffic if possible.
