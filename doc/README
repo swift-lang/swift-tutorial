@@ -991,8 +991,6 @@ export WORKER_HOSTS=$( nova list | grep ACTIVE | sed -e 's/^.*private=//' -e 's/
 
 ////
 
-
-
 TACC Stampede(XSEDE)
 ^^^^^^^^^^^^^^^^^^^^
 
@@ -1033,4 +1031,41 @@ showq -u $USER
 
 # Interactive shell for debugging:
 srun -p development -t 0:30:00 -n 32 --pty /bin/bash -l
+-----
+
+
+Blacklight PSC (XSEDE)
+^^^^^^^^^^^^^^^^^^^^^^
+
+Blacklight is an SGI UV 1000cc-NUMA shared-memory system comprising 256 blades. Each blade 
+holds 2 Intel Xeon X7560 (Nehalem) eight-core processors, for a total of 4096 cores across
+the whole machine. Here's documentation for Blacklight:
+link:https://http://www.psc.edu/index.php/computing-resources/blacklight[Blacklight User Guide]
+
+Here are the steps to run the tutorial on Blacklight:
+
+The preferred way to run the tutorial is from the Blacklight login nodes rather than from
+a remote system. 
+
+1. Ensure you have enabled ssh keys for passwordless access to the Blacklight login nodes (Only necessary if running from remote)
+2. If you are running on the login nodes, set jobManager: "local:pbs"
+3. Set workDirectory to /tmp/your_username_on_blacklight
+4. Set the following line in the swift-tutorial/swift.conf file.
+[source, bash]
+----
+   sites: [blacklight]
+----
+
+
+NOTE: Blacklight has $WORK, $HOME mounted on a shared filesystem.
+
+
+Notes:
+[source, bash]
+-----
+# List queues and status
+qstat -q
+
+# List your jobs and state
+qstat -u $USER
 -----
