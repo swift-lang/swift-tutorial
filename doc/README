@@ -990,3 +990,47 @@ export WORKER_HOSTS=$( nova list | grep ACTIVE | sed -e 's/^.*private=//' -e 's/
 -----
 
 ////
+
+
+
+TACC Stampede(XSEDE)
+^^^^^^^^^^^^^^^^^^^^
+
+The TACC Stampede* system is a 10 PFLOPS (PF) Dell Linux Cluster based on 6400+ Dell 
+PowerEdge server nodes, each outfitted with 2 Intel Xeon E5 (Sandy Bridge) processors
+and an Intel Xeon Phi Coprocessor (MIC Architecture). Here's a great reference for stampede:
+link:https://portal.tacc.utexas.edu/user-guides/stampede[Stampede User Guide]
+
+Here are the steps to run the tutorial on Stampede:
+
+The preferred way to run the tutorial is from the stampede login nodes rather than from
+a remote system. 
+
+1. Ensure you have enabled ssh keys for passwordless access to the Midway login nodes (Only necessary if running from remote)
+2. If you are running on login<ID>.stampede.tacc.utexas.edu, you set jobManager: "local:slurm"
+3. Set workDirectory to /tmp/your_username_on_stampede
+4. Set the following line in the swift-tutorial/swift.conf file.
+[source, bash]
+----
+   sites: [midway]
+----
+
+TIP: The network between Stampede and UChicago is unusually slow, avoid network traffic if possible.
+
+NOTE: Stampede uses Lustre parallel shared filesystem. The environment variables $HOME, $WORK, $SCRATCH
+point at different Lustre filesystems all of which are accessible from the login and compute nodes.
+
+NOTE: There's a limit of one job per user on the development queue (∴ maxJobs=1)
+
+Notes:
+[source, bash]
+-----
+# List queues and status
+sinfo -o "%20P %5a %.10l %16F"
+
+# List your jobs and state
+showq -u $USER
+
+# Interactive shell for debugging:
+srun -p development -t 0:30:00 -n 32 --pty /bin/bash -l
+-----
