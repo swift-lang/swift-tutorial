@@ -766,7 +766,7 @@ asciidoc.install();
 <div class="sectionbody">
 <div class="paragraph"><p>The swift configuration file (swift.conf) is a description of how swift should execute your
 swift workflow on one or more of your target computation resources. The swift config file
-therefore contains two aspects:</p></div>
+therefore contains three aspects:</p></div>
 <div class="ulist"><ul>
 <li>
 <p>
@@ -788,6 +788,18 @@ A description of application that you will run on these resources:
 <li>
 <p>
 Executable for each app, walltimes for apps etc
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Configuration for the workflow execution behavior:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+handling errors, network port to use, leave files for debug etc.
 </p>
 </li>
 </ul></div>
@@ -821,34 +833,36 @@ http://www.gnu.org/software/src-highlite -->
     <span style="font-style: italic"><span style="color: #9A1900"># Describe the application to run on this site</span></span>
     <span style="color: #990000">[&lt;</span>application declarations<span style="color: #990000">&gt;]</span>
 <span style="color: #990000">}</span></tt></pre></div></div>
-<div class="paragraph"><p>Here&#8217;s a simple config file for a cluster which uses slurm scheduler:
-site.midway {
-    execution {
-        type      : "coaster"                         # Use coasters to run on remote sites
-        URL       : "swift.rcc.uchicago.edu"          # Midway login node | Alternatively use midway.rcc.uchicago.edu
-        jobManager: "ssh-cl:slurm"                    # Use ssh-cl to connect, slurm is the Local resource manager
-        options {
-            maxJobs         : 1                       # Max jobs submitted to LRM
-            nodeGranularity : 1                       # Nodes per job
-            maxNodesPerJob  : 1                       # Nodes per job
-            tasksPerNode    : 1                       # Tasks per Node
-            jobQueue        : "sandyb"                # Select queue from (sandyb, westmere, &#8230;)
-            maxJobTime      : "00:25:00"              # Time requested per job
-        }
-    }
-    staging             : "local"                     # Stage files from "local" system to Midway
-    workDirectory       : "/tmp/"${env.MIDWAY_USERNAME} # Location for intermediate files
-    maxParallelTasks    : 101                         # Maximum number of parallel tasks
-    initialParallelTasks: 100                         # Maximum number of tasks at start
-    app.ALL { executable: "*" }                       # All tasks to be found from commandline
-}</p></div>
+<div class="paragraph"><p>Here&#8217;s a simple config file for a cluster which uses slurm scheduler:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>sites <span style="color: #990000">:</span> midway
+
+site<span style="color: #990000">.</span>midway <span style="color: #990000">{</span>
+    execution <span style="color: #990000">{</span>
+        type      <span style="color: #990000">:</span> <span style="color: #FF0000">"coaster"</span>                         <span style="font-style: italic"><span style="color: #9A1900"># Use coasters to run on remote sites</span></span>
+        URL       <span style="color: #990000">:</span> <span style="color: #FF0000">"swift.rcc.uchicago.edu"</span>          <span style="font-style: italic"><span style="color: #9A1900"># Midway login node | Alternatively use midway.rcc.uchicago.edu</span></span>
+        jobManager<span style="color: #990000">:</span> <span style="color: #FF0000">"ssh-cl:slurm"</span>                    <span style="font-style: italic"><span style="color: #9A1900"># Use ssh-cl to connect, slurm is the Local resource manager</span></span>
+        options <span style="color: #990000">{</span>
+            jobQueue        <span style="color: #990000">:</span> <span style="color: #FF0000">"sandyb"</span>                <span style="font-style: italic"><span style="color: #9A1900"># Select queue from (sandyb, westmere, ...)</span></span>
+        <span style="color: #990000">}</span>
+    <span style="color: #990000">}</span>
+    staging             <span style="color: #990000">:</span> <span style="color: #FF0000">"local"</span>                     <span style="font-style: italic"><span style="color: #9A1900"># Stage files from "local" system to Midway</span></span>
+    workDirectory       <span style="color: #990000">:</span> <span style="color: #FF0000">"/tmp/"</span>$<span style="color: #990000">{</span>env<span style="color: #990000">.</span>MIDWAY_USERNAME<span style="color: #990000">}</span> <span style="font-style: italic"><span style="color: #9A1900"># Location for intermediate files</span></span>
+    maxParallelTasks    <span style="color: #990000">:</span> <span style="color: #993399">101</span>                         <span style="font-style: italic"><span style="color: #9A1900"># Maximum number of parallel tasks</span></span>
+    initialParallelTasks<span style="color: #990000">:</span> <span style="color: #993399">100</span>                         <span style="font-style: italic"><span style="color: #9A1900"># Maximum number of tasks at start</span></span>
+    app<span style="color: #990000">.</span>ALL <span style="color: #990000">{</span> executable<span style="color: #990000">:</span> <span style="color: #FF0000">"*"</span> <span style="color: #990000">}</span>                       <span style="font-style: italic"><span style="color: #9A1900"># All tasks to be found from commandline</span></span>
+<span style="color: #990000">}</span></tt></pre></div></div>
 </div>
 </div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-01-27 13:19:03 CST
+Last updated 2015-01-28 16:36:24 CST
 </div>
 </div>
 </body>

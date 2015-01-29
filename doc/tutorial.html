@@ -2237,6 +2237,108 @@ qstat -q
 <span style="font-style: italic"><span style="color: #9A1900"># List your jobs and state</span></span>
 qstat -u <span style="color: #009900">$USER</span></tt></pre></div></div>
 </div>
+<div class="sect3">
+<h4 id="_gordon_sdsc_xsede">Gordon SDSC (XSEDE)</h4>
+<div class="paragraph"><p>Gordon is a dedicated XSEDE cluster designed by Appro and SDSC consisting of 1024 compute nodes and 64 I/O nodes.
+Here is some additional documentation on Gordon:
+<a href="http://www.sdsc.edu/us/resources/gordon/">Gordon User Guide</a></p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="./images/icons/warning.png" alt="Warning" />
+</td>
+<td class="content">The swift client cannot run on the gordon login nodes due to memory limits on the machine. Swift must
+be run from a remote location.</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>Here are the steps to run the tutorial on Gordon:</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Ensure you have enabled ssh keys for passwordless access to the Gordon login nodes
+</p>
+</li>
+<li>
+<p>
+Set workDirectory to /tmp/your_username_on_blacklight
+</p>
+</li>
+<li>
+<p>
+Set the following line in the swift-tutorial/swift.conf file.
+</p>
+</li>
+</ol></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>   sites<span style="color: #990000">:</span> <span style="color: #990000">[</span>gordon<span style="color: #990000">]</span></tt></pre></div></div>
+<div class="paragraph"><p>Notes:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-style: italic"><span style="color: #9A1900"># List queues and status</span></span>
+qstat -q
+
+<span style="font-style: italic"><span style="color: #9A1900"># List your jobs and state</span></span>
+qstat -u <span style="color: #009900">$USER</span></tt></pre></div></div>
+</div>
+<div class="sect3">
+<h4 id="_trestles_sdsc_xsede">Trestles SDSC (XSEDE)</h4>
+<div class="paragraph"><p>Trestles is a dedicated XSEDE cluster designed by Appro and SDSC consisting
+of 324 compute nodes. Each compute node contains four sockets, each with an 8-core
+2.4 GHz AMD Magny-Cours processor, for a total of 32 cores per node and 10,368 total cores for the system.
+. Here&#8217;s documentation for Trestles:
+<a href="http://www.sdsc.edu/us/resources/trestles/">Trestles User Guide</a></p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="./images/icons/warning.png" alt="Warning" />
+</td>
+<td class="content">The swift client cannot run on the gordon login nodes due to memory limits on the machine. Swift must
+be run from a remote location.</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>Here are the steps to run the tutorial on Trestles:</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Ensure you have enabled ssh keys for passwordless access to the Trestles.
+</p>
+</li>
+<li>
+<p>
+Set workDirectory to /tmp/your_username_on_blacklight
+</p>
+</li>
+<li>
+<p>
+Set the following line in the swift-tutorial/swift.conf file.
+</p>
+</li>
+</ol></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>   sites<span style="color: #990000">:</span> <span style="color: #990000">[</span>trestles<span style="color: #990000">]</span></tt></pre></div></div>
+<div class="paragraph"><p>Notes:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-style: italic"><span style="color: #9A1900"># List queues and status</span></span>
+qstat -q
+
+<span style="font-style: italic"><span style="color: #9A1900"># List your jobs and state</span></span>
+qstat -u <span style="color: #009900">$USER</span></tt></pre></div></div>
+</div>
 </div>
 </div>
 </div>
@@ -2244,7 +2346,7 @@ qstat -u <span style="color: #009900">$USER</span></tt></pre></div></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-01-27 17:58:07 CST
+Last updated 2015-01-29 15:58:24 CST
 </div>
 </div>
 </body>

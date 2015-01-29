@@ -1118,8 +1118,8 @@ be run from a remote location.
 Here are the steps to run the tutorial on Trestles:
 
 1. Ensure you have enabled ssh keys for passwordless access to the Trestles.
-3. Set workDirectory to /tmp/your_username_on_blacklight
-4. Set the following line in the swift-tutorial/swift.conf file.
+2. Set workDirectory to /tmp/your_username_on_blacklight
+3. Set the following line in the swift-tutorial/swift.conf file.
 [source, bash]
 ----
    sites: [trestles]
