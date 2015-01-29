@@ -607,12 +607,12 @@ $ cat output/sim_0.out
 22000258
 49000506
 75000310
------
+----
 
 We produce 20 values in each bias file. Simulations of less than that
 number of values ignore the unneeded number, while simualtions of more
 than 20 will use the last bias number for all remaining values past
-20.  
+20. 
 
 NOTE: As an exercise, adjust the code to produce the same number of bias values as is needed for each simulation.  As a further exercise, modify the script to generate a unique seed value for each simulation, which is a common practice in ensemble computations.
 
@@ -1037,7 +1037,7 @@ srun -p development -t 0:30:00 -n 32 --pty /bin/bash -l
 Blacklight PSC (XSEDE)
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Blacklight is an SGI UV 1000cc-NUMA shared-memory system comprising 256 blades. Each blade 
+Blacklight is an SGI UV 1000cc-NUMA shared-memory system comprising 256 blades. Each blade
 holds 2 Intel Xeon X7560 (Nehalem) eight-core processors, for a total of 4096 cores across
 the whole machine. Here's documentation for Blacklight:
 link:https://http://www.psc.edu/index.php/computing-resources/blacklight[Blacklight User Guide]
@@ -1045,7 +1045,7 @@ link:https://http://www.psc.edu/index.php/computing-resources/blacklight[Blackli
 Here are the steps to run the tutorial on Blacklight:
 
 The preferred way to run the tutorial is from the Blacklight login nodes rather than from
-a remote system. 
+a remote system.
 
 1. Ensure you have enabled ssh keys for passwordless access to the Blacklight login nodes (Only necessary if running from remote)
 2. If you are running on the login nodes, set jobManager: "local:pbs"
