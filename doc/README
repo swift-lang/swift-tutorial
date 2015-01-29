@@ -1069,3 +1069,78 @@ qstat -q
 # List your jobs and state
 qstat -u $USER
 -----
+
+
+Gordon SDSC (XSEDE)
+^^^^^^^^^^^^^^^^^^^
+
+WARNING: There are memory limitations on Gordon that prevent swift from running on the 
+headnode. This site cannot be used.
+
+Here are the steps to run the tutorial on Blacklight:
+
+The preferred way to run the tutorial is from the Blacklight login nodes rather than from
+a remote system. 
+
+1. Ensure you have enabled ssh keys for passwordless access to the Blacklight login nodes (Only necessary if running from remote)
+2. If you are running on the login nodes, set jobManager: "local:pbs"
+3. Set workDirectory to /tmp/your_username_on_blacklight
+4. Set the following line in the swift-tutorial/swift.conf file.
+[source, bash]
+----
+   sites: [blacklight]
+----
+
+
+NOTE: Blacklight has $WORK, $HOME mounted on a shared filesystem.
+
+
+Notes:
+[source, bash]
+-----
+# List queues and status
+qstat -q
+
+# List your jobs and state
+qstat -u $USER
+-----
+
+
+Trestles SDSC (XSEDE)
+^^^^^^^^^^^^^^^^^^^^^
+
+Trestles is a dedicated XSEDE cluster designed by Appro and SDSC consisting 
+of 324 compute nodes. Each compute node contains four sockets, each with a 8-core 
+2.4 GHz AMD Magny-Cours processor, for a total of 32 cores per node and 10,368 total cores for the system.
+. Here's documentation for Blacklight:
+link:http://www.sdsc.edu/us/resources/trestles/[Trestles User Guide]
+
+Here are the steps to run the tutorial on Blacklight:
+
+The preferred way to run the tutorial is from the Blacklight login nodes rather than from
+a remote system. 
+
+1. Ensure you have enabled ssh keys for passwordless access to the Blacklight login nodes (Only necessary if running from remote)
+2. If you are running on the login nodes, set jobManager: "local:pbs"
+3. Set workDirectory to /tmp/your_username_on_blacklight
+4. Set the following line in the swift-tutorial/swift.conf file.
+[source, bash]
+----
+   sites: [blacklight]
+----
+
+
+NOTE: Blacklight has $WORK, $HOME mounted on a shared filesystem.
+
+
+Notes:
+[source, bash]
+-----
+# List queues and status
+qstat -q
+
+# List your jobs and state
+qstat -u $USER
+-----
+
+
