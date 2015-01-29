@@ -12,6 +12,11 @@ export URL_OF_AD_HOC_MACHINE_1="crank"
 export AD_HOC_1_USERNAME="yadunand"
 export OSG_USERNAME="yadunand"
 export OSG_PROJECT="swift"
+export GORDON_USERNAME="yadunand"
+export TRESTLES_USERNAME="yadunand"
+export HOPPER_USERNAME="yadunand"
+export BLACKLIGHT_USERNAME="yadunand"
+
 
 if 0
 then

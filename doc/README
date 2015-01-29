@@ -1074,25 +1074,22 @@ qstat -u $USER
 Gordon SDSC (XSEDE)
 ^^^^^^^^^^^^^^^^^^^
 
-WARNING: There are memory limitations on Gordon that prevent swift from running on the 
-headnode. This site cannot be used.
+Gordon is a dedicated XSEDE cluster designed by Appro and SDSC consisting of 1024 compute nodes and 64 I/O nodes.
+Here is some additional documentation on Gordon:
+link:http://www.sdsc.edu/us/resources/gordon/[Gordon User Guide]
 
-Here are the steps to run the tutorial on Blacklight:
+WARNING: The swift client cannot run on the gordon login nodes due to memory limits on the machine. Swift must
+be run from a remote location.
 
-The preferred way to run the tutorial is from the Blacklight login nodes rather than from
-a remote system. 
+Here are the steps to run the tutorial on Gordon:
 
-1. Ensure you have enabled ssh keys for passwordless access to the Blacklight login nodes (Only necessary if running from remote)
-2. If you are running on the login nodes, set jobManager: "local:pbs"
-3. Set workDirectory to /tmp/your_username_on_blacklight
-4. Set the following line in the swift-tutorial/swift.conf file.
+1. Ensure you have enabled ssh keys for passwordless access to the Gordon login nodes
+2. Set workDirectory to /tmp/your_username_on_blacklight
+3. Set the following line in the swift-tutorial/swift.conf file.
 [source, bash]
 ----
-   sites: [blacklight]
+   sites: [gordon]
 ----
-
-
-NOTE: Blacklight has $WORK, $HOME mounted on a shared filesystem.
 
 
 Notes:
@@ -1109,29 +1106,24 @@ qstat -u $USER
 Trestles SDSC (XSEDE)
 ^^^^^^^^^^^^^^^^^^^^^
 
-Trestles is a dedicated XSEDE cluster designed by Appro and SDSC consisting 
-of 324 compute nodes. Each compute node contains four sockets, each with a 8-core 
+Trestles is a dedicated XSEDE cluster designed by Appro and SDSC consisting
+of 324 compute nodes. Each compute node contains four sockets, each with an 8-core
 2.4 GHz AMD Magny-Cours processor, for a total of 32 cores per node and 10,368 total cores for the system.
-. Here's documentation for Blacklight:
+. Here's documentation for Trestles:
 link:http://www.sdsc.edu/us/resources/trestles/[Trestles User Guide]
 
-Here are the steps to run the tutorial on Blacklight:
+WARNING: The swift client cannot run on the gordon login nodes due to memory limits on the machine. Swift must
+be run from a remote location.
 
-The preferred way to run the tutorial is from the Blacklight login nodes rather than from
-a remote system. 
+Here are the steps to run the tutorial on Trestles:
 
-1. Ensure you have enabled ssh keys for passwordless access to the Blacklight login nodes (Only necessary if running from remote)
-2. If you are running on the login nodes, set jobManager: "local:pbs"
+1. Ensure you have enabled ssh keys for passwordless access to the Trestles.
 3. Set workDirectory to /tmp/your_username_on_blacklight
 4. Set the following line in the swift-tutorial/swift.conf file.
 [source, bash]
 ----
-   sites: [blacklight]
+   sites: [trestles]
 ----
-
-
-NOTE: Blacklight has $WORK, $HOME mounted on a shared filesystem.
-
 
 Notes:
 [source, bash]
