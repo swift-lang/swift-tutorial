@@ -1,0 +1,3 @@
+#!/bin/bash
+echo "hi"
+#mpirun /scratch/midway/yadunand/swift-tutorial/mpi/mmps
