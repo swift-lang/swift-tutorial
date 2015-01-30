@@ -47,7 +47,6 @@ installation procedure.
 Swift installation
 ~~~~~~~~~~~~~~~~~~
 
-[source, bash]
 -----
 # Download the swift-0.96 package
 wget http://swiftlang.org/packages/swift-0.96.tar.gz
@@ -68,14 +67,14 @@ Setup the swift-tutorial
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 Clone the repository from github
-[source,bash]
+
 ----
 git clone https://github.com/swift-lang/swift-tutorial.git
 cd swift-tutorial
 ----
 
 Or, download the zip file from github and unpack.
-[source,bash]
+
 ----
 # Download
 wget https://github.com/swift-lang/swift-tutorial/archive/master.zip
@@ -85,7 +84,7 @@ cd swift-tutorial
 ----
 
 Now, run the tutorial setup script:
-[source,bash]
+
 ----
 source setup.sh  # You must run this with "source" !
 ----
@@ -123,7 +122,7 @@ sys::[cat ../part01/p1.swift]
 [red]#TODO: Update the following output block
 
 To run this script, run the following command:
-[source,bash]
+
 -----
 $ cd swift-tutorial/part01
 $ swift p1.swift
@@ -141,7 +140,7 @@ To cleanup the directory and remove all outputs (including the log
 files and directories that Swift generates), run the cleanup script
 which is located in the tutorial PATH:
 
-[source,bash]
+
 -----
 $ cleanup
 -----
@@ -171,7 +170,7 @@ the output files will be named
 `output/sim_N.out`.
 
 To run the script and view the output:
-[source,bash]
+
 -----
 $ cd swift-tutorial/part02
 $ swift p2.swift
@@ -210,7 +209,7 @@ sys::[cat ../part03/p3.swift]
 ----
 
 To run:
-[source, bash]
+
 ----
 $ cd swift-tutorial/part03
 $ swift p3.swift
@@ -256,7 +255,7 @@ arguments placed after the Swift script name in the form `-parameterName=value`:
 
 Now try running (`-nsim=`) 100 simulations of (`-steps=`) 1 second each:
 
-[source,bash]
+
 -----
 $ swift p3.swift -nsim=100 -steps=1
 Swift 0.96
@@ -356,7 +355,7 @@ Once Swift completes execution, you should see a new `sorted.txt` file in the fo
 results.
 
 For example, to run the job remotely on Midway and to view the output:
-[source,bash]
+
 -----
 $ cd swift-tutorial/part04
 $ swift p4.swift
@@ -421,7 +420,7 @@ sys::[cat ../part05/p5.swift]
 ----
 
 To run:
-[source, bash]
+
 ----
 $ cd swift-tutorial/part05
 $ swift p5.swift
@@ -459,7 +458,7 @@ To test with larger runs, there are two changes that are required. The first is
 a change to the command line arguments. The example below will run 1000
 simulations with each simulation taking 5 seconds.
 
-[source,bash]
+
 -----
 # You can increase maxJobs or tasksPerNode to increase the resources available to Swift
 # With the default swift.conf, the following will be processed 4 tasks at a time :
@@ -540,7 +539,7 @@ and on the bias file, computed and then consumed in these two dependent statemen
 -----
 
 To run:
-[source,bash]
+
 ----
 $ cd swift-tutorial/part06
 $ swift p6.swift
@@ -635,7 +634,7 @@ complex scientific simulation application. It generates and prints a
 set of one or more random integers in the range [0-2^62) as controlled
 by its command line arguments, which are:
 
-[source,bash]
+
 -----
 $ ./app/simulate.sh --help
 ./app/simulate.sh: usage:
@@ -659,7 +658,7 @@ With no arguments, simulate.sh prints 1 number in the range of
 where R is a random integer. By default it logs information about its
 execution environment to stderr.  Here is some examples of its usage:
 
-[source, bash]
+
 -----
 $ simulate.sh 2>log
        5
@@ -700,7 +699,7 @@ program. It reads N files each containing M integers and simply prints
 the average of all those numbers to stdout. Similar to simulate.sh
 it logs environmental information to the stderr.
 
-[source, bash]
+
 -----
 $ ls f*
 f1  f2  f3  f4
@@ -797,14 +796,14 @@ Here are the steps to run the tutorial on the Midway cluster:
 2. If you are running on the midway login nodes you set jobManager: "local:slurm"
 3. Set workDirectory to /tmp/your_username_on_midway
 4. Set the following line in the swift-tutorial/swift.conf file.
-[source, bash]
+
 ----
    sites: [midway]
 ----
 
 
 Notes:
-[source, bash]
+
 -----
 # The following commands are to be executed on the Midway login node
 # Check your account and balance
@@ -833,13 +832,13 @@ Here are the steps to run the tutorial on the Beagle supercomputer:
 5. Set workDirectory : "/tmp/YOUR_USERNAME_ON_BEAGLE/swiftwork"
 6. Set the following line in the swift-tutorial/swift.conf file.
 +
-[source, bash]
+
 ----
    sites: [beagle]
 ----
 
 Notes for beagle:
-[source, bash]
+
 -----
 # The following commands should be executed on a beagle login node
 # To check your allocation and project on Beagle:
@@ -869,13 +868,13 @@ Here are the steps to run the tutorial on the Blues cluster
 3. Set workDirectory : "/home/YOUR_USERNAME_ON_BLUES/swiftwork"
 4. Set the following line in the swift-tutorial/swift.conf file.
 +
-[source, bash]
+
 ----
    sites: [blues]
 ----
 
 Notes for blues:
-[source, bash]
+
 -----
 # The following commands should be executed on a beagle login node
 # List queues
@@ -901,14 +900,14 @@ Here are the steps to run the tutorial via OSGConnect on the Open Science Grid:
 4. Set workDirectory : "/tmp/YOUR_USERNAME_ON_OSG"
 5. Set the following line in the swift-tutorial/swift.conf file:
 +
-[source, bash]
+
 ----
    sites: [osgc]
 ----
 
 
 Notes for OSGConnect :
-[source, bash]
+
 -----
 # The following commands should be executed on the OSGConnect login node
 # To check/select your project on OSGConnect
@@ -931,7 +930,7 @@ Getting cloud resources on-demand from Amazon is now as simple as setting up an 
 4. If you update ec2WorkerImage, ensure that it is a ubuntu image
 5. Set the following line in the swift-tutorial/swift.conf file:
 +
-[source, bash]
+
 ----
    sites: [aws]
 ----
@@ -954,7 +953,7 @@ will run tasks on all of them.
 3. For each site block, set URL : URL_OF_AD_HOC_MACHINE_N
 4. Set workDirectory : "/tmp/USERNAME_ON_AD-HOC-N/work"
 +
-[source, bash]
+
 ----
    sites: [<ad-hoc-1.foo.net>, <ad-hoc-1.foo.net>, ... <ad-hoc-N.foo.net>]
 ----
@@ -970,7 +969,7 @@ Let's say you would like to run you applications on Midway and Beagle.
 2. Set the site specific variables for both sites in the swift-tutorial/setup.sh file.
 3. Set the following line in the swift-tutorial/swift.conf file:
 +
-[source, bash]
+
 ----
    sites: [midway, beagle]
 ----
@@ -1008,7 +1007,7 @@ a remote system.
 2. If you are running on login<ID>.stampede.tacc.utexas.edu, you set jobManager: "local:slurm"
 3. Set workDirectory to /tmp/your_username_on_stampede
 4. Set the following line in the swift-tutorial/swift.conf file.
-[source, bash]
+
 ----
    sites: [stampede]
 ----
@@ -1021,7 +1020,7 @@ point at different Lustre filesystems all of which are accessible from the login
 NOTE: There's a limit of one job per user on the development queue (∴ maxJobs=1)
 
 Notes:
-[source, bash]
+
 -----
 # List queues and status
 sinfo -o "%20P %5a %.10l %16F"
@@ -1051,7 +1050,7 @@ a remote system.
 2. If you are running on the login nodes, set jobManager: "local:pbs"
 3. Set workDirectory to /tmp/your_username_on_blacklight
 4. Set the following line in the swift-tutorial/swift.conf file.
-[source, bash]
+
 ----
    sites: [blacklight]
 ----
@@ -1061,7 +1060,7 @@ NOTE: Blacklight has $WORK, $HOME mounted on a shared filesystem.
 
 
 Notes:
-[source, bash]
+
 -----
 # List queues and status
 qstat -q
@@ -1086,14 +1085,14 @@ Here are the steps to run the tutorial on Gordon:
 1. Ensure you have enabled ssh keys for passwordless access to the Gordon login nodes
 2. Set workDirectory to /tmp/your_username_on_blacklight
 3. Set the following line in the swift-tutorial/swift.conf file.
-[source, bash]
+
 ----
    sites: [gordon]
 ----
 
 
 Notes:
-[source, bash]
+
 -----
 # List queues and status
 qstat -q
@@ -1120,13 +1119,13 @@ Here are the steps to run the tutorial on Trestles:
 1. Ensure you have enabled ssh keys for passwordless access to the Trestles.
 2. Set workDirectory to /tmp/your_username_on_blacklight
 3. Set the following line in the swift-tutorial/swift.conf file.
-[source, bash]
+
 ----
    sites: [trestles]
 ----
 
 Notes:
-[source, bash]
+
 -----
 # List queues and status
 qstat -q
