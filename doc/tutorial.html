@@ -810,51 +810,43 @@ installation procedure.</p></div>
 <div class="sect2">
 <h3 id="_swift_installation">Swift installation</h3>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt><span style="font-style: italic"><span style="color: #9A1900"># Download the swift-0.96 package</span></span>
-wget http<span style="color: #990000">:</span>//swiftlang<span style="color: #990000">.</span>org/packages/swift-<span style="color: #993399">0.96</span><span style="color: #990000">.</span>tar<span style="color: #990000">.</span>gz
+<div class="content">
+<pre><code># Download the swift-0.96 package
+wget http://swiftlang.org/packages/swift-0.96.tar.gz
 
-<span style="font-style: italic"><span style="color: #9A1900"># Extract package</span></span>
-tar xfz swift-<span style="color: #993399">0.96</span><span style="color: #990000">.</span>tar<span style="color: #990000">.</span>gz
+# Extract package
+tar xfz swift-0.96.tar.gz
 
-<span style="font-style: italic"><span style="color: #9A1900"># Add swift to the PATH environment variable</span></span>
-<span style="font-weight: bold"><span style="color: #0000FF">export</span></span> <span style="color: #009900">PATH</span><span style="color: #990000">=</span><span style="color: #009900">$PATH</span><span style="color: #990000">:</span>/path/to/swift-<span style="color: #993399">0.96</span>/bin
+# Add swift to the PATH environment variable
+export PATH=$PATH:/path/to/swift-0.96/bin
 
-<span style="font-style: italic"><span style="color: #9A1900"># To verify that Swift has successfully loaded, run:</span></span>
+# To verify that Swift has successfully loaded, run:
 $ swift -version
-<span style="font-style: italic"><span style="color: #9A1900"># This should print Swift 0.96</span></span></tt></pre></div></div>
+# This should print Swift 0.96</code></pre>
+</div></div>
 </div>
 <div class="sect2">
 <h3 id="_setup_the_swift_tutorial">Setup the swift-tutorial</h3>
 <div class="paragraph"><p>Clone the repository from github</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>git clone https<span style="color: #990000">:</span>//github<span style="color: #990000">.</span>com/swift-lang/swift-tutorial<span style="color: #990000">.</span>git
-cd swift-tutorial</tt></pre></div></div>
+<div class="content">
+<pre><code>git clone https://github.com/swift-lang/swift-tutorial.git
+cd swift-tutorial</code></pre>
+</div></div>
 <div class="paragraph"><p>Or, download the zip file from github and unpack.</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt><span style="font-style: italic"><span style="color: #9A1900"># Download</span></span>
-wget https<span style="color: #990000">:</span>//github<span style="color: #990000">.</span>com/swift-lang/swift-tutorial/archive/master<span style="color: #990000">.</span>zip
-unzip master<span style="color: #990000">.</span>zip
+<div class="content">
+<pre><code># Download
+wget https://github.com/swift-lang/swift-tutorial/archive/master.zip
+unzip master.zip
 mv swift-tutorial-master swift-tutorial
-cd swift-tutorial</tt></pre></div></div>
+cd swift-tutorial</code></pre>
+</div></div>
 <div class="paragraph"><p>Now, run the tutorial setup script:</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt><span style="font-weight: bold"><span style="color: #0000FF">source</span></span> setup<span style="color: #990000">.</span>sh  <span style="font-style: italic"><span style="color: #9A1900"># You must run this with "source" !</span></span></tt></pre></div></div>
+<div class="content">
+<pre><code>source setup.sh  # You must run this with "source" !</code></pre>
+</div></div>
 <div class="paragraph"><p>Doing this will add the sample applications <code>simulate</code> and <code>stats</code>
 (explained in the next part) and some other functionalities to
 your local $PATH for you to run the tutorial.</p></div>
@@ -895,29 +887,25 @@ f <span style="color: #990000">=</span> <span style="font-weight: bold"><span st
 <div class="paragraph"><p>[red]#TODO: Update the following output block</p></div>
 <div class="paragraph"><p>To run this script, run the following command:</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>$ cd swift-tutorial/part<span style="color: #993399">01</span>
-$ swift p1<span style="color: #990000">.</span>swift
-Swift <span style="color: #993399">0.96</span>
-RunID<span style="color: #990000">:</span> run001
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">16</span><span style="color: #990000">:</span><span style="color: #993399">21</span><span style="color: #990000">:</span><span style="color: #993399">51</span>-<span style="color: #993399">0600</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">16</span><span style="color: #990000">:</span><span style="color: #993399">21</span><span style="color: #990000">:</span><span style="color: #993399">52</span>-<span style="color: #993399">0600</span>  Active<span style="color: #990000">:</span><span style="color: #993399">1</span>
-Final status<span style="color: #990000">:</span>Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">16</span><span style="color: #990000">:</span><span style="color: #993399">22</span><span style="color: #990000">:</span><span style="color: #993399">11</span>-<span style="color: #993399">0600</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">1</span>
+<div class="content">
+<pre><code>$ cd swift-tutorial/part01
+$ swift p1.swift
+Swift 0.96
+RunID: run001
+Progress: Thu, 22 Jan 2015 16:21:51-0600
+Progress: Thu, 22 Jan 2015 16:21:52-0600  Active:1
+Final status:Thu, 22 Jan 2015 16:22:11-0600  Finished successfully:1
 
-$ cat sim<span style="color: #990000">.</span>out
-      <span style="color: #993399">18</span></tt></pre></div></div>
+$ cat sim.out
+      18</code></pre>
+</div></div>
 <div class="paragraph"><p>To cleanup the directory and remove all outputs (including the log
 files and directories that Swift generates), run the cleanup script
 which is located in the tutorial PATH:</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>$ cleanup</tt></pre></div></div>
+<div class="content">
+<pre><code>$ cleanup</code></pre>
+</div></div>
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
@@ -961,26 +949,24 @@ the output files will be named
 <code>output/sim_N.out</code>.</p></div>
 <div class="paragraph"><p>To run the script and view the output:</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>$ cd swift-tutorial/part<span style="color: #993399">02</span>
-$ swift p2<span style="color: #990000">.</span>swift
-Swift <span style="color: #993399">0.96</span>
-RunID<span style="color: #990000">:</span> run001
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">16</span><span style="color: #990000">:</span><span style="color: #993399">24</span><span style="color: #990000">:</span><span style="color: #993399">07</span>-<span style="color: #993399">0600</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">16</span><span style="color: #990000">:</span><span style="color: #993399">24</span><span style="color: #990000">:</span><span style="color: #993399">08</span>-<span style="color: #993399">0600</span>  Active<span style="color: #990000">:</span><span style="color: #993399">10</span>
-Final status<span style="color: #990000">:</span>Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">16</span><span style="color: #990000">:</span><span style="color: #993399">24</span><span style="color: #990000">:</span><span style="color: #993399">27</span>-<span style="color: #993399">0600</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">10</span>
+<div class="content">
+<pre><code>$ cd swift-tutorial/part02
+$ swift p2.swift
+Swift 0.96
+RunID: run001
+Progress: Thu, 22 Jan 2015 16:24:07-0600
+Progress: Thu, 22 Jan 2015 16:24:08-0600  Active:10
+Final status:Thu, 22 Jan 2015 16:24:27-0600  Finished successfully:10
 
-$ ls output<span style="color: #990000">/</span>
-sim_0<span style="color: #990000">.</span>out  sim_1<span style="color: #990000">.</span>out  sim_2<span style="color: #990000">.</span>out  sim_3<span style="color: #990000">.</span>out  sim_4<span style="color: #990000">.</span>out  sim_5<span style="color: #990000">.</span>out  sim_6<span style="color: #990000">.</span>out  sim_7<span style="color: #990000">.</span>out  sim_8<span style="color: #990000">.</span>out  sim_9<span style="color: #990000">.</span>out
+$ ls output/
+sim_0.out  sim_1.out  sim_2.out  sim_3.out  sim_4.out  sim_5.out  sim_6.out  sim_7.out  sim_8.out  sim_9.out
 
-$ cat output/sim_1<span style="color: #990000">.</span>out
-      <span style="color: #993399">13</span>
+$ cat output/sim_1.out
+      13
 
-$ cat output/sim_2<span style="color: #990000">.</span>out
-       <span style="color: #993399">4</span></tt></pre></div></div>
+$ cat output/sim_2.out
+       4</code></pre>
+</div></div>
 </div>
 <div class="sect2">
 <h3 id="_example_3_analyzing_results_of_a_parallel_ensemble">Example 3: Analyzing results of a parallel ensemble</h3>
@@ -1030,23 +1016,21 @@ file stats<span style="color: #990000">&lt;</span><span style="color: #FF0000">"
 stats <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">analyze</span></span><span style="color: #990000">(</span>sims<span style="color: #990000">);</span></tt></pre></div></div>
 <div class="paragraph"><p>To run:</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>$ cd swift-tutorial/part<span style="color: #993399">03</span>
-$ swift p3<span style="color: #990000">.</span>swift
-Swift <span style="color: #993399">0.96</span>
-RunID<span style="color: #990000">:</span> run001
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">16</span><span style="color: #990000">:</span><span style="color: #993399">27</span><span style="color: #990000">:</span><span style="color: #993399">23</span>-<span style="color: #993399">0600</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">16</span><span style="color: #990000">:</span><span style="color: #993399">27</span><span style="color: #990000">:</span><span style="color: #993399">24</span>-<span style="color: #993399">0600</span>  Active<span style="color: #990000">:</span><span style="color: #993399">10</span>
-Final status<span style="color: #990000">:</span>Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">16</span><span style="color: #990000">:</span><span style="color: #993399">27</span><span style="color: #990000">:</span><span style="color: #993399">44</span>-<span style="color: #993399">0600</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">11</span>
+<div class="content">
+<pre><code>$ cd swift-tutorial/part03
+$ swift p3.swift
+Swift 0.96
+RunID: run001
+Progress: Thu, 22 Jan 2015 16:27:23-0600
+Progress: Thu, 22 Jan 2015 16:27:24-0600  Active:10
+Final status:Thu, 22 Jan 2015 16:27:44-0600  Finished successfully:11
 
-$ ls output<span style="color: #990000">/</span>
-average<span style="color: #990000">.</span>out  sim_0<span style="color: #990000">.</span>out  sim_1<span style="color: #990000">.</span>out  sim_2<span style="color: #990000">.</span>out  sim_3<span style="color: #990000">.</span>out  sim_4<span style="color: #990000">.</span>out  sim_5<span style="color: #990000">.</span>out  sim_6<span style="color: #990000">.</span>out  sim_7<span style="color: #990000">.</span>out  sim_8<span style="color: #990000">.</span>out  sim_9<span style="color: #990000">.</span>out
+$ ls output/
+average.out  sim_0.out  sim_1.out  sim_2.out  sim_3.out  sim_4.out  sim_5.out  sim_6.out  sim_7.out  sim_8.out  sim_9.out
 
-$ cat output/average<span style="color: #990000">.</span>out
-<span style="color: #993399">52</span></tt></pre></div></div>
+$ cat output/average.out
+52</code></pre>
+</div></div>
 <div class="paragraph"><p>Note that in <code>p3.swift</code> we expose more of the capabilities of the
 <code>simulate.sh</code> application to the <code>simulation()</code> app function:</p></div>
 <div class="listingblock">
@@ -1075,20 +1059,18 @@ timesteps, and produce more that one value each, within a specified range, using
 arguments placed after the Swift script name in the form <code>-parameterName=value</code>:</p></div>
 <div class="paragraph"><p>Now try running (<code>-nsim=</code>) 100 simulations of (<code>-steps=</code>) 1 second each:</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>$ swift p3<span style="color: #990000">.</span>swift -nsim<span style="color: #990000">=</span><span style="color: #993399">100</span> -steps<span style="color: #990000">=</span><span style="color: #993399">1</span>
-Swift <span style="color: #993399">0.96</span>
-RunID<span style="color: #990000">:</span> run002
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">16</span><span style="color: #990000">:</span><span style="color: #993399">29</span><span style="color: #990000">:</span><span style="color: #993399">45</span>-<span style="color: #993399">0600</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">16</span><span style="color: #990000">:</span><span style="color: #993399">29</span><span style="color: #990000">:</span><span style="color: #993399">46</span>-<span style="color: #993399">0600</span>  Selecting site<span style="color: #990000">:</span><span style="color: #993399">80</span>  Active<span style="color: #990000">:</span><span style="color: #993399">20</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">16</span><span style="color: #990000">:</span><span style="color: #993399">30</span><span style="color: #990000">:</span><span style="color: #993399">07</span>-<span style="color: #993399">0600</span>  Selecting site<span style="color: #990000">:</span><span style="color: #993399">60</span>  Active<span style="color: #990000">:</span><span style="color: #993399">20</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">20</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">16</span><span style="color: #990000">:</span><span style="color: #993399">30</span><span style="color: #990000">:</span><span style="color: #993399">28</span>-<span style="color: #993399">0600</span>  Selecting site<span style="color: #990000">:</span><span style="color: #993399">40</span>  Active<span style="color: #990000">:</span><span style="color: #993399">20</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">40</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">16</span><span style="color: #990000">:</span><span style="color: #993399">30</span><span style="color: #990000">:</span><span style="color: #993399">49</span>-<span style="color: #993399">0600</span>  Selecting site<span style="color: #990000">:</span><span style="color: #993399">20</span>  Active<span style="color: #990000">:</span><span style="color: #993399">20</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">60</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">16</span><span style="color: #990000">:</span><span style="color: #993399">31</span><span style="color: #990000">:</span><span style="color: #993399">10</span>-<span style="color: #993399">0600</span>  Active<span style="color: #990000">:</span><span style="color: #993399">20</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">80</span>
-Final status<span style="color: #990000">:</span>Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">16</span><span style="color: #990000">:</span><span style="color: #993399">31</span><span style="color: #990000">:</span><span style="color: #993399">31</span>-<span style="color: #993399">0600</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">101</span></tt></pre></div></div>
+<div class="content">
+<pre><code>$ swift p3.swift -nsim=100 -steps=1
+Swift 0.96
+RunID: run002
+Progress: Thu, 22 Jan 2015 16:29:45-0600
+Progress: Thu, 22 Jan 2015 16:29:46-0600  Selecting site:80  Active:20
+Progress: Thu, 22 Jan 2015 16:30:07-0600  Selecting site:60  Active:20  Finished successfully:20
+Progress: Thu, 22 Jan 2015 16:30:28-0600  Selecting site:40  Active:20  Finished successfully:40
+Progress: Thu, 22 Jan 2015 16:30:49-0600  Selecting site:20  Active:20  Finished successfully:60
+Progress: Thu, 22 Jan 2015 16:31:10-0600  Active:20  Finished successfully:80
+Final status:Thu, 22 Jan 2015 16:31:31-0600  Finished successfully:101</code></pre>
+</div></div>
 <div class="paragraph"><p>We can see from Swift&#8217;s "progress" status that the tutorial&#8217;s default
 <code>swift.conf</code> parameters for local execution allow Swift to run up to 20
 application invocations concurrently on the login node. We will look at
@@ -1203,38 +1185,35 @@ staging or moving of the necessary input and output files between the target sys
 results.</p></div>
 <div class="paragraph"><p>For example, to run the job remotely on Midway and to view the output:</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>$ cd swift-tutorial/part<span style="color: #993399">04</span>
-$ swift p4<span style="color: #990000">.</span>swift
-Swift <span style="color: #993399">0.96</span>
-RunID<span style="color: #990000">:</span> run001
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">09</span><span style="color: #990000">:</span><span style="color: #993399">43</span>-<span style="color: #993399">0600</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">09</span><span style="color: #990000">:</span><span style="color: #993399">44</span>-<span style="color: #993399">0600</span>  Submitting<span style="color: #990000">:</span><span style="color: #993399">1</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">09</span><span style="color: #990000">:</span><span style="color: #993399">59</span>-<span style="color: #993399">0600</span>  Submitted<span style="color: #990000">:</span><span style="color: #993399">1</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">10</span><span style="color: #990000">:</span><span style="color: #993399">06</span>-<span style="color: #993399">0600</span>  Stage <span style="font-weight: bold"><span style="color: #0000FF">in</span></span><span style="color: #990000">:</span><span style="color: #993399">1</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">10</span><span style="color: #990000">:</span><span style="color: #993399">07</span>-<span style="color: #993399">0600</span>  Stage out<span style="color: #990000">:</span><span style="color: #993399">1</span>
-Final status<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">10</span><span style="color: #990000">:</span><span style="color: #993399">14</span>-<span style="color: #993399">0600</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">1</span>
+<div class="content">
+<pre><code>$ cd swift-tutorial/part04
+$ swift p4.swift
+Swift 0.96
+RunID: run001
+Progress: Thu, 22 Jan 2015 17:09:43-0600
+Progress: Thu, 22 Jan 2015 17:09:44-0600  Submitting:1
+Progress: Thu, 22 Jan 2015 17:09:59-0600  Submitted:1
+Progress: Thu, 22 Jan 2015 17:10:06-0600  Stage in:1
+Progress: Thu, 22 Jan 2015 17:10:07-0600  Stage out:1
+Final status: Thu, 22 Jan 2015 17:10:14-0600  Finished successfully:1
 
-$ more unsorted<span style="color: #990000">.</span>txt
-<span style="color: #993399">7</span>
-<span style="color: #993399">49</span>
-<span style="color: #993399">73</span>
-<span style="color: #993399">58</span>
-<span style="color: #993399">30</span>
-<span style="color: #993399">72</span>
-<span style="color: #990000">...</span>
+$ more unsorted.txt
+7
+49
+73
+58
+30
+72
+...
 
-$ more sorted<span style="color: #990000">.</span>txt
-<span style="color: #993399">1</span>
-<span style="color: #993399">2</span>
-<span style="color: #993399">3</span>
-<span style="color: #993399">4</span>
-<span style="color: #993399">5</span>
-<span style="color: #990000">...</span>
-</tt></pre></div></div>
+$ more sorted.txt
+1
+2
+3
+4
+5
+...</code></pre>
+</div></div>
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
@@ -1315,91 +1294,86 @@ file stats_log<span style="color: #990000">&lt;</span><span style="color: #FF000
 <span style="color: #990000">(</span>stats_out<span style="color: #990000">,</span> stats_log<span style="color: #990000">)</span> <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">analyze</span></span><span style="color: #990000">(</span>sims<span style="color: #990000">,</span>stats_script<span style="color: #990000">);</span></tt></pre></div></div>
 <div class="paragraph"><p>To run:</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>$ cd swift-tutorial/part<span style="color: #993399">05</span>
-$ swift p5<span style="color: #990000">.</span>swift
-Swift <span style="color: #993399">0.96</span>
-RunID<span style="color: #990000">:</span> run001
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">15</span><span style="color: #990000">:</span><span style="color: #993399">01</span>-<span style="color: #993399">0600</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">15</span><span style="color: #990000">:</span><span style="color: #993399">02</span>-<span style="color: #993399">0600</span>  Submitting<span style="color: #990000">:</span><span style="color: #993399">10</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">15</span><span style="color: #990000">:</span><span style="color: #993399">16</span>-<span style="color: #993399">0600</span>  Submitted<span style="color: #990000">:</span><span style="color: #993399">10</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">15</span><span style="color: #990000">:</span><span style="color: #993399">24</span>-<span style="color: #993399">0600</span>  Submitted<span style="color: #990000">:</span><span style="color: #993399">6</span>  Active<span style="color: #990000">:</span><span style="color: #993399">4</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">15</span><span style="color: #990000">:</span><span style="color: #993399">45</span>-<span style="color: #993399">0600</span>  Stage <span style="font-weight: bold"><span style="color: #0000FF">in</span></span><span style="color: #990000">:</span><span style="color: #993399">1</span>  Submitted<span style="color: #990000">:</span><span style="color: #993399">3</span>  Active<span style="color: #990000">:</span><span style="color: #993399">2</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">4</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">15</span><span style="color: #990000">:</span><span style="color: #993399">46</span>-<span style="color: #993399">0600</span>  Stage <span style="font-weight: bold"><span style="color: #0000FF">in</span></span><span style="color: #990000">:</span><span style="color: #993399">1</span>  Submitted<span style="color: #990000">:</span><span style="color: #993399">2</span>  Active<span style="color: #990000">:</span><span style="color: #993399">3</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">4</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">15</span><span style="color: #990000">:</span><span style="color: #993399">47</span>-<span style="color: #993399">0600</span>  Submitted<span style="color: #990000">:</span><span style="color: #993399">2</span>  Active<span style="color: #990000">:</span><span style="color: #993399">4</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">4</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">16</span><span style="color: #990000">:</span><span style="color: #993399">07</span>-<span style="color: #993399">0600</span>  Active<span style="color: #990000">:</span><span style="color: #993399">3</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">7</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">16</span><span style="color: #990000">:</span><span style="color: #993399">08</span>-<span style="color: #993399">0600</span>  Active<span style="color: #990000">:</span><span style="color: #993399">2</span>  Stage out<span style="color: #990000">:</span><span style="color: #993399">1</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">7</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">16</span><span style="color: #990000">:</span><span style="color: #993399">21</span>-<span style="color: #993399">0600</span>  Active<span style="color: #990000">:</span><span style="color: #993399">2</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">8</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">16</span><span style="color: #990000">:</span><span style="color: #993399">28</span>-<span style="color: #993399">0600</span>  Stage <span style="font-weight: bold"><span style="color: #0000FF">in</span></span><span style="color: #990000">:</span><span style="color: #993399">1</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">10</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">16</span><span style="color: #990000">:</span><span style="color: #993399">29</span>-<span style="color: #993399">0600</span>  Stage out<span style="color: #990000">:</span><span style="color: #993399">1</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">10</span>
-Final status<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">16</span><span style="color: #990000">:</span><span style="color: #993399">51</span>-<span style="color: #993399">0600</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">11</span>
+<div class="content">
+<pre><code>$ cd swift-tutorial/part05
+$ swift p5.swift
+Swift 0.96
+RunID: run001
+Progress: Thu, 22 Jan 2015 17:15:01-0600
+Progress: Thu, 22 Jan 2015 17:15:02-0600  Submitting:10
+Progress: Thu, 22 Jan 2015 17:15:16-0600  Submitted:10
+Progress: Thu, 22 Jan 2015 17:15:24-0600  Submitted:6  Active:4
+Progress: Thu, 22 Jan 2015 17:15:45-0600  Stage in:1  Submitted:3  Active:2  Finished successfully:4
+Progress: Thu, 22 Jan 2015 17:15:46-0600  Stage in:1  Submitted:2  Active:3  Finished successfully:4
+Progress: Thu, 22 Jan 2015 17:15:47-0600  Submitted:2  Active:4  Finished successfully:4
+Progress: Thu, 22 Jan 2015 17:16:07-0600  Active:3  Finished successfully:7
+Progress: Thu, 22 Jan 2015 17:16:08-0600  Active:2  Stage out:1  Finished successfully:7
+Progress: Thu, 22 Jan 2015 17:16:21-0600  Active:2  Finished successfully:8
+Progress: Thu, 22 Jan 2015 17:16:28-0600  Stage in:1  Finished successfully:10
+Progress: Thu, 22 Jan 2015 17:16:29-0600  Stage out:1  Finished successfully:10
+Final status: Thu, 22 Jan 2015 17:16:51-0600  Finished successfully:11
 
-<span style="font-style: italic"><span style="color: #9A1900"># Open the output/average.log to take a look at the rich set of machine specific</span></span>
-<span style="font-style: italic"><span style="color: #9A1900"># information collected from the target system.</span></span>
-$ more output/average<span style="color: #990000">.</span>log
-Start time<span style="color: #990000">:</span> Thu Jan <span style="color: #993399">22</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">16</span><span style="color: #990000">:</span><span style="color: #993399">29</span> CST <span style="color: #993399">2015</span>
-Running as user<span style="color: #990000">:</span> <span style="color: #009900">uid</span><span style="color: #990000">=</span><span style="color: #993399">6040</span><span style="color: #990000">(</span>yadunandb<span style="color: #990000">)</span> <span style="color: #009900">gid</span><span style="color: #990000">=</span><span style="color: #993399">1000</span><span style="color: #990000">(</span>ci-users<span style="color: #990000">)</span> <span style="color: #009900">groups</span><span style="color: #990000">=</span><span style="color: #993399">1000</span><span style="color: #990000">(</span>ci-users<span style="color: #990000">),</span><span style="color: #993399">1033</span><span style="color: #990000">(</span>vdl2-svn<span style="color: #990000">),</span><span style="color: #993399">1082</span><span style="color: #990000">(</span>CI-CCR<span style="color: #993399">000013</span><span style="color: #990000">),</span><span style="color: #993399">1094</span><span style="color: #990000">(</span>CI-SES<span style="color: #993399">000031</span><span style="color: #990000">),</span><span style="color: #993399">1120</span><span style="color: #990000">(</span>CI-IBN<span style="color: #993399">000050</span><span style="color: #990000">)</span>
-Running on node<span style="color: #990000">:</span> nid00116
-<span style="color: #990000">...</span>
-</tt></pre></div></div>
+# Open the output/average.log to take a look at the rich set of machine specific
+# information collected from the target system.
+$ more output/average.log
+Start time: Thu Jan 22 17:16:29 CST 2015
+Running as user: uid=6040(yadunandb) gid=1000(ci-users) groups=1000(ci-users),1033(vdl2-svn),1082(CI-CCR000013),1094(CI-SES000031),1120(CI-IBN000050)
+Running on node: nid00116
+...</code></pre>
+</div></div>
 <div class="sect3">
 <h4 id="_performing_larger_swift_runs">Performing larger Swift runs</h4>
 <div class="paragraph"><p>To test with larger runs, there are two changes that are required. The first is
 a change to the command line arguments. The example below will run 1000
 simulations with each simulation taking 5 seconds.</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt><span style="font-style: italic"><span style="color: #9A1900"># You can increase maxJobs or tasksPerNode to increase the resources available to Swift</span></span>
-<span style="font-style: italic"><span style="color: #9A1900"># With the default swift.conf, the following will be processed 4 tasks at a time :</span></span>
-$ swift p5<span style="color: #990000">.</span>swift -steps<span style="color: #990000">=</span><span style="color: #993399">5</span> -nsim<span style="color: #990000">=</span><span style="color: #993399">100</span>
-Swift <span style="color: #993399">0.96</span>
-RunID<span style="color: #990000">:</span> run001
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">35</span><span style="color: #990000">:</span><span style="color: #993399">01</span>-<span style="color: #993399">0600</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">35</span><span style="color: #990000">:</span><span style="color: #993399">02</span>-<span style="color: #993399">0600</span>  Submitting<span style="color: #990000">:</span><span style="color: #993399">100</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">35</span><span style="color: #990000">:</span><span style="color: #993399">16</span>-<span style="color: #993399">0600</span>  Submitted<span style="color: #990000">:</span><span style="color: #993399">100</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">35</span><span style="color: #990000">:</span><span style="color: #993399">27</span>-<span style="color: #993399">0600</span>  Submitted<span style="color: #990000">:</span><span style="color: #993399">96</span>  Active<span style="color: #990000">:</span><span style="color: #993399">4</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">35</span><span style="color: #990000">:</span><span style="color: #993399">52</span>-<span style="color: #993399">0600</span>  Submitted<span style="color: #990000">:</span><span style="color: #993399">92</span>  Active<span style="color: #990000">:</span><span style="color: #993399">4</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">4</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">36</span><span style="color: #990000">:</span><span style="color: #993399">17</span>-<span style="color: #993399">0600</span>  Submitted<span style="color: #990000">:</span><span style="color: #993399">92</span>  Active<span style="color: #990000">:</span><span style="color: #993399">3</span>  Stage out<span style="color: #990000">:</span><span style="color: #993399">1</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">4</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">36</span><span style="color: #990000">:</span><span style="color: #993399">18</span>-<span style="color: #993399">0600</span>  Submitted<span style="color: #990000">:</span><span style="color: #993399">88</span>  Active<span style="color: #990000">:</span><span style="color: #993399">4</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">8</span>
-<span style="color: #990000">...</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">46</span><span style="color: #990000">:</span><span style="color: #993399">27</span>-<span style="color: #993399">0600</span>  Stage out<span style="color: #990000">:</span><span style="color: #993399">1</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">99</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">46</span><span style="color: #990000">:</span><span style="color: #993399">40</span>-<span style="color: #993399">0600</span>  Stage <span style="font-weight: bold"><span style="color: #0000FF">in</span></span><span style="color: #990000">:</span><span style="color: #993399">1</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">100</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">46</span><span style="color: #990000">:</span><span style="color: #993399">53</span>-<span style="color: #993399">0600</span>  Active<span style="color: #990000">:</span><span style="color: #993399">1</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">100</span>
-Final status<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">46</span><span style="color: #990000">:</span><span style="color: #993399">53</span>-<span style="color: #993399">0600</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">101</span>
+<div class="content">
+<pre><code># You can increase maxJobs or tasksPerNode to increase the resources available to Swift
+# With the default swift.conf, the following will be processed 4 tasks at a time :
+$ swift p5.swift -steps=5 -nsim=100
+Swift 0.96
+RunID: run001
+Progress: Thu, 22 Jan 2015 17:35:01-0600
+Progress: Thu, 22 Jan 2015 17:35:02-0600  Submitting:100
+Progress: Thu, 22 Jan 2015 17:35:16-0600  Submitted:100
+Progress: Thu, 22 Jan 2015 17:35:27-0600  Submitted:96  Active:4
+Progress: Thu, 22 Jan 2015 17:35:52-0600  Submitted:92  Active:4  Finished successfully:4
+Progress: Thu, 22 Jan 2015 17:36:17-0600  Submitted:92  Active:3  Stage out:1  Finished successfully:4
+Progress: Thu, 22 Jan 2015 17:36:18-0600  Submitted:88  Active:4  Finished successfully:8
+...
+Progress: Thu, 22 Jan 2015 17:46:27-0600  Stage out:1  Finished successfully:99
+Progress: Thu, 22 Jan 2015 17:46:40-0600  Stage in:1  Finished successfully:100
+Progress: Thu, 22 Jan 2015 17:46:53-0600  Active:1  Finished successfully:100
+Final status: Thu, 22 Jan 2015 17:46:53-0600  Finished successfully:101
 
-<span style="font-style: italic"><span style="color: #9A1900"># From the time-stamps it can be seen that run001 took ~12minutes, with only 4 jobs active at</span></span>
-<span style="font-style: italic"><span style="color: #9A1900"># any given time</span></span>
+# From the time-stamps it can be seen that run001 took ~12minutes, with only 4 jobs active at
+# any given time
 
-<span style="font-style: italic"><span style="color: #9A1900"># The following run was done with swift.conf modified to use higher tasksPerNode and maxJobs</span></span>
-<span style="font-style: italic"><span style="color: #9A1900"># maxJobs       : 2      # Increased from 1</span></span>
-<span style="font-style: italic"><span style="color: #9A1900"># tasksPerNode  : 15     # Increased from 4</span></span>
-$ swift p5<span style="color: #990000">.</span>swift -steps<span style="color: #990000">=</span><span style="color: #993399">5</span> -nsim<span style="color: #990000">=</span><span style="color: #993399">100</span>
-Swift <span style="color: #993399">0.96</span>
-RunID<span style="color: #990000">:</span> run002
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">30</span><span style="color: #990000">:</span><span style="color: #993399">35</span>-<span style="color: #993399">0600</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">30</span><span style="color: #990000">:</span><span style="color: #993399">36</span>-<span style="color: #993399">0600</span>  Submitting<span style="color: #990000">:</span><span style="color: #993399">100</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">30</span><span style="color: #990000">:</span><span style="color: #993399">49</span>-<span style="color: #993399">0600</span>  Submitted<span style="color: #990000">:</span><span style="color: #993399">100</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">31</span><span style="color: #990000">:</span><span style="color: #993399">04</span>-<span style="color: #993399">0600</span>  Submitted<span style="color: #990000">:</span><span style="color: #993399">85</span>  Active<span style="color: #990000">:</span><span style="color: #993399">15</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">31</span><span style="color: #990000">:</span><span style="color: #993399">05</span>-<span style="color: #993399">0600</span>  Stage <span style="font-weight: bold"><span style="color: #0000FF">in</span></span><span style="color: #990000">:</span><span style="color: #993399">8</span>  Submitted<span style="color: #990000">:</span><span style="color: #993399">77</span>  Active<span style="color: #990000">:</span><span style="color: #993399">15</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">31</span><span style="color: #990000">:</span><span style="color: #993399">06</span>-<span style="color: #993399">0600</span>  Submitted<span style="color: #990000">:</span><span style="color: #993399">70</span>  Active<span style="color: #990000">:</span><span style="color: #993399">30</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">31</span><span style="color: #990000">:</span><span style="color: #993399">30</span>-<span style="color: #993399">0600</span>  Submitted<span style="color: #990000">:</span><span style="color: #993399">55</span>  Active<span style="color: #990000">:</span><span style="color: #993399">30</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">15</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">31</span><span style="color: #990000">:</span><span style="color: #993399">31</span>-<span style="color: #993399">0600</span>  Submitted<span style="color: #990000">:</span><span style="color: #993399">53</span>  Active<span style="color: #990000">:</span><span style="color: #993399">29</span>  Stage out<span style="color: #990000">:</span><span style="color: #993399">1</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">17</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">31</span><span style="color: #990000">:</span><span style="color: #993399">32</span>-<span style="color: #993399">0600</span>  Stage <span style="font-weight: bold"><span style="color: #0000FF">in</span></span><span style="color: #990000">:</span><span style="color: #993399">1</span>  Submitted<span style="color: #990000">:</span><span style="color: #993399">40</span>  Active<span style="color: #990000">:</span><span style="color: #993399">29</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">30</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">31</span><span style="color: #990000">:</span><span style="color: #993399">33</span>-<span style="color: #993399">0600</span>  Submitted<span style="color: #990000">:</span><span style="color: #993399">40</span>  Active<span style="color: #990000">:</span><span style="color: #993399">30</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">30</span>
-<span style="color: #990000">...</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">32</span><span style="color: #990000">:</span><span style="color: #993399">23</span>-<span style="color: #993399">0600</span>  Active<span style="color: #990000">:</span><span style="color: #993399">17</span>  Stage out<span style="color: #990000">:</span><span style="color: #993399">1</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">82</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">32</span><span style="color: #990000">:</span><span style="color: #993399">24</span>-<span style="color: #993399">0600</span>  Active<span style="color: #990000">:</span><span style="color: #993399">10</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">90</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">32</span><span style="color: #990000">:</span><span style="color: #993399">47</span>-<span style="color: #993399">0600</span>  Active<span style="color: #990000">:</span><span style="color: #993399">6</span>  Stage out<span style="color: #990000">:</span><span style="color: #993399">1</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">93</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">32</span><span style="color: #990000">:</span><span style="color: #993399">48</span>-<span style="color: #993399">0600</span>  Stage out<span style="color: #990000">:</span><span style="color: #993399">1</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">99</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">32</span><span style="color: #990000">:</span><span style="color: #993399">49</span>-<span style="color: #993399">0600</span>  Stage <span style="font-weight: bold"><span style="color: #0000FF">in</span></span><span style="color: #990000">:</span><span style="color: #993399">1</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">100</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">33</span><span style="color: #990000">:</span><span style="color: #993399">02</span>-<span style="color: #993399">0600</span>  Active<span style="color: #990000">:</span><span style="color: #993399">1</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">100</span>
-Final status<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">33</span><span style="color: #990000">:</span><span style="color: #993399">02</span>-<span style="color: #993399">0600</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">101</span></tt></pre></div></div>
+# The following run was done with swift.conf modified to use higher tasksPerNode and maxJobs
+# maxJobs       : 2      # Increased from 1
+# tasksPerNode  : 15     # Increased from 4
+$ swift p5.swift -steps=5 -nsim=100
+Swift 0.96
+RunID: run002
+Progress: Thu, 22 Jan 2015 17:30:35-0600
+Progress: Thu, 22 Jan 2015 17:30:36-0600  Submitting:100
+Progress: Thu, 22 Jan 2015 17:30:49-0600  Submitted:100
+Progress: Thu, 22 Jan 2015 17:31:04-0600  Submitted:85  Active:15
+Progress: Thu, 22 Jan 2015 17:31:05-0600  Stage in:8  Submitted:77  Active:15
+Progress: Thu, 22 Jan 2015 17:31:06-0600  Submitted:70  Active:30
+Progress: Thu, 22 Jan 2015 17:31:30-0600  Submitted:55  Active:30  Finished successfully:15
+Progress: Thu, 22 Jan 2015 17:31:31-0600  Submitted:53  Active:29  Stage out:1  Finished successfully:17
+Progress: Thu, 22 Jan 2015 17:31:32-0600  Stage in:1  Submitted:40  Active:29  Finished successfully:30
+Progress: Thu, 22 Jan 2015 17:31:33-0600  Submitted:40  Active:30  Finished successfully:30
+...
+Progress: Thu, 22 Jan 2015 17:32:23-0600  Active:17  Stage out:1  Finished successfully:82
+Progress: Thu, 22 Jan 2015 17:32:24-0600  Active:10  Finished successfully:90
+Progress: Thu, 22 Jan 2015 17:32:47-0600  Active:6  Stage out:1  Finished successfully:93
+Progress: Thu, 22 Jan 2015 17:32:48-0600  Stage out:1  Finished successfully:99
+Progress: Thu, 22 Jan 2015 17:32:49-0600  Stage in:1  Finished successfully:100
+Progress: Thu, 22 Jan 2015 17:33:02-0600  Active:1  Finished successfully:100
+Final status: Thu, 22 Jan 2015 17:33:02-0600  Finished successfully:101</code></pre>
+</div></div>
 </div>
 </div>
 <div class="sect2">
@@ -1494,75 +1468,73 @@ http://www.gnu.org/software/src-highlite -->
   <span style="color: #990000">(</span>simout<span style="color: #990000">,</span>simlog<span style="color: #990000">)</span> <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">simulation</span></span><span style="color: #990000">(</span>steps<span style="color: #990000">,</span> range<span style="color: #990000">,</span> biasfile<span style="color: #990000">,</span> <span style="color: #993399">1000000</span><span style="color: #990000">,</span> values<span style="color: #990000">,</span> simulate_script<span style="color: #990000">,</span> seedfile<span style="color: #990000">);</span></tt></pre></div></div>
 <div class="paragraph"><p>To run:</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>$ cd swift-tutorial/part<span style="color: #993399">06</span>
-$ swift p6<span style="color: #990000">.</span>swift
-Swift <span style="color: #993399">0.96</span>
-RunID<span style="color: #990000">:</span> run001
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">54</span><span style="color: #990000">:</span><span style="color: #993399">47</span>-<span style="color: #993399">0600</span>
+<div class="content">
+<pre><code>$ cd swift-tutorial/part06
+$ swift p6.swift
+Swift 0.96
+RunID: run001
+Progress: Thu, 22 Jan 2015 17:54:47-0600
 
-<span style="color: #990000">***</span> Script parameters<span style="color: #990000">:</span> <span style="color: #009900">nsim</span><span style="color: #990000">=</span><span style="color: #993399">10</span> <span style="color: #009900">range</span><span style="color: #990000">=</span><span style="color: #993399">100</span> num <span style="color: #009900">values</span><span style="color: #990000">=</span><span style="color: #993399">10</span>
+*** Script parameters: nsim=10 range=100 num values=10
 
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">54</span><span style="color: #990000">:</span><span style="color: #993399">48</span>-<span style="color: #993399">0600</span>  Submitting<span style="color: #990000">:</span><span style="color: #993399">11</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">55</span><span style="color: #990000">:</span><span style="color: #993399">01</span>-<span style="color: #993399">0600</span>  Submitted<span style="color: #990000">:</span><span style="color: #993399">11</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">55</span><span style="color: #990000">:</span><span style="color: #993399">08</span>-<span style="color: #993399">0600</span>  Stage <span style="font-weight: bold"><span style="color: #0000FF">in</span></span><span style="color: #990000">:</span><span style="color: #993399">3</span>  Submitted<span style="color: #990000">:</span><span style="color: #993399">8</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">55</span><span style="color: #990000">:</span><span style="color: #993399">09</span>-<span style="color: #993399">0600</span>  Submitted<span style="color: #990000">:</span><span style="color: #993399">7</span>  Active<span style="color: #990000">:</span><span style="color: #993399">4</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">55</span><span style="color: #990000">:</span><span style="color: #993399">29</span>-<span style="color: #993399">0600</span>  Submitted<span style="color: #990000">:</span><span style="color: #993399">4</span>  Active<span style="color: #990000">:</span><span style="color: #993399">4</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">3</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">55</span><span style="color: #990000">:</span><span style="color: #993399">32</span>-<span style="color: #993399">0600</span>  Submitted<span style="color: #990000">:</span><span style="color: #993399">3</span>  Active<span style="color: #990000">:</span><span style="color: #993399">4</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">4</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">55</span><span style="color: #990000">:</span><span style="color: #993399">49</span>-<span style="color: #993399">0600</span>  Stage <span style="font-weight: bold"><span style="color: #0000FF">in</span></span><span style="color: #990000">:</span><span style="color: #993399">3</span>  Submitted<span style="color: #990000">:</span><span style="color: #993399">6</span>  Active<span style="color: #990000">:</span><span style="color: #993399">1</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">7</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">55</span><span style="color: #990000">:</span><span style="color: #993399">50</span>-<span style="color: #993399">0600</span>  Submitted<span style="color: #990000">:</span><span style="color: #993399">6</span>  Active<span style="color: #990000">:</span><span style="color: #993399">4</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">7</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">55</span><span style="color: #990000">:</span><span style="color: #993399">52</span>-<span style="color: #993399">0600</span>  Submitted<span style="color: #990000">:</span><span style="color: #993399">6</span>  Active<span style="color: #990000">:</span><span style="color: #993399">3</span>  Stage out<span style="color: #990000">:</span><span style="color: #993399">1</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">7</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">56</span><span style="color: #990000">:</span><span style="color: #993399">10</span>-<span style="color: #993399">0600</span>  Submitted<span style="color: #990000">:</span><span style="color: #993399">6</span>  Active<span style="color: #990000">:</span><span style="color: #993399">4</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">11</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">56</span><span style="color: #990000">:</span><span style="color: #993399">31</span>-<span style="color: #993399">0600</span>  Stage <span style="font-weight: bold"><span style="color: #0000FF">in</span></span><span style="color: #990000">:</span><span style="color: #993399">2</span>  Submitted<span style="color: #990000">:</span><span style="color: #993399">4</span>  Active<span style="color: #990000">:</span><span style="color: #993399">2</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">13</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">56</span><span style="color: #990000">:</span><span style="color: #993399">32</span>-<span style="color: #993399">0600</span>  Submitted<span style="color: #990000">:</span><span style="color: #993399">2</span>  Active<span style="color: #990000">:</span><span style="color: #993399">4</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">15</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">56</span><span style="color: #990000">:</span><span style="color: #993399">53</span>-<span style="color: #993399">0600</span>  Active<span style="color: #990000">:</span><span style="color: #993399">2</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">19</span>
-Progress<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">57</span><span style="color: #990000">:</span><span style="color: #993399">14</span>-<span style="color: #993399">0600</span>  Stage <span style="font-weight: bold"><span style="color: #0000FF">in</span></span><span style="color: #990000">:</span><span style="color: #993399">1</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">21</span>
-Final status<span style="color: #990000">:</span> Thu<span style="color: #990000">,</span> <span style="color: #993399">22</span> Jan <span style="color: #993399">2015</span> <span style="color: #993399">17</span><span style="color: #990000">:</span><span style="color: #993399">57</span><span style="color: #990000">:</span><span style="color: #993399">16</span>-<span style="color: #993399">0600</span>  Finished successfully<span style="color: #990000">:</span><span style="color: #993399">22</span>
+Progress: Thu, 22 Jan 2015 17:54:48-0600  Submitting:11
+Progress: Thu, 22 Jan 2015 17:55:01-0600  Submitted:11
+Progress: Thu, 22 Jan 2015 17:55:08-0600  Stage in:3  Submitted:8
+Progress: Thu, 22 Jan 2015 17:55:09-0600  Submitted:7  Active:4
+Progress: Thu, 22 Jan 2015 17:55:29-0600  Submitted:4  Active:4  Finished successfully:3
+Progress: Thu, 22 Jan 2015 17:55:32-0600  Submitted:3  Active:4  Finished successfully:4
+Progress: Thu, 22 Jan 2015 17:55:49-0600  Stage in:3  Submitted:6  Active:1  Finished successfully:7
+Progress: Thu, 22 Jan 2015 17:55:50-0600  Submitted:6  Active:4  Finished successfully:7
+Progress: Thu, 22 Jan 2015 17:55:52-0600  Submitted:6  Active:3  Stage out:1  Finished successfully:7
+Progress: Thu, 22 Jan 2015 17:56:10-0600  Submitted:6  Active:4  Finished successfully:11
+Progress: Thu, 22 Jan 2015 17:56:31-0600  Stage in:2  Submitted:4  Active:2  Finished successfully:13
+Progress: Thu, 22 Jan 2015 17:56:32-0600  Submitted:2  Active:4  Finished successfully:15
+Progress: Thu, 22 Jan 2015 17:56:53-0600  Active:2  Finished successfully:19
+Progress: Thu, 22 Jan 2015 17:57:14-0600  Stage in:1  Finished successfully:21
+Final status: Thu, 22 Jan 2015 17:57:16-0600  Finished successfully:22
 
-<span style="font-style: italic"><span style="color: #9A1900"># which produces the following output:</span></span>
-$ ls output<span style="color: #990000">/</span>
-average<span style="color: #990000">.</span>log  bias_1<span style="color: #990000">.</span>dat  bias_4<span style="color: #990000">.</span>dat  bias_7<span style="color: #990000">.</span>dat  seed<span style="color: #990000">.</span>dat   sim_1<span style="color: #990000">.</span>log  sim_2<span style="color: #990000">.</span>out  sim_4<span style="color: #990000">.</span>log  sim_5<span style="color: #990000">.</span>out  sim_7<span style="color: #990000">.</span>log  sim_8<span style="color: #990000">.</span>out
-average<span style="color: #990000">.</span>out  bias_2<span style="color: #990000">.</span>dat  bias_5<span style="color: #990000">.</span>dat  bias_8<span style="color: #990000">.</span>dat  sim_0<span style="color: #990000">.</span>log  sim_1<span style="color: #990000">.</span>out  sim_3<span style="color: #990000">.</span>log  sim_4<span style="color: #990000">.</span>out  sim_6<span style="color: #990000">.</span>log  sim_7<span style="color: #990000">.</span>out  sim_9<span style="color: #990000">.</span>log
-bias_0<span style="color: #990000">.</span>dat   bias_3<span style="color: #990000">.</span>dat  bias_6<span style="color: #990000">.</span>dat  bias_9<span style="color: #990000">.</span>dat  sim_0<span style="color: #990000">.</span>out  sim_2<span style="color: #990000">.</span>log  sim_3<span style="color: #990000">.</span>out  sim_5<span style="color: #990000">.</span>log  sim_6<span style="color: #990000">.</span>out  sim_8<span style="color: #990000">.</span>log  sim_9<span style="color: #990000">.</span>out
+# which produces the following output:
+$ ls output/
+average.log  bias_1.dat  bias_4.dat  bias_7.dat  seed.dat   sim_1.log  sim_2.out  sim_4.log  sim_5.out  sim_7.log  sim_8.out
+average.out  bias_2.dat  bias_5.dat  bias_8.dat  sim_0.log  sim_1.out  sim_3.log  sim_4.out  sim_6.log  sim_7.out  sim_9.log
+bias_0.dat   bias_3.dat  bias_6.dat  bias_9.dat  sim_0.out  sim_2.log  sim_3.out  sim_5.log  sim_6.out  sim_8.log  sim_9.out
 
-<span style="font-style: italic"><span style="color: #9A1900"># Each sim_N.out file is the sum of its bias file plus newly "simulated" random output scaled by 1,000,000:</span></span>
+# Each sim_N.out file is the sum of its bias file plus newly "simulated" random output scaled by 1,000,000:
 
-$ cat output/bias_0<span style="color: #990000">.</span>dat
-     <span style="color: #993399">302</span>
-     <span style="color: #993399">489</span>
-      <span style="color: #993399">81</span>
-     <span style="color: #993399">582</span>
-     <span style="color: #993399">664</span>
-     <span style="color: #993399">290</span>
-     <span style="color: #993399">839</span>
-     <span style="color: #993399">258</span>
-     <span style="color: #993399">506</span>
-     <span style="color: #993399">310</span>
-     <span style="color: #993399">293</span>
-     <span style="color: #993399">508</span>
-      <span style="color: #993399">88</span>
-     <span style="color: #993399">261</span>
-     <span style="color: #993399">453</span>
-     <span style="color: #993399">187</span>
-      <span style="color: #993399">26</span>
-     <span style="color: #993399">198</span>
-     <span style="color: #993399">402</span>
-     <span style="color: #993399">555</span>
+$ cat output/bias_0.dat
+     302
+     489
+      81
+     582
+     664
+     290
+     839
+     258
+     506
+     310
+     293
+     508
+      88
+     261
+     453
+     187
+      26
+     198
+     402
+     555
 
-$ cat output/sim_0<span style="color: #990000">.</span>out
-<span style="color: #993399">64000302</span>
-<span style="color: #993399">38000489</span>
-<span style="color: #993399">32000081</span>
-<span style="color: #993399">12000582</span>
-<span style="color: #993399">46000664</span>
-<span style="color: #993399">36000290</span>
-<span style="color: #993399">35000839</span>
-<span style="color: #993399">22000258</span>
-<span style="color: #993399">49000506</span>
-<span style="color: #993399">75000310</span></tt></pre></div></div>
+$ cat output/sim_0.out
+64000302
+38000489
+32000081
+12000582
+46000664
+36000290
+35000839
+22000258
+49000506
+75000310</code></pre>
+</div></div>
 <div class="paragraph"><p>We produce 20 values in each bias file. Simulations of less than that
 number of values ignore the unneeded number, while simualtions of more
 than 20 will use the last bias number for all remaining values past
@@ -1594,62 +1566,58 @@ complex scientific simulation application. It generates and prints a
 set of one or more random integers in the range [0-2^62) as controlled
 by its command line arguments, which are:</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>$ <span style="color: #990000">.</span>/app/simulate<span style="color: #990000">.</span>sh --help
-<span style="color: #990000">.</span>/app/simulate<span style="color: #990000">.</span>sh<span style="color: #990000">:</span> usage<span style="color: #990000">:</span>
-    -b<span style="color: #990000">|</span>--bias       offset bias<span style="color: #990000">:</span> add this integer to all results <span style="color: #990000">[</span><span style="color: #993399">0</span><span style="color: #990000">]</span>
-    -B<span style="color: #990000">|</span>--biasfile   file of integer biases to add to results <span style="color: #990000">[</span>none<span style="color: #990000">]</span>
-    -l<span style="color: #990000">|</span>--log        generate a log <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> stderr <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> not null <span style="color: #990000">[</span>y<span style="color: #990000">]</span>
-    -n<span style="color: #990000">|</span>--nvalues    print this many values per simulation <span style="color: #990000">[</span><span style="color: #993399">1</span><span style="color: #990000">]</span>
-    -r<span style="color: #990000">|</span>--range      range <span style="color: #990000">(</span>limit<span style="color: #990000">)</span> of generated results <span style="color: #990000">[</span><span style="color: #993399">100</span><span style="color: #990000">]</span>
-    -s<span style="color: #990000">|</span>--seed       use this integer <span style="color: #990000">[</span><span style="color: #993399">0</span><span style="color: #990000">..</span><span style="color: #993399">32767</span><span style="color: #990000">]</span> as a seed <span style="color: #990000">[</span>none<span style="color: #990000">]</span>
-    -S<span style="color: #990000">|</span>--seedfile   use this file <span style="color: #990000">(</span>containing integer seeds <span style="color: #990000">[</span><span style="color: #993399">0</span><span style="color: #990000">..</span><span style="color: #993399">32767</span><span style="color: #990000">])</span> one per line <span style="color: #990000">[</span>none<span style="color: #990000">]</span>
-    -t<span style="color: #990000">|</span>--timesteps  number of simulated <span style="color: #FF0000">"timesteps"</span> <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> seconds <span style="color: #990000">(</span>determines runtime<span style="color: #990000">)</span> <span style="color: #990000">[</span><span style="color: #993399">1</span><span style="color: #990000">]</span>
-    -x<span style="color: #990000">|</span>--scale      scale the results by this integer <span style="color: #990000">[</span><span style="color: #993399">1</span><span style="color: #990000">]</span>
-    -h<span style="color: #990000">|</span>-<span style="color: #990000">?|?|</span>--help  print this <span style="font-weight: bold"><span style="color: #0000FF">help</span></span>
-$</tt></pre></div></div>
+<div class="content">
+<pre><code>$ ./app/simulate.sh --help
+./app/simulate.sh: usage:
+    -b|--bias       offset bias: add this integer to all results [0]
+    -B|--biasfile   file of integer biases to add to results [none]
+    -l|--log        generate a log in stderr if not null [y]
+    -n|--nvalues    print this many values per simulation [1]
+    -r|--range      range (limit) of generated results [100]
+    -s|--seed       use this integer [0..32767] as a seed [none]
+    -S|--seedfile   use this file (containing integer seeds [0..32767]) one per line [none]
+    -t|--timesteps  number of simulated "timesteps" in seconds (determines runtime) [1]
+    -x|--scale      scale the results by this integer [1]
+    -h|-?|?|--help  print this help
+$</code></pre>
+</div></div>
 <div class="paragraph"><p>All of these arguments are optional, with default values indicated above as <code>[n]</code>.</p></div>
 <div class="paragraph"><p>With no arguments, simulate.sh prints 1 number in the range of
 1-100. Otherwise it generates n numbers of the form (R*scale)+bias
 where R is a random integer. By default it logs information about its
 execution environment to stderr.  Here is some examples of its usage:</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>$ simulate<span style="color: #990000">.</span>sh <span style="color: #993399">2</span><span style="color: #990000">&gt;</span>log
-       <span style="color: #993399">5</span>
-$ head -<span style="color: #993399">4</span> log
+<div class="content">
+<pre><code>$ simulate.sh 2&gt;log
+       5
+$ head -4 log
 
-Called as<span style="color: #990000">:</span> /home/wilde/swift/tut/CIC_2013-<span style="color: #993399">08</span>-<span style="color: #993399">09</span>/app/simulate<span style="color: #990000">.</span>sh<span style="color: #990000">:</span>
-Start time<span style="color: #990000">:</span> Thu Aug <span style="color: #993399">22</span> <span style="color: #993399">12</span><span style="color: #990000">:</span><span style="color: #993399">40</span><span style="color: #990000">:</span><span style="color: #993399">24</span> CDT <span style="color: #993399">2013</span>
-Running on node<span style="color: #990000">:</span> login01<span style="color: #990000">.</span>osgconnect<span style="color: #990000">.</span>net
+Called as: /home/wilde/swift/tut/CIC_2013-08-09/app/simulate.sh:
+Start time: Thu Aug 22 12:40:24 CDT 2013
+Running on node: login01.osgconnect.net
 
-$ simulate<span style="color: #990000">.</span>sh -n <span style="color: #993399">4</span> -r <span style="color: #993399">1000000</span> <span style="color: #993399">2</span><span style="color: #990000">&gt;</span>log
-  <span style="color: #993399">239454</span>
-  <span style="color: #993399">386702</span>
-   <span style="color: #993399">13849</span>
-  <span style="color: #993399">873526</span>
+$ simulate.sh -n 4 -r 1000000 2&gt;log
+  239454
+  386702
+   13849
+  873526
 
-$ simulate<span style="color: #990000">.</span>sh -n <span style="color: #993399">3</span> -r <span style="color: #993399">1000000</span> -x <span style="color: #993399">100</span> <span style="color: #993399">2</span><span style="color: #990000">&gt;</span>log
- <span style="color: #993399">6643700</span>
-<span style="color: #993399">62182300</span>
- <span style="color: #993399">5230600</span>
+$ simulate.sh -n 3 -r 1000000 -x 100 2&gt;log
+ 6643700
+62182300
+ 5230600
 
-$ simulate<span style="color: #990000">.</span>sh -n <span style="color: #993399">2</span> -r <span style="color: #993399">1000</span> -x <span style="color: #993399">1000</span> <span style="color: #993399">2</span><span style="color: #990000">&gt;</span>log
-  <span style="color: #993399">565000</span>
-  <span style="color: #993399">636000</span>
+$ simulate.sh -n 2 -r 1000 -x 1000 2&gt;log
+  565000
+  636000
 
-$ time simulate<span style="color: #990000">.</span>sh -n <span style="color: #993399">2</span> -r <span style="color: #993399">1000</span> -x <span style="color: #993399">1000</span> -t <span style="color: #993399">3</span> <span style="color: #993399">2</span><span style="color: #990000">&gt;</span>log
-  <span style="color: #993399">336000</span>
-  <span style="color: #993399">320000</span>
-real    0m3<span style="color: #990000">.</span>012s
-user    0m0<span style="color: #990000">.</span>005s
-sys     0m0<span style="color: #990000">.</span>006s</tt></pre></div></div>
+$ time simulate.sh -n 2 -r 1000 -x 1000 -t 3 2&gt;log
+  336000
+  320000
+real    0m3.012s
+user    0m0.005s
+sys     0m0.006s</code></pre>
+</div></div>
 </div>
 <div class="sect3">
 <h4 id="_stats_sh">stats.sh</h4>
@@ -1658,21 +1626,19 @@ program. It reads N files each containing M integers and simply prints
 the average of all those numbers to stdout. Similar to simulate.sh
 it logs environmental information to the stderr.</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>$ ls f<span style="color: #990000">*</span>
+<div class="content">
+<pre><code>$ ls f*
 f1  f2  f3  f4
 
-$ cat f<span style="color: #990000">*</span>
-<span style="color: #993399">25</span>
-<span style="color: #993399">60</span>
-<span style="color: #993399">40</span>
-<span style="color: #993399">75</span>
+$ cat f*
+25
+60
+40
+75
 
-$ stats<span style="color: #990000">.</span>sh f<span style="color: #990000">*</span> <span style="color: #993399">2</span><span style="color: #990000">&gt;</span>log
-<span style="color: #993399">50</span></tt></pre></div></div>
+$ stats.sh f* 2&gt;log
+50</code></pre>
+</div></div>
 </div>
 </div>
 <div class="sect2">
@@ -1802,26 +1768,22 @@ Set the following line in the swift-tutorial/swift.conf file.
 </li>
 </ol></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>   sites<span style="color: #990000">:</span> <span style="color: #990000">[</span>midway<span style="color: #990000">]</span></tt></pre></div></div>
+<div class="content">
+<pre><code>   sites: [midway]</code></pre>
+</div></div>
 <div class="paragraph"><p>Notes:</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt><span style="font-style: italic"><span style="color: #9A1900"># The following commands are to be executed on the Midway login node</span></span>
-<span style="font-style: italic"><span style="color: #9A1900"># Check your account and balance</span></span>
+<div class="content">
+<pre><code># The following commands are to be executed on the Midway login node
+# Check your account and balance
 accounts balance
 
-<span style="font-style: italic"><span style="color: #9A1900"># List queues</span></span>
+# List queues
 qstat -q
 
-<span style="font-style: italic"><span style="color: #9A1900"># List your jobs and state</span></span>
-qstat -u <span style="color: #009900">$USER</span></tt></pre></div></div>
+# List your jobs and state
+qstat -u $USER</code></pre>
+</div></div>
 </div>
 <div class="sect3">
 <h4 id="_beagle_supercomputer_cray">Beagle Supercomputer (Cray)</h4>
@@ -1859,31 +1821,27 @@ Set workDirectory : "/tmp/YOUR_USERNAME_ON_BEAGLE/swiftwork"
 Set the following line in the swift-tutorial/swift.conf file.
 </p>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>   sites<span style="color: #990000">:</span> <span style="color: #990000">[</span>beagle<span style="color: #990000">]</span></tt></pre></div></div>
+<div class="content">
+<pre><code>   sites: [beagle]</code></pre>
+</div></div>
 </li>
 </ol></div>
 <div class="paragraph"><p>Notes for beagle:</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt><span style="font-style: italic"><span style="color: #9A1900"># The following commands should be executed on a beagle login node</span></span>
-<span style="font-style: italic"><span style="color: #9A1900"># To check your allocation and project on Beagle:</span></span>
+<div class="content">
+<pre><code># The following commands should be executed on a beagle login node
+# To check your allocation and project on Beagle:
 show_alloc
 
-<span style="font-style: italic"><span style="color: #9A1900"># List queues</span></span>
+# List queues
 qstat -q
 
-<span style="font-style: italic"><span style="color: #9A1900"># List your jobs and state</span></span>
-qstat -u <span style="color: #009900">$USER</span>
+# List your jobs and state
+qstat -u $USER
 
-<span style="font-style: italic"><span style="color: #9A1900"># Visual representation of current node allocation status</span></span>
-xtnodestat -d</tt></pre></div></div>
+# Visual representation of current node allocation status
+xtnodestat -d</code></pre>
+</div></div>
 </div>
 <div class="sect3">
 <h4 id="_blues_cluster_at_lcrc">Blues cluster at LCRC</h4>
@@ -1912,25 +1870,21 @@ Set workDirectory : "/home/YOUR_USERNAME_ON_BLUES/swiftwork"
 Set the following line in the swift-tutorial/swift.conf file.
 </p>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>   sites<span style="color: #990000">:</span> <span style="color: #990000">[</span>blues<span style="color: #990000">]</span></tt></pre></div></div>
+<div class="content">
+<pre><code>   sites: [blues]</code></pre>
+</div></div>
 </li>
 </ol></div>
 <div class="paragraph"><p>Notes for blues:</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt><span style="font-style: italic"><span style="color: #9A1900"># The following commands should be executed on a beagle login node</span></span>
-<span style="font-style: italic"><span style="color: #9A1900"># List queues</span></span>
+<div class="content">
+<pre><code># The following commands should be executed on a beagle login node
+# List queues
 qstat -q
 
-<span style="font-style: italic"><span style="color: #9A1900"># List your jobs and state</span></span>
-qstat -u <span style="color: #009900">$USER</span></tt></pre></div></div>
+# List your jobs and state
+qstat -u $USER</code></pre>
+</div></div>
 </div>
 <div class="sect3">
 <h4 id="_osgconnect_at_uchicago">OSGConnect at UChicago</h4>
@@ -1964,25 +1918,21 @@ Set workDirectory : "/tmp/YOUR_USERNAME_ON_OSG"
 Set the following line in the swift-tutorial/swift.conf file:
 </p>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>   sites<span style="color: #990000">:</span> <span style="color: #990000">[</span>osgc<span style="color: #990000">]</span></tt></pre></div></div>
+<div class="content">
+<pre><code>   sites: [osgc]</code></pre>
+</div></div>
 </li>
 </ol></div>
 <div class="paragraph"><p>Notes for OSGConnect :</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt><span style="font-style: italic"><span style="color: #9A1900"># The following commands should be executed on the OSGConnect login node</span></span>
-<span style="font-style: italic"><span style="color: #9A1900"># To check/select your project on OSGConnect</span></span>
+<div class="content">
+<pre><code># The following commands should be executed on the OSGConnect login node
+# To check/select your project on OSGConnect
 connect project
 
-<span style="font-style: italic"><span style="color: #9A1900"># List your jobs and state</span></span>
-condor_q <span style="color: #009900">$USER</span></tt></pre></div></div>
+# List your jobs and state
+condor_q $USER</code></pre>
+</div></div>
 </div>
 <div class="sect3">
 <h4 id="_amazon_ec2">Amazon EC2</h4>
@@ -2014,11 +1964,9 @@ If you update ec2WorkerImage, ensure that it is a ubuntu image
 Set the following line in the swift-tutorial/swift.conf file:
 </p>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>   sites<span style="color: #990000">:</span> <span style="color: #990000">[</span>aws<span style="color: #990000">]</span></tt></pre></div></div>
+<div class="content">
+<pre><code>   sites: [aws]</code></pre>
+</div></div>
 </li>
 </ol></div>
 <div class="admonitionblock">
@@ -2060,11 +2008,9 @@ For each site block, set URL : URL_OF_AD_HOC_MACHINE_N
 Set workDirectory : "/tmp/USERNAME_ON_AD-HOC-N/work"
 </p>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>   sites<span style="color: #990000">:</span> <span style="color: #990000">[&lt;</span>ad-hoc-<span style="color: #993399">1</span><span style="color: #990000">.</span>foo<span style="color: #990000">.</span>net<span style="color: #990000">&gt;,</span> <span style="color: #990000">&lt;</span>ad-hoc-<span style="color: #993399">1</span><span style="color: #990000">.</span>foo<span style="color: #990000">.</span>net<span style="color: #990000">&gt;,</span> <span style="color: #990000">...</span> <span style="color: #990000">&lt;</span>ad-hoc-N<span style="color: #990000">.</span>foo<span style="color: #990000">.</span>net<span style="color: #990000">&gt;]</span></tt></pre></div></div>
+<div class="content">
+<pre><code>   sites: [&lt;ad-hoc-1.foo.net&gt;, &lt;ad-hoc-1.foo.net&gt;, ... &lt;ad-hoc-N.foo.net&gt;]</code></pre>
+</div></div>
 </li>
 </ol></div>
 </div>
@@ -2088,11 +2034,9 @@ Set the site specific variables for both sites in the swift-tutorial/setup.sh fi
 Set the following line in the swift-tutorial/swift.conf file:
 </p>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>   sites<span style="color: #990000">:</span> <span style="color: #990000">[</span>midway<span style="color: #990000">,</span> beagle<span style="color: #990000">]</span></tt></pre></div></div>
+<div class="content">
+<pre><code>   sites: [midway, beagle]</code></pre>
+</div></div>
 </li>
 </ol></div>
 </div>
@@ -2135,11 +2079,9 @@ Set the following line in the swift-tutorial/swift.conf file.
 </li>
 </ol></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>   sites<span style="color: #990000">:</span> <span style="color: #990000">[</span>stampede<span style="color: #990000">]</span></tt></pre></div></div>
+<div class="content">
+<pre><code>   sites: [stampede]</code></pre>
+</div></div>
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
@@ -2167,18 +2109,16 @@ point at different Lustre filesystems all of which are accessible from the login
 </div>
 <div class="paragraph"><p>Notes:</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt><span style="font-style: italic"><span style="color: #9A1900"># List queues and status</span></span>
-sinfo -o <span style="color: #FF0000">"%20P %5a %.10l %16F"</span>
+<div class="content">
+<pre><code># List queues and status
+sinfo -o "%20P %5a %.10l %16F"
 
-<span style="font-style: italic"><span style="color: #9A1900"># List your jobs and state</span></span>
-showq -u <span style="color: #009900">$USER</span>
+# List your jobs and state
+showq -u $USER
 
-<span style="font-style: italic"><span style="color: #9A1900"># Interactive shell for debugging:</span></span>
-srun -p development -t <span style="color: #993399">0</span><span style="color: #990000">:</span><span style="color: #993399">30</span><span style="color: #990000">:</span><span style="color: #993399">00</span> -n <span style="color: #993399">32</span> --pty /bin/bash -l</tt></pre></div></div>
+# Interactive shell for debugging:
+srun -p development -t 0:30:00 -n 32 --pty /bin/bash -l</code></pre>
+</div></div>
 </div>
 <div class="sect3">
 <h4 id="_blacklight_psc_xsede">Blacklight PSC (XSEDE)</h4>
@@ -2212,11 +2152,9 @@ Set the following line in the swift-tutorial/swift.conf file.
 </li>
 </ol></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>   sites<span style="color: #990000">:</span> <span style="color: #990000">[</span>blacklight<span style="color: #990000">]</span></tt></pre></div></div>
+<div class="content">
+<pre><code>   sites: [blacklight]</code></pre>
+</div></div>
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
@@ -2227,15 +2165,13 @@ http://www.gnu.org/software/src-highlite -->
 </div>
 <div class="paragraph"><p>Notes:</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt><span style="font-style: italic"><span style="color: #9A1900"># List queues and status</span></span>
+<div class="content">
+<pre><code># List queues and status
 qstat -q
 
-<span style="font-style: italic"><span style="color: #9A1900"># List your jobs and state</span></span>
-qstat -u <span style="color: #009900">$USER</span></tt></pre></div></div>
+# List your jobs and state
+qstat -u $USER</code></pre>
+</div></div>
 </div>
 <div class="sect3">
 <h4 id="_gordon_sdsc_xsede">Gordon SDSC (XSEDE)</h4>
@@ -2270,22 +2206,18 @@ Set the following line in the swift-tutorial/swift.conf file.
 </li>
 </ol></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>   sites<span style="color: #990000">:</span> <span style="color: #990000">[</span>gordon<span style="color: #990000">]</span></tt></pre></div></div>
+<div class="content">
+<pre><code>   sites: [gordon]</code></pre>
+</div></div>
 <div class="paragraph"><p>Notes:</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt><span style="font-style: italic"><span style="color: #9A1900"># List queues and status</span></span>
+<div class="content">
+<pre><code># List queues and status
 qstat -q
 
-<span style="font-style: italic"><span style="color: #9A1900"># List your jobs and state</span></span>
-qstat -u <span style="color: #009900">$USER</span></tt></pre></div></div>
+# List your jobs and state
+qstat -u $USER</code></pre>
+</div></div>
 </div>
 <div class="sect3">
 <h4 id="_trestles_sdsc_xsede">Trestles SDSC (XSEDE)</h4>
@@ -2322,22 +2254,18 @@ Set the following line in the swift-tutorial/swift.conf file.
 </li>
 </ol></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>   sites<span style="color: #990000">:</span> <span style="color: #990000">[</span>trestles<span style="color: #990000">]</span></tt></pre></div></div>
+<div class="content">
+<pre><code>   sites: [trestles]</code></pre>
+</div></div>
 <div class="paragraph"><p>Notes:</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt><span style="font-style: italic"><span style="color: #9A1900"># List queues and status</span></span>
+<div class="content">
+<pre><code># List queues and status
 qstat -q
 
-<span style="font-style: italic"><span style="color: #9A1900"># List your jobs and state</span></span>
-qstat -u <span style="color: #009900">$USER</span></tt></pre></div></div>
+# List your jobs and state
+qstat -u $USER</code></pre>
+</div></div>
 </div>
 </div>
 </div>
@@ -2346,7 +2274,7 @@ qstat -u <span style="color: #009900">$USER</span></tt></pre></div></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-01-29 15:58:24 CST
+Last updated 2015-01-29 16:07:53 CST
 </div>
 </div>
 </body>
