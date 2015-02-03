@@ -2,10 +2,13 @@ type file;
 
 app (file out, file err) do_mpi ()
 {
-    halo stderr=filename(err) stdout=filename(out);
+    mpi_app stderr=filename(err) stdout=filename(out);
 }
 
-file out <"mpi.out">;
-file err <"mpi.err">;
+int nsim   = toInt(arg("nsim",   "10"));
 
-(out,err) = do_mpi();
+foreach i in [0:nsim-1] {
+  file mpiout <single_file_mapper; file=strcat("output/mpi_",i,".out")>;
+  file mpierr <single_file_mapper; file=strcat("output/mpi_",i,".log")>;
+  (mpiout, mpierr) = do_mpi();
+}
