@@ -1,0 +1,13 @@
+#PBS -N mpi-test
+#PBS -m n
+#PBS -l mppwidth=1,mppnppn=1,mppdepth=4
+#PBS -l walltime=00:24:00
+#PBS -l advres=yadunandb.2763
+#PBS -q development
+#PBS -o /lustre/beagle2/yadunandb/swift-tutorial/mpi/output/mpu_sum.stdout
+#PBS -e /lustre/beagle2/yadunandb/swift-tutorial/mpi/output/mpu_sum.stderr
+export WORKER_LOGGING_LEVEL=NONE
+
+cd /lustre/beagle2/yadunandb/swift-tutorial/mpi
+aprun -n 24 /lustre/beagle2/yadunandb/swift-tutorial/mpi/mpi_sum
+
