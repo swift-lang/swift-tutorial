@@ -1,3 +1,0 @@
-[mpiexec@midway389] set_default_values (./ui/mpich/utils.c:1542): no executable provided
-[mpiexec@midway389] HYD_uii_mpx_get_parameters (./ui/mpich/utils.c:1751): setting default values failed
-[mpiexec@midway389] main (./ui/mpich/mpiexec.c:153): error parsing parameters
