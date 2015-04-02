@@ -7,7 +7,7 @@ SRC = $(wildcard *.c)
 DEPS = timer.h
 OBJS = $(SRC:.c=.o)
 
-EXEC=mpi_sum
+EXEC=mpi_hello
 
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
