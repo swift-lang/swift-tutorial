@@ -4,18 +4,27 @@ echo "ARGS: $*"
 which convert
 if [[ "$?" != "0" ]]
 then
-    echo "The application \"convert\" is necessary for assembling montage" 1>&2
+    echo "The application \"convert\" is necessary for making the movie" 1>&2
+fi
+
+which montage
+if [[ "$?" != "0" ]]
+then
+    echo "The application \"montage\" is necessary for assembling montage" 1>&2
 fi
 
 TMP=$PWD/imglist.$RANDOM.txt
 
-MOVIE_FILE=$1; shift
+MOVIE_FILE=$1;   shift
+MONTAGE_FILE=$2; shift
 
 echo "convert -delay 20 -loop 0 $* $MOVIE_FILE"
-convert -delay 20 -loop 0 $* $MOVIE_FILE
+convert -delay 40 -loop 0 $* $MOVIE_FILE
+montage -label %f -frame 5 -background '#336699' -geometry +4+4 $* $MONTAGE_FILE
 
 if [ -d $HOME/public_html ]
 then
     cp $MOVIE_FILE $HOME/public_html
+    cp $MONTAGE_FILE $HOME/public_html
 fi
 
