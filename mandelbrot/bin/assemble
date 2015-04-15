@@ -16,10 +16,15 @@ fi
 TMP=$PWD/imglist.$RANDOM.txt
 
 MOVIE_FILE=$1;   shift
-MONTAGE_FILE=$2; shift
+MONTAGE_FILE=$1; shift
+
+echo "MOVIE_FILE:   $MOVIE_FILE"
+echo "MONTAGE_FILE: $MONTAGE_FILE"
 
 echo "convert -delay 20 -loop 0 $* $MOVIE_FILE"
 convert -delay 40 -loop 0 $* $MOVIE_FILE
+
+echo "montage -label %f -frame 5 -background '#336699' -geometry +4+4 $* $MONTAGE_FILE"
 montage -label %f -frame 5 -background '#336699' -geometry +4+4 $* $MONTAGE_FILE
 
 if [ -d $HOME/public_html ]
