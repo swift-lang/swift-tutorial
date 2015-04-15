@@ -1,35 +1,21 @@
 #!/bin/bash
 
-module load ffmpeg
+echo "ARGS: $*"
 which convert
 if [[ "$?" != "0" ]]
 then
     echo "The application \"convert\" is necessary for assembling montage" 1>&2
 fi
 
-which ffmpeg
-if [[ "$?" != "0" ]]
-then
-    echo "The application \"ffmpeg\" is necessary for assembling montage" 1>&2
-fi
-
-TMP=imglist.$RANDOM.txt
+TMP=$PWD/imglist.$RANDOM.txt
 
 MOVIE_FILE=$1; shift
 
-for filename in $*
-do
-    convert $filename -size 1920x1200 ${filename%.ppm}.jpg &
-    echo ${filename%.ppm}.jpg >> $TMP
-    echo "file: $filename"
-done
+echo "convert -delay 20 -loop 0 $* $MOVIE_FILE"
+convert -delay 20 -loop 0 $* $MOVIE_FILE
 
-for job in `jobs -p`
-do
-    wait $job || let "FAIL+=1"
-done
-
-cat $TMP
-convert -delay 1 @$TMP convert-$MOVIE_FILE
-ffmpeg -r 1/5 -pattern_type glob -i "$(dirname $1)/*.jpg" -c:v libx264 $MOVIE_FILE
+if [ -d $HOME/public_html ]
+then
+    cp $MOVIE_FILE $HOME/public_html
+fi
 

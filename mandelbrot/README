@@ -6,4 +6,16 @@ This was only tested locally on midway.
 
 The assemble step depends on direct staging.
 
+The swift.conf is setup such that the assemble to gif movie, is done on localhost
+while the run_mandelbrot script is executed on the supported MPI sites.
 
+The run_mandelbrot script requires 3 env variables to be set, which are passed via
+the env. definition in the swift.conf, these variables are :
+
+env.MACHINE: "midway"
+env.MPI_APP_PATH: "/scratch/midway/yadunand/swift-tutorial/mandelbrot/bin/mandelbrot"
+env.MPI_RANKS: "12"
+
+Since MPI build on different machines differ, make your own installation on the sites,
+and then point the MPI_APP_PATH at the right executable on the remote system, along
+with setting up modules in the if:elif ladder selected by env.MACHINE in run_mandelbrot script.

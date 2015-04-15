@@ -1,0 +1,30 @@
+#!/bin/bash
+
+echo "MACHINE      : $MACHINE"
+echo "MPI_APP_PATH : $MPI_APP_PATH"
+echo "MPI_RANKS    : $MPI_RANKS"
+
+if [[ "$MPI_RANKS" == "" ]]
+then
+    echo "MPI_RANKS not defined" 1>&2
+    exit -1
+fi
+
+if [[ $MACHINE == "raven" ]]
+then
+    $MPI_APP_PATH
+elif [[ $MACHINE == "swan" ]]
+then
+    $MPI_APP_PATH
+elif [[ $MACHINE == "midway" ]]
+then
+    module load openmpi
+    mpirun -n $MPI_RANKS $MPI_APP_PATH $*
+else
+    echo "MACHINE : $MACHINE is not defined"
+fi
+
+outputfile="${@: -1}"
+
+echo "outputfile : $outputfile"
+convert $outputfile -resize 1000x1000 $outputfile

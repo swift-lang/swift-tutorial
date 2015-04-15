@@ -19,11 +19,13 @@ int Y_MAX = 10000;
 
 int dump_mandelbrot(char *buffer, char *filename)
 {
+    char ppm_to_jpg[1000];
     FILE * fp = fopen(filename, "w");
-    fprintf(fp, "P6\n# CREATOR: Eric R Weeks / mandel program\n");
+    fprintf(fp, "P6\n# CREATOR: Yadu Nand / mandel program\n");
     fprintf(fp, "%d %d\n255\n",X_MAX,Y_MAX);
-    //printf("Output string : %c%c%c ", buffer[0], buffer[1], buffer[2]);
     fwrite(buffer, sizeof(char), 3*X_MAX*Y_MAX, fp);
+    //snprintf(ppm_to_jpg, 1000, "convert %s -resize 1000x1000 %s", filename, filename);
+    //system(ppm_to_jpg);
     fclose(fp);
     return 0;
 }
