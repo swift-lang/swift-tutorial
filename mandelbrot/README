@@ -20,3 +20,8 @@ env.MPI_RANKS: "12"
 Since MPI build on different machines differ, make your own installation on the sites,
 and then point the MPI_APP_PATH at the right executable on the remote system, along
 with setting up modules in the if:elif ladder selected by env.MACHINE in run_mandelbrot script.
+
+Swan single rank runs works for me. THe mandelbrot code needs to be built by the default cc on the system.
+Multiple ranks fail with an apsched error.
+
+Stampede fails to run at all with MPI errors.
