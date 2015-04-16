@@ -10,12 +10,24 @@ then
     exit -1
 fi
 
+
+outputfile="${@: -1}"
+
 if [[ $MACHINE == "raven" ]]
 then
     $MPI_APP_PATH
 elif [[ $MACHINE == "swan" ]]
 then
-    $MPI_APP_PATH
+    echo "aprun -n $MPI_RANKS -N 1 $MPI_APP_PATH $*"
+    echo "hostname : $HOSTNAME"
+    aprun -n $MPI_RANKS -N 1 $MPI_APP_PATH $*
+    touch $outputfile
+
+elif [[ $MACHINE == "stampede" ]]
+then
+    echo "    ibrun -n $MPI_RANKS $MPI_APP_PATH $*"
+    ibrun -n $MPI_RANKS -o 0 $MPI_APP_PATH $*
+
 elif [[ $MACHINE == "midway" ]]
 then
     module load openmpi
@@ -24,7 +36,7 @@ else
     echo "MACHINE : $MACHINE is not defined"
 fi
 
-outputfile="${@: -1}"
+
 
 echo "outputfile : $outputfile"
 convert $outputfile -resize 1000x1000 $outputfile
