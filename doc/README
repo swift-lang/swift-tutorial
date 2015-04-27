@@ -1135,3 +1135,41 @@ qstat -u $USER
 -----
 
 
+Edison at NERSC
+^^^^^^^^^^^^^^^
+
+Edison is NERSC's newest supercomputer, a Cray XC30, with a peak performance of 2.57
+petaflops/sec, 133,824 compute cores, 357 terabytes of memory, and 7.56 petabytes of disk.
+Here's documentation on Edison : link:https://www.nersc.gov/users/computational-systems/edison/[Edison docs]
+
+Here are the steps to run the tutorial on Edison
+
+1. Ensure you have enabled ssh keys for passwordless access to the Edison login nodes (edison.nersc.gov).
+2. If you are running on the Edison login nodes, set jobManager: "local:pbs"
+3. Set workDirectory : "/home/YOUR_USERNAME_ON_EDISON/swiftwork"
+4. Set the following line in the swift-tutorial/swift.conf file.
++
+
+----
+   sites: [Edison]
+----
+
+Notes for Edison:
+
+-----
+# The following commands should be executed on the Edison login node
+# List queues
+qstat -q
+
+# List your jobs and state
+qstat -u $USER
+-----
+
+
+Changing you default shell on NERSC systems
+
+1. Login to the NERSC Information Management page, link:https://nim.nersc.gov[NIM]
+2. Once you've logged onto the NIM, Go to the "ACTIONS" dropdown at the top.
+3. Select "Change Shell" and update the shell to *bash* for your machines.
+4. Save, and try logging into the machines to confirm that the changes have taken effect.
+

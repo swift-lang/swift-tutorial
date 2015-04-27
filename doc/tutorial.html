@@ -2267,6 +2267,49 @@ qstat -q
 qstat -u $USER</code></pre>
 </div></div>
 </div>
+<div class="sect3">
+<h4 id="_edison_at_nersc">Edison at NERSC</h4>
+<div class="paragraph"><p>Edison is NERSC&#8217;s newest supercomputer, a Cray XC30, with a peak performance of 2.57
+petaflops/sec, 133,824 compute cores, 357 terabytes of memory, and 7.56 petabytes of disk.
+Here&#8217;s documentation on Edison : <a href="https://www.nersc.gov/users/computational-systems/edison/">Edison docs</a></p></div>
+<div class="paragraph"><p>Here are the steps to run the tutorial on Edison</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Ensure you have enabled ssh keys for passwordless access to the Edison login nodes (edison.nersc.gov).
+</p>
+</li>
+<li>
+<p>
+If you are running on the Edison login nodes, set jobManager: "local:pbs"
+</p>
+</li>
+<li>
+<p>
+Set workDirectory : "/home/YOUR_USERNAME_ON_EDISON/swiftwork"
+</p>
+</li>
+<li>
+<p>
+Set the following line in the swift-tutorial/swift.conf file.
+</p>
+<div class="listingblock">
+<div class="content">
+<pre><code>   sites: [Edison]</code></pre>
+</div></div>
+</li>
+</ol></div>
+<div class="paragraph"><p>Notes for Edison:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code># The following commands should be executed on the Edison login node
+# List queues
+qstat -q
+
+# List your jobs and state
+qstat -u $USER</code></pre>
+</div></div>
+</div>
 </div>
 </div>
 </div>
@@ -2274,7 +2317,7 @@ qstat -u $USER</code></pre>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-01-29 16:07:53 CST
+Last updated 2015-02-20 13:50:41 CST
 </div>
 </div>
 </body>
