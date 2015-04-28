@@ -1173,3 +1173,27 @@ Changing you default shell on NERSC systems
 3. Select "Change Shell" and update the shell to *bash* for your machines.
 4. Save, and try logging into the machines to confirm that the changes have taken effect.
 
+
+Legion at University College London
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Legion is a heterogeneous cluster linked together by a fast network at the University College London.
+Here's documentation on Edison : link:https://wiki.rc.ucl.ac.uk/wiki/Legion[Legion docs]
+
+Here are the steps to run the tutorial on Legion:
+The swift 0.96 package has been modified to work correctly with Legion. The package can
+be downloaded from here : link:http://swift-lang.org/packages/swift-0.96-sge-mod.tar.gz[Swift-0.96-sge-mod.tar.gz]
+
+1. Login to legion.rc.ucl.ac.uk
+2. The tutorial is designed to be run on the cluster from the login node.
+3. Set the following line in the swift-tutorial/swift.conf file.
+
++
+----
+   sites: [Legion]
+----
+
+Notes for Legion:
+
+Please note that when jobs are submitted to the queue, you will see the following error message
+which can be ignored: "Error: No parallel environment specified"
