@@ -1,0 +1,19 @@
+CC=gcc
+
+CFLAGS="-I/opt/cray/mpt/default/gni/mpich2-gnu/49/include"
+LDFLAGS="-L/opt/cray/mpt/default/gni/mpich2-gnu/49/lib -lmpich"
+SRC = $(wildcard *.c)
+
+DEPS = mandelbrot.h
+OBJS = $(SRC:.c=.o)
+
+EXEC=mandelbrot
+
+%.o: %.c $(DEPS)
+	$(CC) -c -o $@ $< $(CFLAGS) $(LDFLAGS)
+
+$(EXEC) : $(OBJS)
+	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS)
+
+clean:
+	rm -f $(OBJS) $(EXEC) *~ *out *err
