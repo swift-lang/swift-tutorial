@@ -10,8 +10,8 @@ app (file movie, file montage, file out, file err) assemble (file[] mandel_imgs)
     assemble @movie @montage @mandel_imgs stdout=@out stderr=@err;
 }
 
-int  itermax     = toInt(arg("niter", "100"));     # number of iterations for mandelbrot
-int  step        = toInt(arg("step", "1"));       # number of iterations for mandelbrot
+int  itermax     = toInt(arg("niter", "20"));     # number of iterations for mandelbrot
+int  step        = toInt(arg("step", "5"));       # number of iterations for mandelbrot
 int  resolution  = toInt(arg("res",  "10000"));   # Resolution of result
 
 // 5 -> 100 iterations stepping by 5

@@ -1,15 +1,10 @@
 #!/bin/bash
 
-echo "MACHINE      : $MACHINE"
-echo "MPI_APP_PATH : $MPI_APP_PATH"
-echo "MPI_RANKS    : $MPI_RANKS"
-
 if [[ "$MPI_RANKS" == "" ]]
 then
     echo "MPI_RANKS not defined" 1>&2
     exit -1
 fi
-
 
 outputfile="${@: -1}"
 
@@ -25,8 +20,8 @@ then
 
 elif [[ $MACHINE == "stampede" ]]
 then
-    echo "    ibrun -n $MPI_RANKS $MPI_APP_PATH $*"
-    ibrun -n $MPI_RANKS -o 0 $MPI_APP_PATH $*
+    echo "$MPI_APP_PATH $*"
+    $MPI_APP_PATH $*
 
 elif [[ $MACHINE == "midway" ]]
 then
@@ -37,6 +32,14 @@ else
 fi
 
 
+LOCK=./DIRLOCK
 
-echo "outputfile : $outputfile"
-convert $outputfile -resize 1000x1000 $outputfile
+if mkdir "$LOCK" ; then
+    log "Locking succeeded"
+    convert $outputfile -resize 1000x1000 $outputfile
+    sleep 2;
+    echo "[PID:$$] Done" > $LOCK/release
+else
+    sleep 2    
+fi
+

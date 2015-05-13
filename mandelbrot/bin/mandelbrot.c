@@ -21,11 +21,6 @@ void color(char *buffer, int red, int green, int blue)  {
     buffer[0] = (char)red ;
     buffer[1] = (char)green ;
     buffer[2] = (char)blue ;
-    /*
-    fputc((char)red,stdout);
-    fputc((char)green,stdout);
-    fputc((char)blue,stdout);
-    */
 }
 
 
