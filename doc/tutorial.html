@@ -538,29 +538,16 @@ body.manpage div.sectionbody {
 a:link { color:navy; }
 a:visited { color:navy; }
 
-.monospaced, code, pre {
-  font-family: "Courier New", Courier, monospace;
-  font-size: medium; /* inherit; */
-  color: black;
-  padding: 0;
-  margin: 0;
+#content .listingblock code {
+    /* margin-left: 32px; */
+    line-height: 140%;
+    /* padding: 8px; */
+    background-color: #f7f7f7;
+    /* border: thin solid #d0d0d0; */
+    border-radius: 3px;
+    width: 780px;
+    display: block;
 }
-
-/*
-  background: #f8f8f8;
-  border: 1px solid #dddddd;
-  border-left: 5px solid #f0f0f0;
-  margin-right: 10%;
-*/
-
-div.listingblock > div.content {
-  padding: 0.5em;
-  background: none;
-  border: none;
-  border-left: none;
-  margin-right: none;
-}
-
 </style>
 <script type="text/javascript">
 /*<![CDATA[*/
@@ -780,13 +767,11 @@ ordinary application programs on distributed and parallel resources.
 Swift scripts run many copies of ordinary programs concurrently, using
 statements like this:</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>foreach protein <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> proteinList <span style="color: #990000">{</span>
-  <span style="font-weight: bold"><span style="color: #000000">runBLAST</span></span><span style="color: #990000">(</span>protein<span style="color: #990000">);</span>
-<span style="color: #990000">}</span></tt></pre></div></div>
+<div class="content">
+<pre><code>foreach protein in proteinList {
+  runBLAST(protein);
+}</code></pre>
+</div></div>
 <div class="paragraph"><p>Swift acts like a structured "shell" language. It runs programs concurrently as
 soon as their inputs are available, reducing the need for complex parallel
 programming.  Swift expresses workflow in a portable fashion: The same script
@@ -871,19 +856,17 @@ single random number. It writes the number to a file.</p></div>
 </div>
 <div class="listingblock">
 <div class="title">p1.swift</div>
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>type file<span style="color: #990000">;</span>
+<div class="content">
+<pre><code>type file;
 
-<span style="font-weight: bold"><span style="color: #000000">app</span></span> <span style="color: #990000">(</span>file o<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #000000">simulation</span></span> <span style="color: #990000">()</span>
-<span style="color: #990000">{</span>
-  simulate stdout<span style="color: #990000">=</span><span style="font-weight: bold"><span style="color: #000000">filename</span></span><span style="color: #990000">(</span>o<span style="color: #990000">);</span>
-<span style="color: #990000">}</span>
+app (file o) simulation ()
+{
+  simulate stdout=filename(o);
+}
 
-file f <span style="color: #990000">&lt;</span><span style="color: #FF0000">"sim.out"</span><span style="color: #990000">&gt;;</span>
-f <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">simulation</span></span><span style="color: #990000">();</span></tt></pre></div></div>
+file f &lt;"sim.out"&gt;;
+f = simulation();</code></pre>
+</div></div>
 <div class="paragraph"><p>[red]#TODO: Update the following output block</p></div>
 <div class="paragraph"><p>To run this script, run the following command:</p></div>
 <div class="listingblock">
@@ -929,21 +912,19 @@ be ignored for now.</td>
 </div>
 <div class="listingblock">
 <div class="title">p2.swift</div>
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>type file<span style="color: #990000">;</span>
+<div class="content">
+<pre><code>type file;
 
-<span style="font-weight: bold"><span style="color: #000000">app</span></span> <span style="color: #990000">(</span>file o<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #000000">simulation</span></span> <span style="color: #990000">()</span>
-<span style="color: #990000">{</span>
-  simulate stdout<span style="color: #990000">=</span><span style="font-weight: bold"><span style="color: #000000">filename</span></span><span style="color: #990000">(</span>o<span style="color: #990000">);</span>
-<span style="color: #990000">}</span>
+app (file o) simulation ()
+{
+  simulate stdout=filename(o);
+}
 
-foreach i <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> <span style="color: #990000">[</span><span style="color: #993399">0</span><span style="color: #990000">:</span><span style="color: #993399">9</span><span style="color: #990000">]</span> <span style="color: #990000">{</span>
-  file f <span style="color: #990000">&lt;</span>single_file_mapper<span style="color: #990000">;</span> file<span style="color: #990000">=</span><span style="font-weight: bold"><span style="color: #000000">strcat</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"output/sim_"</span><span style="color: #990000">,</span>i<span style="color: #990000">,</span><span style="color: #FF0000">".out"</span><span style="color: #990000">)&gt;;</span>
-  f <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">simulation</span></span><span style="color: #990000">();</span>
-<span style="color: #990000">}</span></tt></pre></div></div>
+foreach i in [0:9] {
+  file f &lt;single_file_mapper; file=strcat("output/sim_",i,".out")&gt;;
+  f = simulation();
+}</code></pre>
+</div></div>
 <div class="paragraph"><p>The script also shows an example of naming the output files of an ensemble run. In this case,
 the output files will be named
 <code>output/sim_N.out</code>.</p></div>
@@ -983,37 +964,35 @@ the trivial "analysis application" <code>stats.sh</code>:</p></div>
 </div>
 <div class="listingblock">
 <div class="title">p3.swift</div>
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>type file<span style="color: #990000">;</span>
+<div class="content">
+<pre><code>type file;
 
-<span style="font-weight: bold"><span style="color: #000000">app</span></span> <span style="color: #990000">(</span>file o<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #000000">simulation</span></span> <span style="color: #990000">(</span>int sim_steps<span style="color: #990000">,</span> int sim_range<span style="color: #990000">,</span> int sim_values<span style="color: #990000">)</span>
-<span style="color: #990000">{</span>
-  simulate <span style="color: #FF0000">"--timesteps"</span> sim_steps <span style="color: #FF0000">"--range"</span> sim_range <span style="color: #FF0000">"--nvalues"</span> sim_values stdout<span style="color: #990000">=</span><span style="font-weight: bold"><span style="color: #000000">filename</span></span><span style="color: #990000">(</span>o<span style="color: #990000">);</span>
-<span style="color: #990000">}</span>
+app (file o) simulation (int sim_steps, int sim_range, int sim_values)
+{
+  simulate "--timesteps" sim_steps "--range" sim_range "--nvalues" sim_values stdout=filename(o);
+}
 
-<span style="font-weight: bold"><span style="color: #000000">app</span></span> <span style="color: #990000">(</span>file o<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #000000">analyze</span></span> <span style="color: #990000">(</span>file s<span style="color: #990000">[])</span>
-<span style="color: #990000">{</span>
-  stats <span style="font-weight: bold"><span style="color: #000000">filenames</span></span><span style="color: #990000">(</span>s<span style="color: #990000">)</span> stdout<span style="color: #990000">=</span><span style="font-weight: bold"><span style="color: #000000">filename</span></span><span style="color: #990000">(</span>o<span style="color: #990000">);</span>
-<span style="color: #990000">}</span>
+app (file o) analyze (file s[])
+{
+  stats filenames(s) stdout=filename(o);
+}
 
-int nsim   <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">toInt</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">arg</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"nsim"</span><span style="color: #990000">,</span><span style="color: #FF0000">"10"</span><span style="color: #990000">));</span>
-int steps  <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">toInt</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">arg</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"steps"</span><span style="color: #990000">,</span><span style="color: #FF0000">"1"</span><span style="color: #990000">));</span>
-int range  <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">toInt</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">arg</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"range"</span><span style="color: #990000">,</span><span style="color: #FF0000">"100"</span><span style="color: #990000">));</span>
-int values <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">toInt</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">arg</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"values"</span><span style="color: #990000">,</span><span style="color: #FF0000">"5"</span><span style="color: #990000">));</span>
+int nsim   = toInt(arg("nsim","10"));
+int steps  = toInt(arg("steps","1"));
+int range  = toInt(arg("range","100"));
+int values = toInt(arg("values","5"));
 
-file sims<span style="color: #990000">[];</span>
+file sims[];
 
-foreach i <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> <span style="color: #990000">[</span><span style="color: #993399">0</span><span style="color: #990000">:</span>nsim<span style="color: #990000">-</span><span style="color: #993399">1</span><span style="color: #990000">]</span> <span style="color: #990000">{</span>
-  file simout <span style="color: #990000">&lt;</span>single_file_mapper<span style="color: #990000">;</span> file<span style="color: #990000">=</span><span style="font-weight: bold"><span style="color: #000000">strcat</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"output/sim_"</span><span style="color: #990000">,</span>i<span style="color: #990000">,</span><span style="color: #FF0000">".out"</span><span style="color: #990000">)&gt;;</span>
-  simout <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">simulation</span></span><span style="color: #990000">(</span>steps<span style="color: #990000">,</span>range<span style="color: #990000">,</span>values<span style="color: #990000">);</span>
-  sims<span style="color: #990000">[</span>i<span style="color: #990000">]</span> <span style="color: #990000">=</span> simout<span style="color: #990000">;</span>
-<span style="color: #990000">}</span>
+foreach i in [0:nsim-1] {
+  file simout &lt;single_file_mapper; file=strcat("output/sim_",i,".out")&gt;;
+  simout = simulation(steps,range,values);
+  sims[i] = simout;
+}
 
-file stats<span style="color: #990000">&lt;</span><span style="color: #FF0000">"output/average.out"</span><span style="color: #990000">&gt;;</span>
-stats <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">analyze</span></span><span style="color: #990000">(</span>sims<span style="color: #990000">);</span></tt></pre></div></div>
+file stats&lt;"output/average.out"&gt;;
+stats = analyze(sims);</code></pre>
+</div></div>
 <div class="paragraph"><p>To run:</p></div>
 <div class="listingblock">
 <div class="content">
@@ -1034,26 +1013,22 @@ $ cat output/average.out
 <div class="paragraph"><p>Note that in <code>p3.swift</code> we expose more of the capabilities of the
 <code>simulate.sh</code> application to the <code>simulation()</code> app function:</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt><span style="font-weight: bold"><span style="color: #000000">app</span></span> <span style="color: #990000">(</span>file o<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #000000">simulation</span></span> <span style="color: #990000">(</span>int sim_steps<span style="color: #990000">,</span> int sim_range<span style="color: #990000">,</span> int sim_values<span style="color: #990000">)</span>
-<span style="color: #990000">{</span>
-  simulate <span style="color: #FF0000">"--timesteps"</span> sim_steps <span style="color: #FF0000">"--range"</span> sim_range <span style="color: #FF0000">"--nvalues"</span> sim_values stdout<span style="color: #990000">=</span><span style="font-weight: bold"><span style="color: #000000">filename</span></span><span style="color: #990000">(</span>o<span style="color: #990000">);</span>
-<span style="color: #990000">}</span></tt></pre></div></div>
+<div class="content">
+<pre><code>app (file o) simulation (int sim_steps, int sim_range, int sim_values)
+{
+  simulate "--timesteps" sim_steps "--range" sim_range "--nvalues" sim_values stdout=filename(o);
+}</code></pre>
+</div></div>
 <div class="paragraph"><p><code>p3.swift</code> also shows how to fetch application-specific values from
 the <code>swift</code> command line in a Swift script using <code>arg()</code> which
 accepts a keyword-style argument and its default value:</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>int nsim   <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">toInt</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">arg</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"nsim"</span><span style="color: #990000">,</span><span style="color: #FF0000">"10"</span><span style="color: #990000">));</span>
-int steps  <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">toInt</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">arg</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"steps"</span><span style="color: #990000">,</span><span style="color: #FF0000">"1"</span><span style="color: #990000">));</span>
-int range  <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">toInt</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">arg</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"range"</span><span style="color: #990000">,</span><span style="color: #FF0000">"100"</span><span style="color: #990000">));</span>
-int values <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">toInt</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">arg</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"values"</span><span style="color: #990000">,</span><span style="color: #FF0000">"5"</span><span style="color: #990000">));</span></tt></pre></div></div>
+<div class="content">
+<pre><code>int nsim   = toInt(arg("nsim","10"));
+int steps  = toInt(arg("steps","1"));
+int range  = toInt(arg("range","100"));
+int values = toInt(arg("values","5"));</code></pre>
+</div></div>
 <div class="paragraph"><p>Now we can specify that more runs should be performed and that each should run for more
 timesteps, and produce more that one value each, within a specified range, using command line
 arguments placed after the Swift script name in the form <code>-parameterName=value</code>:</p></div>
@@ -1087,21 +1062,22 @@ We will go into the configuration aspects that allow swift to run your applicati
 on computation resources. The <code>swift.conf</code> file contains definitions of various aspects
 of different remote computational resources that swift can run your tasks on.</p></div>
 <div class="paragraph"><p>The examples 4-6, are designed to run on remote sites, and require configurations to be set in
-the <code>swift.conf</code>. There are 6 remote sites defined in the swift.conf:</p></div>
+the <code>swift.conf</code>. Here are some of the remote sites defined in the supplied config files,
+swift.conf, xsede.conf and nersc.conf:</p></div>
 <div class="ulist"><ul>
 <li>
 <p>
-Beagle
+Beagle (UChicago)
 </p>
 </li>
 <li>
 <p>
-Blues
+Blues  (LCRC at Argonne)
 </p>
 </li>
 <li>
 <p>
-Midway
+Midway (UChicago)
 </p>
 </li>
 <li>
@@ -1116,6 +1092,36 @@ Amazon EC2
 </li>
 <li>
 <p>
+Legion (Universty College London)
+</p>
+</li>
+<li>
+<p>
+Swan   (Cray Partner Network)
+</p>
+</li>
+<li>
+<p>
+Stampede (XSEDE/TACC)
+</p>
+</li>
+<li>
+<p>
+Gordon   (XSEDE/SDSC)
+</p>
+</li>
+<li>
+<p>
+Blacklight (XSEDE/PSC)
+</p>
+</li>
+<li>
+<p>
+Edison (NERSC)
+</p>
+</li>
+<li>
+<p>
 Collection of Ad-hoc nodes (ad-hoc-1..N).
 </p>
 </li>
@@ -1126,33 +1132,31 @@ cluster, edit the site.midway entry in the swift-tutorial/swift.conf file and fo
 given for midway in the config file.</p></div>
 <div class="paragraph"><p>Here is a snippet from the swift.conf for the midway cluster:</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt><span style="font-style: italic"><span style="color: #9A1900"># Instructions for Midway:</span></span>
-<span style="font-style: italic"><span style="color: #9A1900"># 1. If you are running on the midway login nodes you set jobManager: "local:slurm"</span></span>
-<span style="font-style: italic"><span style="color: #9A1900"># 2. Set workDirectory to /tmp/your_username_on_midway</span></span>
-site<span style="color: #990000">.</span>midway <span style="color: #990000">{</span>
-    execution <span style="color: #990000">{</span>
-        type      <span style="color: #990000">:</span> <span style="color: #FF0000">"coaster"</span>                         <span style="font-style: italic"><span style="color: #9A1900"># Use coasters to run on remote sites</span></span>
-        URL       <span style="color: #990000">:</span> <span style="color: #FF0000">"midway.rcc.uchicago.edu"</span>         <span style="font-style: italic"><span style="color: #9A1900"># Midway login node</span></span>
-        jobManager<span style="color: #990000">:</span> <span style="color: #FF0000">"ssh-cl:slurm"</span>                    <span style="font-style: italic"><span style="color: #9A1900"># Use ssh-cl to connect, slurm is the Local resource manager</span></span>
-        options <span style="color: #990000">{</span>
-            maxJobs         <span style="color: #990000">:</span> <span style="color: #993399">1</span>                       <span style="font-style: italic"><span style="color: #9A1900"># Max jobs submitted to LRM</span></span>
-            nodeGranularity <span style="color: #990000">:</span> <span style="color: #993399">1</span>                       <span style="font-style: italic"><span style="color: #9A1900"># Nodes per job</span></span>
-            maxNodesPerJob  <span style="color: #990000">:</span> <span style="color: #993399">1</span>                       <span style="font-style: italic"><span style="color: #9A1900"># Nodes per job</span></span>
-            tasksPerNode    <span style="color: #990000">:</span> <span style="color: #993399">1</span>                       <span style="font-style: italic"><span style="color: #9A1900"># Tasks per Node</span></span>
-            jobQueue        <span style="color: #990000">:</span> <span style="color: #FF0000">"sandyb"</span>                <span style="font-style: italic"><span style="color: #9A1900"># Select queue from (sandyb, westmere, ...)</span></span>
-            maxJobTime      <span style="color: #990000">:</span> <span style="color: #FF0000">"00:25:00"</span>              <span style="font-style: italic"><span style="color: #9A1900"># Time requested per job</span></span>
-        <span style="color: #990000">}</span>
-    <span style="color: #990000">}</span>
-    staging             <span style="color: #990000">:</span> <span style="color: #FF0000">"local"</span>                     <span style="font-style: italic"><span style="color: #9A1900"># Stage files from "local" system to Midway</span></span>
-    workDirectory       <span style="color: #990000">:</span> <span style="color: #FF0000">"/tmp/"</span>$<span style="color: #990000">{</span>env<span style="color: #990000">.</span>MIDWAY_USERNAME<span style="color: #990000">}</span> <span style="font-style: italic"><span style="color: #9A1900"># Location for intermediate files</span></span>
-    maxParallelTasks    <span style="color: #990000">:</span> <span style="color: #993399">101</span>                         <span style="font-style: italic"><span style="color: #9A1900"># Maximum number of parallel tasks</span></span>
-    initialParallelTasks<span style="color: #990000">:</span> <span style="color: #993399">100</span>                         <span style="font-style: italic"><span style="color: #9A1900"># Maximum number of tasks at start</span></span>
-    app<span style="color: #990000">.</span>ALL <span style="color: #990000">{</span> executable<span style="color: #990000">:</span> <span style="color: #FF0000">"*"</span> <span style="color: #990000">}</span>                       <span style="font-style: italic"><span style="color: #9A1900"># All tasks to be found from commandline</span></span>
-<span style="color: #990000">}</span></tt></pre></div></div>
+<div class="content">
+<pre><code># Instructions for Midway:
+# 1. If you are running on the midway login nodes you set jobManager: "local:slurm"
+# 2. Set workDirectory to /tmp/your_username_on_midway
+site.midway {
+    execution {
+        type      : "coaster"                         # Use coasters to run on remote sites
+        URL       : "midway.rcc.uchicago.edu"         # Midway login node
+        jobManager: "ssh-cl:slurm"                    # Use ssh-cl to connect, slurm is the Local resource manager
+        options {
+            maxJobs         : 1                       # Max jobs submitted to LRM
+            nodeGranularity : 1                       # Nodes per job
+            maxNodesPerJob  : 1                       # Nodes per job
+            tasksPerNode    : 1                       # Tasks per Node
+            jobQueue        : "sandyb"                # Select queue from (sandyb, westmere, ...)
+            maxJobTime      : "00:25:00"              # Time requested per job
+        }
+    }
+    staging             : "local"                     # Stage files from "local" system to Midway
+    workDirectory       : "/tmp/"${env.MIDWAY_USERNAME} # Location for intermediate files
+    maxParallelTasks    : 101                         # Maximum number of parallel tasks
+    initialParallelTasks: 100                         # Maximum number of tasks at start
+    app.ALL { executable: "*" }                       # All tasks to be found from commandline
+}</code></pre>
+</div></div>
 <div class="paragraph"><p>Note: To ensure that the site you have selected is used by swift for the workflow, update the "sites: [&lt;SITE_NAME&gt;&#8230;]"
 with "sites: [midway]".</p></div>
 <div class="paragraph"><p>There are detailed instructions for each of the sites in the <a href="#remote-configuration">Remote site configuration</a> section.</p></div>
@@ -1163,21 +1167,19 @@ folder we have a file, <code>unsorted.txt</code>, which contains 100 random inte
 Ensure that you have configured the <code>swift.conf</code> for your target remote site.</p></div>
 <div class="listingblock">
 <div class="title">p4.swift</div>
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>type file<span style="color: #990000">;</span>
+<div class="content">
+<pre><code>type file;
 
-<span style="font-weight: bold"><span style="color: #000000">app</span></span> <span style="color: #990000">(</span>file out<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #000000">sortdata</span></span> <span style="color: #990000">(</span>file unsorted<span style="color: #990000">)</span>
-<span style="color: #990000">{</span>
-    sort <span style="color: #FF0000">"-n"</span> <span style="font-weight: bold"><span style="color: #000000">filename</span></span><span style="color: #990000">(</span>unsorted<span style="color: #990000">)</span> stdout<span style="color: #990000">=</span><span style="font-weight: bold"><span style="color: #000000">filename</span></span><span style="color: #990000">(</span>out<span style="color: #990000">);</span>
-<span style="color: #990000">}</span>
+app (file out) sortdata (file unsorted)
+{
+    sort "-n" filename(unsorted) stdout=filename(out);
+}
 
-file unsorted <span style="color: #990000">&lt;</span><span style="color: #FF0000">"unsorted.txt"</span><span style="color: #990000">&gt;;</span>
-file sorted   <span style="color: #990000">&lt;</span><span style="color: #FF0000">"sorted.txt"</span><span style="color: #990000">&gt;;</span>
+file unsorted &lt;"unsorted.txt"&gt;;
+file sorted   &lt;"sorted.txt"&gt;;
 
-sorted <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">sortdata</span></span><span style="color: #990000">(</span>unsorted<span style="color: #990000">);</span></tt></pre></div></div>
+sorted = sortdata(unsorted);</code></pre>
+</div></div>
 <div class="paragraph"><p>We rely on the common <code>sort</code> command line utility in this example. When a remote site is set as the execution target,
 Swift will connect to it and start swift-workers which in turn will execute tasks, in this case <code>sort</code>. Swift handles the
 staging or moving of the necessary input and output files between the target systems and the machine you are running Swift on.</p></div>
@@ -1242,14 +1244,12 @@ to <code>stderr</code>. In <code>p3.swift</code> the apps simulation and stats c
 stats and simulate which are available on the local machine and is present in
 the system path. The <code>p5.swift</code> script</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt><span style="font-weight: bold"><span style="color: #000000">app</span></span> <span style="color: #990000">(</span>file out<span style="color: #990000">,</span> file log<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #000000">simulation</span></span> <span style="color: #990000">(</span>int sim_steps<span style="color: #990000">,</span> int sim_range<span style="color: #990000">,</span> int sim_values<span style="color: #990000">,</span> file sim_script<span style="color: #990000">)</span>
-<span style="color: #990000">{</span>
-  bash @sim_script <span style="color: #FF0000">"--timesteps"</span> sim_steps <span style="color: #FF0000">"--range"</span> sim_range <span style="color: #FF0000">"--nvalues"</span> sim_values stdout<span style="color: #990000">=</span>@out stderr<span style="color: #990000">=</span>@log<span style="color: #990000">;</span>
-<span style="color: #990000">}</span></tt></pre></div></div>
+<div class="content">
+<pre><code>app (file out, file log) simulation (int sim_steps, int sim_range, int sim_values, file sim_script)
+{
+  bash @sim_script "--timesteps" sim_steps "--range" sim_range "--nvalues" sim_values stdout=@out stderr=@log;
+}</code></pre>
+</div></div>
 <div class="imageblock" style="text-align:center;">
 <div class="content">
 <img src="part05.png" alt="part05.png" />
@@ -1257,41 +1257,39 @@ http://www.gnu.org/software/src-highlite -->
 </div>
 <div class="listingblock">
 <div class="title">p5.swift</div>
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>type file<span style="color: #990000">;</span>
+<div class="content">
+<pre><code>type file;
 
-<span style="font-weight: bold"><span style="color: #000000">app</span></span> <span style="color: #990000">(</span>file out<span style="color: #990000">,</span> file log<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #000000">simulation</span></span> <span style="color: #990000">(</span>int sim_steps<span style="color: #990000">,</span> int sim_range<span style="color: #990000">,</span> int sim_values<span style="color: #990000">,</span> file sim_script<span style="color: #990000">)</span>
-<span style="color: #990000">{</span>
-  bash @sim_script <span style="color: #FF0000">"--timesteps"</span> sim_steps <span style="color: #FF0000">"--range"</span> sim_range <span style="color: #FF0000">"--nvalues"</span> sim_values stdout<span style="color: #990000">=</span>@out stderr<span style="color: #990000">=</span>@log<span style="color: #990000">;</span>
-<span style="color: #990000">}</span>
+app (file out, file log) simulation (int sim_steps, int sim_range, int sim_values, file sim_script)
+{
+  bash @sim_script "--timesteps" sim_steps "--range" sim_range "--nvalues" sim_values stdout=@out stderr=@log;
+}
 
-<span style="font-weight: bold"><span style="color: #000000">app</span></span> <span style="color: #990000">(</span>file out<span style="color: #990000">,</span> file log<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #000000">analyze</span></span> <span style="color: #990000">(</span>file s<span style="color: #990000">[],</span> file stat_script<span style="color: #990000">)</span>
-<span style="color: #990000">{</span>
-  bash @stat_script <span style="font-weight: bold"><span style="color: #000000">filenames</span></span><span style="color: #990000">(</span>s<span style="color: #990000">)</span> stdout<span style="color: #990000">=</span>@out stderr<span style="color: #990000">=</span>@log<span style="color: #990000">;</span>
-<span style="color: #990000">}</span>
+app (file out, file log) analyze (file s[], file stat_script)
+{
+  bash @stat_script filenames(s) stdout=@out stderr=@log;
+}
 
-int nsim   <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">toInt</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">arg</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"nsim"</span><span style="color: #990000">,</span>   <span style="color: #FF0000">"10"</span><span style="color: #990000">));</span>
-int steps  <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">toInt</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">arg</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"steps"</span><span style="color: #990000">,</span>  <span style="color: #FF0000">"1"</span><span style="color: #990000">));</span>
-int range  <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">toInt</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">arg</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"range"</span><span style="color: #990000">,</span>  <span style="color: #FF0000">"100"</span><span style="color: #990000">));</span>
-int values <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">toInt</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">arg</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"values"</span><span style="color: #990000">,</span> <span style="color: #FF0000">"5"</span><span style="color: #990000">));</span>
+int nsim   = toInt(arg("nsim",   "10"));
+int steps  = toInt(arg("steps",  "1"));
+int range  = toInt(arg("range",  "100"));
+int values = toInt(arg("values", "5"));
 
-file sims<span style="color: #990000">[];</span>
-file simulate_script <span style="color: #990000">&lt;</span><span style="color: #FF0000">"simulate.sh"</span><span style="color: #990000">&gt;;</span>
-file stats_script <span style="color: #990000">&lt;</span><span style="color: #FF0000">"stats.sh"</span><span style="color: #990000">&gt;;</span>
+file sims[];
+file simulate_script &lt;"simulate.sh"&gt;;
+file stats_script &lt;"stats.sh"&gt;;
 
-foreach i <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> <span style="color: #990000">[</span><span style="color: #993399">0</span><span style="color: #990000">:</span>nsim<span style="color: #990000">-</span><span style="color: #993399">1</span><span style="color: #990000">]</span> <span style="color: #990000">{</span>
-  file simout <span style="color: #990000">&lt;</span>single_file_mapper<span style="color: #990000">;</span> file<span style="color: #990000">=</span><span style="font-weight: bold"><span style="color: #000000">strcat</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"output/sim_"</span><span style="color: #990000">,</span>i<span style="color: #990000">,</span><span style="color: #FF0000">".out"</span><span style="color: #990000">)&gt;;</span>
-  file simlog <span style="color: #990000">&lt;</span>single_file_mapper<span style="color: #990000">;</span> file<span style="color: #990000">=</span><span style="font-weight: bold"><span style="color: #000000">strcat</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"output/sim_"</span><span style="color: #990000">,</span>i<span style="color: #990000">,</span><span style="color: #FF0000">".log"</span><span style="color: #990000">)&gt;;</span>
-  <span style="color: #990000">(</span>simout<span style="color: #990000">,</span>simlog<span style="color: #990000">)</span> <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">simulation</span></span><span style="color: #990000">(</span>steps<span style="color: #990000">,</span>range<span style="color: #990000">,</span>values<span style="color: #990000">,</span>simulate_script<span style="color: #990000">);</span>
-  sims<span style="color: #990000">[</span>i<span style="color: #990000">]</span> <span style="color: #990000">=</span> simout<span style="color: #990000">;</span>
-<span style="color: #990000">}</span>
+foreach i in [0:nsim-1] {
+  file simout &lt;single_file_mapper; file=strcat("output/sim_",i,".out")&gt;;
+  file simlog &lt;single_file_mapper; file=strcat("output/sim_",i,".log")&gt;;
+  (simout,simlog) = simulation(steps,range,values,simulate_script);
+  sims[i] = simout;
+}
 
-file stats_out<span style="color: #990000">&lt;</span><span style="color: #FF0000">"output/average.out"</span><span style="color: #990000">&gt;;</span>
-file stats_log<span style="color: #990000">&lt;</span><span style="color: #FF0000">"output/average.log"</span><span style="color: #990000">&gt;;</span>
-<span style="color: #990000">(</span>stats_out<span style="color: #990000">,</span> stats_log<span style="color: #990000">)</span> <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">analyze</span></span><span style="color: #990000">(</span>sims<span style="color: #990000">,</span>stats_script<span style="color: #990000">);</span></tt></pre></div></div>
+file stats_out&lt;"output/average.out"&gt;;
+file stats_log&lt;"output/average.log"&gt;;
+(stats_out, stats_log) = analyze(sims,stats_script);</code></pre>
+</div></div>
 <div class="paragraph"><p>To run:</p></div>
 <div class="listingblock">
 <div class="content">
@@ -1390,82 +1388,76 @@ file". This pattern is shown below, followed by the Swift script.</p></div>
 </div>
 <div class="listingblock">
 <div class="title">p6.swift</div>
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>type file<span style="color: #990000">;</span>
+<div class="content">
+<pre><code>type file;
 
-<span style="font-style: italic"><span style="color: #9A1900"># app() functions for application programs to be called:</span></span>
+# app() functions for application programs to be called:
 
-<span style="font-weight: bold"><span style="color: #000000">app</span></span> <span style="color: #990000">(</span>file out<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #000000">genseed</span></span> <span style="color: #990000">(</span>int nseeds<span style="color: #990000">,</span> file seed_script<span style="color: #990000">)</span>
-<span style="color: #990000">{</span>
-  bash @seed_script <span style="color: #FF0000">"-r"</span> <span style="color: #993399">2000000</span> <span style="color: #FF0000">"-n"</span> nseeds stdout<span style="color: #990000">=</span>@out<span style="color: #990000">;</span>
-<span style="color: #990000">}</span>
+app (file out) genseed (int nseeds, file seed_script)
+{
+  bash @seed_script "-r" 2000000 "-n" nseeds stdout=@out;
+}
 
-<span style="font-weight: bold"><span style="color: #000000">app</span></span> <span style="color: #990000">(</span>file out<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #000000">genbias</span></span> <span style="color: #990000">(</span>int bias_range<span style="color: #990000">,</span> int nvalues<span style="color: #990000">,</span> file bias_script<span style="color: #990000">)</span>
-<span style="color: #990000">{</span>
-  bash @bias_script <span style="color: #FF0000">"-r"</span> bias_range <span style="color: #FF0000">"-n"</span> nvalues stdout<span style="color: #990000">=</span>@out<span style="color: #990000">;</span>
-<span style="color: #990000">}</span>
+app (file out) genbias (int bias_range, int nvalues, file bias_script)
+{
+  bash @bias_script "-r" bias_range "-n" nvalues stdout=@out;
+}
 
-<span style="font-weight: bold"><span style="color: #000000">app</span></span> <span style="color: #990000">(</span>file out<span style="color: #990000">,</span> file log<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #000000">simulation</span></span> <span style="color: #990000">(</span>int timesteps<span style="color: #990000">,</span> int sim_range<span style="color: #990000">,</span>
-                                     file bias_file<span style="color: #990000">,</span> int scale<span style="color: #990000">,</span> int sim_count<span style="color: #990000">,</span>
-                                     file sim_script<span style="color: #990000">,</span> file seed_file<span style="color: #990000">)</span>
-<span style="color: #990000">{</span>
-  bash @sim_script <span style="color: #FF0000">"-t"</span> timesteps <span style="color: #FF0000">"-r"</span> sim_range <span style="color: #FF0000">"-B"</span> @bias_file <span style="color: #FF0000">"-x"</span> scale
-           <span style="color: #FF0000">"-n"</span> sim_count <span style="color: #FF0000">"-S"</span> @seed_file stdout<span style="color: #990000">=</span>@out stderr<span style="color: #990000">=</span>@log<span style="color: #990000">;</span>
-<span style="color: #990000">}</span>
+app (file out, file log) simulation (int timesteps, int sim_range,
+                                     file bias_file, int scale, int sim_count,
+                                     file sim_script, file seed_file)
+{
+  bash @sim_script "-t" timesteps "-r" sim_range "-B" @bias_file "-x" scale
+           "-n" sim_count "-S" @seed_file stdout=@out stderr=@log;
+}
 
-<span style="font-weight: bold"><span style="color: #000000">app</span></span> <span style="color: #990000">(</span>file out<span style="color: #990000">,</span> file log<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #000000">analyze</span></span> <span style="color: #990000">(</span>file s<span style="color: #990000">[],</span> file stat_script<span style="color: #990000">)</span>
-<span style="color: #990000">{</span>
-  bash @stat_script <span style="font-weight: bold"><span style="color: #000000">filenames</span></span><span style="color: #990000">(</span>s<span style="color: #990000">)</span> stdout<span style="color: #990000">=</span>@out stderr<span style="color: #990000">=</span>@log<span style="color: #990000">;</span>
-<span style="color: #990000">}</span>
+app (file out, file log) analyze (file s[], file stat_script)
+{
+  bash @stat_script filenames(s) stdout=@out stderr=@log;
+}
 
-<span style="font-style: italic"><span style="color: #9A1900"># Command line arguments</span></span>
+# Command line arguments
 
-int  nsim  <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">toInt</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">arg</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"nsim"</span><span style="color: #990000">,</span>   <span style="color: #FF0000">"10"</span><span style="color: #990000">));</span>  <span style="font-style: italic"><span style="color: #9A1900"># number of simulation programs to run</span></span>
-int  steps <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">toInt</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">arg</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"steps"</span><span style="color: #990000">,</span>  <span style="color: #FF0000">"1"</span><span style="color: #990000">));</span>   <span style="font-style: italic"><span style="color: #9A1900"># number of timesteps (seconds) per simulation</span></span>
-int  range <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">toInt</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">arg</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"range"</span><span style="color: #990000">,</span>  <span style="color: #FF0000">"100"</span><span style="color: #990000">));</span> <span style="font-style: italic"><span style="color: #9A1900"># range of the generated random numbers</span></span>
-int  values <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">toInt</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">arg</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"values"</span><span style="color: #990000">,</span> <span style="color: #FF0000">"10"</span><span style="color: #990000">));</span>  <span style="font-style: italic"><span style="color: #9A1900"># number of values generated per simulation</span></span>
+int  nsim  = toInt(arg("nsim",   "10"));  # number of simulation programs to run
+int  steps = toInt(arg("steps",  "1"));   # number of timesteps (seconds) per simulation
+int  range = toInt(arg("range",  "100")); # range of the generated random numbers
+int  values = toInt(arg("values", "10"));  # number of values generated per simulation
 
-<span style="font-style: italic"><span style="color: #9A1900"># Main script and data</span></span>
+# Main script and data
 
-file simulate_script <span style="color: #990000">&lt;</span><span style="color: #FF0000">"simulate.sh"</span><span style="color: #990000">&gt;;</span>
-file stats_script <span style="color: #990000">&lt;</span><span style="color: #FF0000">"stats.sh"</span><span style="color: #990000">&gt;;</span>
-file seedfile <span style="color: #990000">&lt;</span><span style="color: #FF0000">"output/seed.dat"</span><span style="color: #990000">&gt;;</span>        <span style="font-style: italic"><span style="color: #9A1900"># Dynamically generated bias for simulation ensemble</span></span>
+file simulate_script &lt;"simulate.sh"&gt;;
+file stats_script &lt;"stats.sh"&gt;;
+file seedfile &lt;"output/seed.dat"&gt;;        # Dynamically generated bias for simulation ensemble
 
-<span style="font-weight: bold"><span style="color: #000000">tracef</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"\n*** Script parameters: nsim=%i range=%i num values=%i\n\n"</span><span style="color: #990000">,</span> nsim<span style="color: #990000">,</span> range<span style="color: #990000">,</span> values<span style="color: #990000">);</span>
-seedfile <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">genseed</span></span><span style="color: #990000">(</span><span style="color: #993399">1</span><span style="color: #990000">,</span>simulate_script<span style="color: #990000">);</span>
+tracef("\n*** Script parameters: nsim=%i range=%i num values=%i\n\n", nsim, range, values);
+seedfile = genseed(1,simulate_script);
 
-file sims<span style="color: #990000">[];</span>                      <span style="font-style: italic"><span style="color: #9A1900"># Array of files to hold each simulation output</span></span>
+file sims[];                      # Array of files to hold each simulation output
 
-foreach i <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> <span style="color: #990000">[</span><span style="color: #993399">0</span><span style="color: #990000">:</span>nsim<span style="color: #990000">-</span><span style="color: #993399">1</span><span style="color: #990000">]</span> <span style="color: #990000">{</span>
-  file biasfile <span style="color: #990000">&lt;</span>single_file_mapper<span style="color: #990000">;</span> file<span style="color: #990000">=</span><span style="font-weight: bold"><span style="color: #000000">strcat</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"output/bias_"</span><span style="color: #990000">,</span>i<span style="color: #990000">,</span><span style="color: #FF0000">".dat"</span><span style="color: #990000">)&gt;;</span>
-  file simout   <span style="color: #990000">&lt;</span>single_file_mapper<span style="color: #990000">;</span> file<span style="color: #990000">=</span><span style="font-weight: bold"><span style="color: #000000">strcat</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"output/sim_"</span><span style="color: #990000">,</span>i<span style="color: #990000">,</span><span style="color: #FF0000">".out"</span><span style="color: #990000">)&gt;;</span>
-  file simlog   <span style="color: #990000">&lt;</span>single_file_mapper<span style="color: #990000">;</span> file<span style="color: #990000">=</span><span style="font-weight: bold"><span style="color: #000000">strcat</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"output/sim_"</span><span style="color: #990000">,</span>i<span style="color: #990000">,</span><span style="color: #FF0000">".log"</span><span style="color: #990000">)&gt;;</span>
-  biasfile <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">genbias</span></span><span style="color: #990000">(</span><span style="color: #993399">1000</span><span style="color: #990000">,</span> <span style="color: #993399">20</span><span style="color: #990000">,</span> simulate_script<span style="color: #990000">);</span>
-  <span style="color: #990000">(</span>simout<span style="color: #990000">,</span>simlog<span style="color: #990000">)</span> <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">simulation</span></span><span style="color: #990000">(</span>steps<span style="color: #990000">,</span> range<span style="color: #990000">,</span> biasfile<span style="color: #990000">,</span> <span style="color: #993399">1000000</span><span style="color: #990000">,</span> values<span style="color: #990000">,</span> simulate_script<span style="color: #990000">,</span> seedfile<span style="color: #990000">);</span>
-  sims<span style="color: #990000">[</span>i<span style="color: #990000">]</span> <span style="color: #990000">=</span> simout<span style="color: #990000">;</span>
-<span style="color: #990000">}</span>
+foreach i in [0:nsim-1] {
+  file biasfile &lt;single_file_mapper; file=strcat("output/bias_",i,".dat")&gt;;
+  file simout   &lt;single_file_mapper; file=strcat("output/sim_",i,".out")&gt;;
+  file simlog   &lt;single_file_mapper; file=strcat("output/sim_",i,".log")&gt;;
+  biasfile = genbias(1000, 20, simulate_script);
+  (simout,simlog) = simulation(steps, range, biasfile, 1000000, values, simulate_script, seedfile);
+  sims[i] = simout;
+}
 
-file stats_out<span style="color: #990000">&lt;</span><span style="color: #FF0000">"output/average.out"</span><span style="color: #990000">&gt;;</span>
-file stats_log<span style="color: #990000">&lt;</span><span style="color: #FF0000">"output/average.log"</span><span style="color: #990000">&gt;;</span>
-<span style="color: #990000">(</span>stats_out<span style="color: #990000">,</span>stats_log<span style="color: #990000">)</span> <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">analyze</span></span><span style="color: #990000">(</span>sims<span style="color: #990000">,</span> stats_script<span style="color: #990000">);</span></tt></pre></div></div>
+file stats_out&lt;"output/average.out"&gt;;
+file stats_log&lt;"output/average.log"&gt;;
+(stats_out,stats_log) = analyze(sims, stats_script);</code></pre>
+</div></div>
 <div class="paragraph"><p>Note that the workflow is based on data flow dependencies: each simulation depends on the seed value, calculated in this statement:</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>seedfile <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">genseed</span></span><span style="color: #990000">(</span><span style="color: #993399">1</span><span style="color: #990000">);</span></tt></pre></div></div>
+<div class="content">
+<pre><code>seedfile = genseed(1);</code></pre>
+</div></div>
 <div class="paragraph"><p>and on the bias file, computed and then consumed in these two dependent statements:</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.6
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>  biasfile <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">genbias</span></span><span style="color: #990000">(</span><span style="color: #993399">1000</span><span style="color: #990000">,</span> <span style="color: #993399">20</span><span style="color: #990000">,</span> simulate_script<span style="color: #990000">);</span>
-  <span style="color: #990000">(</span>simout<span style="color: #990000">,</span>simlog<span style="color: #990000">)</span> <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">simulation</span></span><span style="color: #990000">(</span>steps<span style="color: #990000">,</span> range<span style="color: #990000">,</span> biasfile<span style="color: #990000">,</span> <span style="color: #993399">1000000</span><span style="color: #990000">,</span> values<span style="color: #990000">,</span> simulate_script<span style="color: #990000">,</span> seedfile<span style="color: #990000">);</span></tt></pre></div></div>
+<div class="content">
+<pre><code>  biasfile = genbias(1000, 20, simulate_script);
+  (simout,simlog) = simulation(steps, range, biasfile, 1000000, values, simulate_script, seedfile);</code></pre>
+</div></div>
 <div class="paragraph"><p>To run:</p></div>
 <div class="listingblock">
 <div class="content">
@@ -2309,6 +2301,62 @@ qstat -q
 # List your jobs and state
 qstat -u $USER</code></pre>
 </div></div>
+<div class="paragraph"><p>Changing you default shell on NERSC systems</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Login to the NERSC Information Management page, <a href="https://nim.nersc.gov">NIM</a>
+</p>
+</li>
+<li>
+<p>
+Once you&#8217;ve logged onto the NIM, Go to the "ACTIONS" dropdown at the top.
+</p>
+</li>
+<li>
+<p>
+Select "Change Shell" and update the shell to <strong>bash</strong> for your machines.
+</p>
+</li>
+<li>
+<p>
+Save, and try logging into the machines to confirm that the changes have taken effect.
+</p>
+</li>
+</ol></div>
+</div>
+<div class="sect3">
+<h4 id="_legion_at_university_college_london">Legion at University College London</h4>
+<div class="paragraph"><p>Legion is a heterogeneous cluster linked together by a fast network at the University College London.
+Here&#8217;s documentation on Edison : <a href="https://wiki.rc.ucl.ac.uk/wiki/Legion">Legion docs</a></p></div>
+<div class="paragraph"><p>Here are the steps to run the tutorial on Legion:
+The swift 0.96 package has been modified to work correctly with Legion. The package can
+be downloaded from here : <a href="http://swift-lang.org/packages/swift-0.96-sge-mod.tar.gz">Swift-0.96-sge-mod.tar.gz</a></p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Login to legion.rc.ucl.ac.uk
+</p>
+</li>
+<li>
+<p>
+The tutorial is designed to be run on the cluster from the login node.
+</p>
+</li>
+<li>
+<p>
+Set the following line in the swift-tutorial/swift.conf file.
+</p>
+</li>
+</ol></div>
+<div class="paragraph"><p>+</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>   sites: [Legion]</code></pre>
+</div></div>
+<div class="paragraph"><p>Notes for Legion:</p></div>
+<div class="paragraph"><p>Please note that when jobs are submitted to the queue, you will see the following error message
+which can be ignored: "Error: No parallel environment specified"</p></div>
 </div>
 </div>
 </div>
@@ -2317,7 +2365,7 @@ qstat -u $USER</code></pre>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-02-20 13:50:41 CST
+Last updated 2015-05-07 14:02:51 CDT
 </div>
 </div>
 </body>

@@ -14,7 +14,7 @@ ordinary application programs on distributed and parallel resources.
 Swift scripts run many copies of ordinary programs concurrently, using
 statements like this:
 
-[source, python]
+
 -----
 foreach protein in proteinList {
   runBLAST(protein);
@@ -113,7 +113,7 @@ single random number. It writes the number to a file.
 image::part01.png["p1 workflow",align="center"]
 
 .p1.swift
-[source, python]
+
 -----
 sys::[cat ../part01/p1.swift]
 -----
@@ -160,7 +160,6 @@ The `p2.swift` script introduces the `foreach` parallel iteration construct to r
 image::part02.png[align="center"]
 
 .p2.swift
-[source,python]
 -----
 sys::[cat ../part02/p2.swift]
 -----
@@ -203,7 +202,7 @@ the trivial "analysis application" `stats.sh`:
 image::part03.png[align="center"]
 
 .p3.swift
-[source, python]
+
 ----
 sys::[cat ../part03/p3.swift]
 ----
@@ -229,7 +228,6 @@ $ cat output/average.out
 Note that in `p3.swift` we expose more of the capabilities of the
 `simulate.sh` application to the `simulation()` app function:
 
-[source,python]
 -----
 app (file o) simulation (int sim_steps, int sim_range, int sim_values)
 {
@@ -241,7 +239,6 @@ app (file o) simulation (int sim_steps, int sim_range, int sim_values)
 the `swift` command line in a Swift script using `arg()` which
 accepts a keyword-style argument and its default value:
 
-[source,python]
 -----
 int nsim   = toInt(arg("nsim","10"));
 int steps  = toInt(arg("steps","1"));
@@ -285,13 +282,20 @@ on computation resources. The `swift.conf` file contains definitions of various 
 of different remote computational resources that swift can run your tasks on.
 
 The examples 4-6, are designed to run on remote sites, and require configurations to be set in
-the `swift.conf`. There are 6 remote sites defined in the swift.conf:
+the `swift.conf`. Here are some of the remote sites defined in the supplied config files,
+swift.conf, xsede.conf and nersc.conf:
 
-* Beagle
-* Blues
-* Midway
+* Beagle (UChicago)
+* Blues  (LCRC at Argonne)
+* Midway (UChicago)
 * OSGConnect
 * Amazon EC2
+* Legion (Universty College London)
+* Swan   (Cray Partner Network)
+* Stampede (XSEDE/TACC)
+* Gordon   (XSEDE/SDSC)
+* Blacklight (XSEDE/PSC)
+* Edison (NERSC)
 * Collection of Ad-hoc nodes (ad-hoc-1..N).
 
 To configure the remote site definition for a particular site, open the swift-tutorial/swift.conf file
@@ -301,7 +305,7 @@ given for midway in the config file.
 
 Here is a snippet from the swift.conf for the midway cluster:
 
-[source, python]
+
 -----
 # Instructions for Midway:
 # 1. If you are running on the midway login nodes you set jobManager: "local:slurm"
@@ -342,7 +346,7 @@ folder we have a file, `unsorted.txt`, which contains 100 random integers rangin
 Ensure that you have configured the `swift.conf` for your target remote site.
 
 .p4.swift
-[source, python]
+
 ----
 sys::[cat ../part04/p4.swift]
 ----
@@ -403,7 +407,6 @@ to `stderr`. In `p3.swift` the apps simulation and stats called the binaries
 stats and simulate which are available on the local machine and is present in
 the system path. The `p5.swift` script 
 
-[source,python]
 ----
 app (file out, file log) simulation (int sim_steps, int sim_range, int sim_values, file sim_script)
 {
@@ -414,7 +417,7 @@ app (file out, file log) simulation (int sim_steps, int sim_range, int sim_value
 image::part05.png[align="center"]
 
 .p5.swift
-[source, python]
+
 ----
 sys::[cat ../part05/p5.swift]
 ----
@@ -520,19 +523,17 @@ file". This pattern is shown below, followed by the Swift script.
 image::part06.png[align="center"]
 
 .p6.swift
-[source,python]
 ----
 sys::[cat ../part06/p6.swift]
 ----
 
 Note that the workflow is based on data flow dependencies: each simulation depends on the seed value, calculated in this statement:
-[source,python]
 -----
 seedfile = genseed(1);
 -----
 
 and on the bias file, computed and then consumed in these two dependent statements:
-[source, python]
+
 -----
   biasfile = genbias(1000, 20, simulate_script);
   (simout,simlog) = simulation(steps, range, biasfile, 1000000, values, simulate_script, seedfile);
