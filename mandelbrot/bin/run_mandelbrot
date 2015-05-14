@@ -23,6 +23,12 @@ then
     echo "$MPI_APP_PATH $*"
     $MPI_APP_PATH $*
 
+elif [[ $MACHINE == "blacklight" ]]
+then
+    export PATH=/usr/local/packages/ImageMagick-6.7.3-10/bin:$PATH
+    echo "mpirun -np $PBS_NCPUS $MPI_APP_PATH $*"
+    mpirun -np $PBS_NCPUS $MPI_APP_PATH $*
+
 elif [[ $MACHINE == "midway" ]]
 then
     module load openmpi
@@ -31,15 +37,4 @@ else
     echo "MACHINE : $MACHINE is not defined"
 fi
 
-
-LOCK=./DIRLOCK
-
-if mkdir "$LOCK" ; then
-    log "Locking succeeded"
-    convert $outputfile -resize 1000x1000 $outputfile
-    sleep 2;
-    echo "[PID:$$] Done" > $LOCK/release
-else
-    sleep 2    
-fi
-
+convert $outputfile -resize 1000x1000 $outputfile
