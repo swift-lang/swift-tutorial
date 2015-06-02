@@ -1166,6 +1166,69 @@ qstat -q
 qstat -u $USER
 -----
 
+Config note for Edison:
+
+In order to enable rapid connection between Swift service (on login node) and worker (on compute nodes), the worker must know the network interface connecting login and compute nodes. To achieve this, worker will probe all the interface at startup. This can cause delays in completion of Swift run. To facilitate a quick connection, Swift config uses a directive called +internalHostName+ whose value is an IP address. Depending on which login node the Swift service runs, the value of this IP differs. The following table shows current mapping of IP addresses between various login nodes and compute nodes on Edison:
+
+[width="40%",frame="topbot",options="header,footer"]
+|======================
+|Login Node |IP Address
+|edison01        |128.55.72.21
+|edison02        |128.55.72.22
+|edison03        |128.55.72.23
+|edison04        |128.55.72.24
+|edison05        |128.55.72.25
+|edison06        |128.55.72.26
+|edison07        |128.55.72.27
+|edison08        |128.55.72.28
+|edison09        |128.55.72.29
+|edison10        |128.55.72.30
+|======================
+
+For instance, if you are logged in edison05, the config for a short run will look like:
+
+----
+site.edison {
+ execution {
+  type: "coaster"
+  URL: "none"
+  jobManager: "local:pbs"
+  options {
+    nodeGranularity: 1
+    maxNodesPerJob: 1
+    maxJobTime: "00:30:00"
+    internalHostName: "128.55.72.29"
+    maxJobs: 20
+    jobProject: "m1540"
+    jobOptions {
+     pbs.aprun: true
+     pbs.mpp: true
+     depth: "24"
+    }
+    tasksPerNode: 24
+  }
+ }
+ workDirectory: "/tmp/swiftwork"
+ staging: "local"
+ maxParallelTasks: 480
+ initialParallelTasks: 480
+ app.cat {
+  executable: "/bin/cat"
+  maxWallTime: "00:02:00"
+ }
+}
+
+sites: edison
+
+TCPPortRange: "50000,51000"
+lazyErrors: false
+executionRetries: 0
+keepSiteDir: true
+providerStagingPinSwiftFiles: false
+alwaysTransferWrapperLog: true
+staging: "local"
+
+----
 
 Changing you default shell on NERSC systems
 

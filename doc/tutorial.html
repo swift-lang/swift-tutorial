@@ -2301,6 +2301,110 @@ qstat -q
 # List your jobs and state
 qstat -u $USER</code></pre>
 </div></div>
+<div class="paragraph"><p>Config note for Edison:</p></div>
+<div class="paragraph"><p>In order to enable rapid connection between Swift service (on login node) and worker (on compute nodes), the worker must know the network interface connecting login and compute nodes. To achieve this, worker will probe all the interface at startup. This can cause delays in completion of Swift run. To facilitate a quick connection, Swift config uses a directive called <code>internalHostName</code> whose value is an IP address. Depending on which login node the Swift service runs, the value of this IP differs. The following table shows current mapping of IP addresses between various login nodes and compute nodes on Edison:</p></div>
+<div class="tableblock">
+<table rules="all"
+width="40%"
+frame="hsides"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<thead>
+<tr>
+<th align="left" valign="top">Login Node </th>
+<th align="left" valign="top">IP Address</th>
+</tr>
+</thead>
+<tfoot>
+<tr>
+<td align="left" valign="top"><p class="table">edison10</p></td>
+<td align="left" valign="top"><p class="table">128.55.72.30</p></td>
+</tr>
+</tfoot>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">edison01</p></td>
+<td align="left" valign="top"><p class="table">128.55.72.21</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">edison02</p></td>
+<td align="left" valign="top"><p class="table">128.55.72.22</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">edison03</p></td>
+<td align="left" valign="top"><p class="table">128.55.72.23</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">edison04</p></td>
+<td align="left" valign="top"><p class="table">128.55.72.24</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">edison05</p></td>
+<td align="left" valign="top"><p class="table">128.55.72.25</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">edison06</p></td>
+<td align="left" valign="top"><p class="table">128.55.72.26</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">edison07</p></td>
+<td align="left" valign="top"><p class="table">128.55.72.27</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">edison08</p></td>
+<td align="left" valign="top"><p class="table">128.55.72.28</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">edison09</p></td>
+<td align="left" valign="top"><p class="table">128.55.72.29</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p>For instance, if you are logged in edison05, the config for a short run will look like:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>site.edison {
+ execution {
+  type: "coaster"
+  URL: "none"
+  jobManager: "local:pbs"
+  options {
+    nodeGranularity: 1
+    maxNodesPerJob: 1
+    maxJobTime: "00:30:00"
+    internalHostName: "128.55.72.29"
+    maxJobs: 20
+    jobProject: "m1540"
+    jobOptions {
+     pbs.aprun: true
+     pbs.mpp: true
+     depth: "24"
+    }
+    tasksPerNode: 24
+  }
+ }
+ workDirectory: "/tmp/swiftwork"
+ staging: "local"
+ maxParallelTasks: 480
+ initialParallelTasks: 480
+ app.cat {
+  executable: "/bin/cat"
+  maxWallTime: "00:02:00"
+ }
+}
+
+sites: edison
+
+TCPPortRange: "50000,51000"
+lazyErrors: false
+executionRetries: 0
+keepSiteDir: true
+providerStagingPinSwiftFiles: false
+alwaysTransferWrapperLog: true
+staging: "local"</code></pre>
+</div></div>
 <div class="paragraph"><p>Changing you default shell on NERSC systems</p></div>
 <div class="olist arabic"><ol class="arabic">
 <li>
@@ -2365,7 +2469,7 @@ which can be ignored: "Error: No parallel environment specified"</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-05-07 14:02:51 CDT
+Last updated 2015-06-02 10:02:58 CDT
 </div>
 </div>
 </body>
