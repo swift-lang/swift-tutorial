@@ -1190,43 +1190,24 @@ For instance, if you are logged in edison05, the config for a short run will loo
 ----
 site.edison {
  execution {
-  type: "coaster"
-  URL: "none"
-  jobManager: "local:pbs"
+ ...
   options {
-    nodeGranularity: 1
-    maxNodesPerJob: 1
-    maxJobTime: "00:30:00"
+    ...
     internalHostName: "128.55.72.29"
-    maxJobs: 20
-    jobProject: "m1540"
+    ...
     jobOptions {
-     pbs.aprun: true
-     pbs.mpp: true
-     depth: "24"
+     ...
     }
-    tasksPerNode: 24
+    ...
   }
  }
- workDirectory: "/tmp/swiftwork"
- staging: "local"
- maxParallelTasks: 480
- initialParallelTasks: 480
- app.cat {
-  executable: "/bin/cat"
-  maxWallTime: "00:02:00"
+ ...
  }
 }
 
 sites: edison
-
-TCPPortRange: "50000,51000"
-lazyErrors: false
-executionRetries: 0
-keepSiteDir: true
-providerStagingPinSwiftFiles: false
-alwaysTransferWrapperLog: true
-staging: "local"
+...
+...
 
 ----
 
