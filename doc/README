@@ -3,7 +3,7 @@ Swift Tutorial
 
 This tutorial is viewable at:
 
-[red]#TODO> http://swiftlang.org/tutorials/swift-tutorial-0.96
+http://swift-lang.org/swift-tutorial/doc/tutorial.html
 
 
 Introduction: Why Parallel Scripting?
@@ -41,8 +41,6 @@ installed on the machine you would be using to run the tutorial on.
 Swift is available as loadable software module on Beagle, Midway and
 OSGConnect. If a module is not available the following steps describe the
 installation procedure.
-
-[red]#TODO: Ensure latest modules are available on Beagle/Midway/OSGConnect#
 
 Swift installation
 ~~~~~~~~~~~~~~~~~~
@@ -117,9 +115,6 @@ image::part01.png["p1 workflow",align="center"]
 -----
 sys::[cat ../part01/p1.swift]
 -----
-
-
-[red]#TODO: Update the following output block
 
 To run this script, run the following command:
 
