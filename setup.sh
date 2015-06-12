@@ -10,7 +10,7 @@ export AD_HOC_N_USERNAME=""
 export OSG_USERNAME=""
 export OSG_PROJECT=""
 export BLUES_USERNAME=""
-
+export CLOUD_HEADNODE="http://HEADNODE_ADDRESS:50010"
 #############################################################
 
 

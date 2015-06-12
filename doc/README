@@ -293,6 +293,17 @@ swift.conf, xsede.conf and nersc.conf:
 * Edison (NERSC)
 * Collection of Ad-hoc nodes (ad-hoc-1..N).
 
+Please note that the XSEDE sites Stampede, Gordon, Blacklight and Trestles are defined in the config
+file : xsede.conf.
+
+In order to use a different config file besides the default config file swift.conf, specify the
+config file on the swift commandline using the -config option.
+For example:
+
+For part04:
+swift -config xsede.conf -sites stampede p4.swift
+
+
 To configure the remote site definition for a particular site, open the swift-tutorial/swift.conf file
 and edit the site entry for that site. For example, if you like to run the tutorial on the Midway
 cluster, edit the site.midway entry in the swift-tutorial/swift.conf file and follow the instructions
@@ -400,7 +411,7 @@ script is similar to `p3.swift`, but specifies that each simulation app
 invocation should additionally return the log file which the application writes
 to `stderr`. In `p3.swift` the apps simulation and stats called the binaries
 stats and simulate which are available on the local machine and is present in
-the system path. The `p5.swift` script 
+the system path. The `p5.swift` script
 
 ----
 app (file out, file log) simulation (int sim_steps, int sim_range, int sim_values, file sim_script)
