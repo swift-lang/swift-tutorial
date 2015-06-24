@@ -38,6 +38,14 @@ then
     export PATH=$JAVA:$SWIFT:$PATH
 fi
 
+if [ -d /opt/swift/swift-0.96.1 ] && [ -d /opt/swift/jdk1.7.0_51 ]
+then
+    export SWIFT=/opt/swift/swift-0.96.1/bin
+    export JAVA=/opt/swift/jdk1.7.0_51/bin
+    export PATH=$SWIFT:$JAVA:$PATH
+    export X509_USER_PROXY=/tmp/x509.$USER.$RANDOM
+fi
+
 echo Swift version is $(swift -version)
 
 return

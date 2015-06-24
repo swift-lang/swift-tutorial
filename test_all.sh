@@ -36,7 +36,8 @@ do
 done
 fi
 
-SITES=('beagle' 'midway' 'osgc' 'ad-hoc-1')
+#SITES=('beagle' 'midway' 'osgc' 'ad-hoc-1')
+SITES=('stampede' 'gordon' 'blacklight')
 for i in $(seq 4 1 6)
 do
     pushd .
@@ -46,7 +47,7 @@ do
     for SITE in ${SITES[*]}
     do
         echo "Running on SITE : $SITE"
-        swift -site=$SITE p$i.swift
+        swift -config xsede.conf -sites $SITE p$i.swift
         if [[ $? == 0 ]]
         then
             echo "Cleaning up!"
