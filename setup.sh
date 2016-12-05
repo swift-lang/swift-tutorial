@@ -31,14 +31,69 @@ else
   echo Assuming $TUTDIR/bin:$TUTDIR/app: is already at front of PATH
 fi
 
-if [ -d /usr/local/bin/swift-trunk ] && [ -d /usr/local/bin/jdk1.7.0_51 ]
-then
-    export JAVA=/usr/local/bin/jdk1.7.0_51/bin
-    export SWIFT=/usr/local/bin/swift-trunk/bin
-    export PATH=$JAVA:$SWIFT:$PATH
-fi
 
-if [ -d /opt/swift/swift-0.96.1 ] && [ -d /opt/swift/jdk1.7.0_51 ]
+# Set PATH for specific hosts
+
+if hostname | grep bridges; then
+
+    module load java # Get Oracle Java 1.8.x
+    SWIFT=/home/wilde/swift/rev/swift-0.96.2
+    PATH=$SWIFT/bin:$JAVA:$PATH
+
+    module unload mpi/intel_mpi
+    module load mpi/gcc_mvapich
+    export CC="mpicc"
+    echo "modules adjusted: unloaded mpi/intel_mpi; loaded mpi/gcc_mvapich"
+    echo "This list should should show mpi/gcc_mvapich as only MPI:"
+    module list
+
+elif hostname -f | grep "edison" ; then
+    echo "Configuring for Edison"
+    module swap PrgEnv-intel PrgEnv-gnu
+    export PATH=$PWD/part07:$PATH
+    export CC="cc"
+
+    pushd .
+    cd part07/ ;
+    make clean ; make
+    popd
+
+    pushd .
+    cd part08/ ; rm hipi
+    make -f makefile.edison
+    popd
+
+
+elif hostname -f | grep "ncsa.illinois.edu" ; then
+    # BW does not have a clearly identifiable hostname on the login nodes
+
+    module load java # Oracle java java/jdk1.8.0_51
+    module unload PrgEnv-cray/5.2.82
+    module load PrgEnv-gnu/5.2.82
+    SWIFT=~wilde/scratch/swift/rev/swift-0.96.2
+    PATH=$SWIFT/bin:$PATH
+    export CC="cc"
+
+elif hostname | grep comet; then
+
+    JAVA=/oasis/scratch/comet/xdtr1/temp_project/jdk1.8.0_91/bin
+    SWIFT=/oasis/scratch/comet/xdtr1/temp_project/swift/swift-0.96.2/bin
+    PATH=$SWIFT:$JAVA:$PATH
+
+elif hostname | grep workflow.iu; then
+
+    SWIFT=/opt/swift/swift-0.96.2/bin
+    JAVA=$(echo /opt/swift/jdk1.*/bin)
+    PATH=$SWIFT:$JAVA:$PATH
+    export X509_USER_PROXY=/tmp/x509.$USER.$RANDOM
+
+elif [ -d /usr/local/bin/swift-trunk ] && [ -d /usr/local/bin/jdk1.7.0_51 ]; then
+
+    JAVA=/usr/local/bin/jdk1.7.0_51/bin
+    SWIFT=/usr/local/bin/swift-trunk/bin
+    PATH=$JAVA:$SWIFT:$PATH
+
+elif [ -d /opt/swift/swift-0.96.1 ] && [ -d /opt/swift/jdk1.7.0_51 ]
 then
     export SWIFT=/opt/swift/swift-0.96.1/bin
     export JAVA=/opt/swift/jdk1.7.0_51/bin
@@ -46,7 +101,6 @@ then
     export X509_USER_PROXY=/tmp/x509.$USER.$RANDOM
 fi
 
-echo Swift version is $(swift -version)
+echo "Swift version is $(swift -version)"
 
 return
-
