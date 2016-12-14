@@ -756,7 +756,7 @@ asciidoc.install(2);
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph"><p>This tutorial is viewable at:</p></div>
-<div class="paragraph"><p>[red]#TODO&gt; <a href="http://swiftlang.org/tutorials/swift-tutorial-0.96">http://swiftlang.org/tutorials/swift-tutorial-0.96</a></p></div>
+<div class="paragraph"><p><a href="http://swift-lang.org/swift-tutorial/doc/tutorial.html">http://swift-lang.org/swift-tutorial/doc/tutorial.html</a></p></div>
 </div>
 </div>
 <div class="sect1">
@@ -791,7 +791,6 @@ installed on the machine you would be using to run the tutorial on.</p></div>
 <div class="paragraph"><p>Swift is available as loadable software module on Beagle, Midway and
 OSGConnect. If a module is not available the following steps describe the
 installation procedure.</p></div>
-<div class="paragraph"><p><span class="red">TODO: Ensure latest modules are available on Beagle/Midway/OSGConnect</span></p></div>
 <div class="sect2">
 <h3 id="_swift_installation">Swift installation</h3>
 <div class="listingblock">
@@ -867,7 +866,6 @@ app (file o) simulation ()
 file f &lt;"sim.out"&gt;;
 f = simulation();</code></pre>
 </div></div>
-<div class="paragraph"><p>[red]#TODO: Update the following output block</p></div>
 <div class="paragraph"><p>To run this script, run the following command:</p></div>
 <div class="listingblock">
 <div class="content">
@@ -1082,6 +1080,11 @@ Midway (UChicago)
 </li>
 <li>
 <p>
+Edison (NERSC)
+</p>
+</li>
+<li>
+<p>
 OSGConnect
 </p>
 </li>
@@ -1117,15 +1120,17 @@ Blacklight (XSEDE/PSC)
 </li>
 <li>
 <p>
-Edison (NERSC)
-</p>
-</li>
-<li>
-<p>
 Collection of Ad-hoc nodes (ad-hoc-1..N).
 </p>
 </li>
 </ul></div>
+<div class="paragraph"><p>Please note that the XSEDE sites Stampede, Gordon, Blacklight and Trestles are defined in the config
+file : xsede.conf.</p></div>
+<div class="paragraph"><p>In order to use a different config file besides the default config file swift.conf, specify the
+config file on the swift commandline using the -config option.
+For example:</p></div>
+<div class="paragraph"><p>For part04:
+swift -config xsede.conf -sites stampede p4.swift</p></div>
 <div class="paragraph"><p>To configure the remote site definition for a particular site, open the swift-tutorial/swift.conf file
 and edit the site entry for that site. For example, if you like to run the tutorial on the Midway
 cluster, edit the site.midway entry in the swift-tutorial/swift.conf file and follow the instructions
@@ -1539,6 +1544,161 @@ than 20 will use the last bias number for all remaining values past
 <td class="content">As an exercise, adjust the code to produce the same number of bias values as is needed for each simulation.  As a further exercise, modify the script to generate a unique seed value for each simulation, which is a common practice in ensemble computations.</td>
 </tr></table>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_example_7_mpi_hello">Example 7: MPI Hello</h3>
+<div class="paragraph"><p>p7.swift is a basic "Hello World!" example that shows you how to run MPI applications.
+Here we have a simple MPI code <code>mpi_hello.c</code> that has each MPI rank sleep for a user-specified duration
+and then print the processor name on which the rank is executing followed by "Hello World!".
+Note that unlike the previous examples the mpi application is not called directly in the app definition.
+Instead it is called as an argument to <code>mpiwrap</code>. <code>mpiwrap</code> manages the system specific invocation such as mpiexec or srun,
+required to launch an MPI task and takes the number of processes to launch as an argument followed by the path to the mpiapp and it&#8217;s arguments.</p></div>
+<div class="paragraph"><p>Now we will explore configuration options that are used to specify the shape of the compute resource.
+The nersc.conf file shows two configurations for Edison, <code>edison</code> and <code>edison_multinode</code>. First we will now look at the configuration
+that we used for running regular tasks and how that needs to be modified in order to run MPI tasks. In the site configuration <code>edison</code>
+we set the following in the site execution options block :</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>options {
+    maxJobs         : 1           # Max jobs submitted to LRM
+    nodeGranularity : 1           # Nodes requested will be multiples of this
+    maxNodesPerJob  : 1           # Max Nodes that can be requested per job
+    tasksPerNode    : 24          # Tasks per Node, This is not used here
+    maxJobTime      : "00:25:00"  # Time requested per job
+    jobQueue        : "debug"
+}</code></pre>
+</div></div>
+<div class="paragraph"><p>Here is a brief description of the config options:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<code>maxJobs</code>: Upper limit on the number of jobs that could be submitted to the Compute resource&#8217;s Resource manager(slurm, pbs etc).
+Swift may submit fewer job to the resource if it determines that fewer jobs are sufficient to complete the workflow.
+</p>
+</li>
+<li>
+<p>
+<code>nodeGranularity</code>: This is the granularity of the increments by which additional nodes might be requested per Job.
+For eg, if you set nodeGranularity=2 and maxNodesPerJob=4, Swift will request either 2 or 4 nodes per Job.
+</p>
+</li>
+<li>
+<p>
+<code>maxNodesPerJob</code>: This is the upper limit on the number of nodes that could be requested per Job submitted to the resource manager.
+</p>
+</li>
+<li>
+<p>
+<code>tasksPerNode</code>: These are the number of tasks that the swift-worker running on each node is allowed to run in parallel.
+</p>
+</li>
+<li>
+<p>
+<code>jobQueue</code>: This is the queue to which we submit our resource requests to.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>The <code>edison</code> config gets you a single node, which runs 24 tasks per node. Next we see the
+configuration that we will use for our MPI application <code>edison_multinode</code>.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>options {
+   maxJobs         : 1                       # Max jobs submitted to LRM
+   nodeGranularity : 2                       # Nodes requested will be multiples of this
+   maxNodesPerJob  : 2                       # Max nodes that can be requested per job
+   maxJobTime      : "00:25:00"              # Time requested per job
+   jobQueue        : "debug"
+   jobOptions {
+      jobType     : "single"                   # Submit jobs via aprun mechanism
+   }
+}</code></pre>
+</div></div>
+<div class="paragraph"><p>Here we request a single job which requests nodes in multiple of 2 with a maximum of 2 nodes.
+With jobOptions.jobType set to "single" we specify that we will launch only a single swift-worker per block of resources.
+The swift worker also launches a single task per block of 2 nodes with tasksPerNode not set. This allows us to launch MPI apps which often use multiple node.</p></div>
+<div class="listingblock">
+<div class="title">p7.swift</div>
+<div class="content">
+<pre><code>type file;
+
+string curdir = java("java.lang.System","getProperty","user.dir");
+
+app (file out, file err) mpi_hello (int time, int nproc)
+{
+    mpiwrap nproc mpiapp time stdout=@out stderr=@err;
+}
+
+int    nsim   = toInt(arg("nsim",   "10"));
+int    time   = toInt(arg("time",   "1"));
+int    nproc  = toInt(arg("nproc",  "56"));
+
+global string mpiapp = arg("mpiapp", curdir+"/mpi_hello");
+
+foreach i in [0:nsim-1] {
+  file mpiout &lt;single_file_mapper; file=strcat("output/mpi_",i,".out")&gt;;
+  file mpierr &lt;single_file_mapper; file=strcat("output/mpi_",i,".err")&gt;;
+  (mpiout, mpierr) = mpi_hello(time, nproc);
+}</code></pre>
+</div></div>
+<div class="paragraph"><p>To run:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>$ cd swift-tutorial/part07
+# Run the test locally on the login node itself
+$ swift p7.swift
+Swift trunk git-rev: 8873d3d69e3beebde12642c2e4c344a46a60f9af heads/master 6284 (modified locally)
+RunID: run004
+Progress: Tue, 13 Dec 2016 22:16:01-0800
+Progress: Tue, 13 Dec 2016 22:16:02-0800  Active:10
+Final status: Tue, 13 Dec 2016 22:16:05-0800  Finished successfully:10
+
+
+# Run the test on the cluster
+$ swift -config nersc.conf -sites edison_multinode p7.swift
+Swift trunk git-rev: 8873d3d69e3beebde12642c2e4c344a46a60f9af heads/master 6284 (modified locally)
+RunID: run002
+Progress: Thu, 08 Dec 2016 13:13:03-0800
+Progress: Thu, 08 Dec 2016 13:13:04-0800  Submitted:10
+Progress: Thu, 08 Dec 2016 13:13:34-0800  Submitted:10
+Progress: Thu, 08 Dec 2016 13:14:04-0800  Submitted:10
+Progress: Thu, 08 Dec 2016 13:14:34-0800  Submitted:10
+Progress: Thu, 08 Dec 2016 13:15:04-0800  Submitted:10
+Progress: Thu, 08 Dec 2016 13:15:34-0800  Submitted:10
+...
+Progress: Thu, 08 Dec 2016 13:53:06-0800  Active:10
+Progress: Thu, 08 Dec 2016 13:53:36-0800  Active:10
+Progress: Thu, 08 Dec 2016 13:54:06-0800  Active:10
+Progress: Thu, 08 Dec 2016 13:54:36-0800  Active:10
+Progress: Thu, 08 Dec 2016 13:54:41-0800  Active:9  Finished successfully:1
+Progress: Thu, 08 Dec 2016 13:54:53-0800  Active:8  Finished successfully:2
+Progress: Thu, 08 Dec 2016 13:55:03-0800  Active:7  Finished successfully:3
+Progress: Thu, 08 Dec 2016 13:55:17-0800  Active:6  Finished successfully:4
+Progress: Thu, 08 Dec 2016 13:55:34-0800  Active:5  Finished successfully:5
+Progress: Thu, 08 Dec 2016 13:55:44-0800  Active:4  Finished successfully:6
+Progress: Thu, 08 Dec 2016 13:56:00-0800  Active:3  Finished successfully:7
+Progress: Thu, 08 Dec 2016 13:56:12-0800  Active:2  Finished successfully:8
+Progress: Thu, 08 Dec 2016 13:56:42-0800  Active:2  Finished successfully:8
+Progress: Thu, 08 Dec 2016 13:56:45-0800  Active:1  Finished successfully:9
+Final status: Thu, 08 Dec 2016 13:56:57-0800  Finished successfully:10
+
+
+# cat output/mpi_0.out
+Executing with srun :
+[Rank:29]Hello World!
+[Rank:30]Hello World!
+[Rank:31]Hello World!
+[Rank:32]Hello World!
+[Rank:33]Hello World!
+[Rank:34]Hello World!
+[Rank:35]Hello World!
+[Rank:36]Hello World!
+[Rank:37]Hello World!
+...</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_example_8_a_two_stage_mpi_workflow">Example 8: A two stage MPI workflow</h3>
+<div class="paragraph"><p>Expanding on the previous example, we will look at a simple workflow that has a distributed phase followed by an aggregation phase. For this example we are using an MPI program <code>hipi.c</code> that calculates the value of <code>Pi</code> $pi in a distributed fashion.</p></div>
 </div>
 </div>
 </div>
@@ -2450,7 +2610,7 @@ which can be ignored: "Error: No parallel environment specified"</p></div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-06-02 10:14:30 CDT
+Last updated 2016-12-14 15:10:19 CST
 </div>
 </div>
 </body>

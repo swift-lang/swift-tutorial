@@ -283,6 +283,7 @@ swift.conf, xsede.conf and nersc.conf:
 * Beagle (UChicago)
 * Blues  (LCRC at Argonne)
 * Midway (UChicago)
+* Edison (NERSC)
 * OSGConnect
 * Amazon EC2
 * Legion (Universty College London)
@@ -290,7 +291,6 @@ swift.conf, xsede.conf and nersc.conf:
 * Stampede (XSEDE/TACC)
 * Gordon   (XSEDE/SDSC)
 * Blacklight (XSEDE/PSC)
-* Edison (NERSC)
 * Collection of Ad-hoc nodes (ad-hoc-1..N).
 
 Please note that the XSEDE sites Stampede, Gordon, Blacklight and Trestles are defined in the config
@@ -618,9 +618,138 @@ $ cat output/sim_0.out
 We produce 20 values in each bias file. Simulations of less than that
 number of values ignore the unneeded number, while simualtions of more
 than 20 will use the last bias number for all remaining values past
-20. 
+20.
 
 NOTE: As an exercise, adjust the code to produce the same number of bias values as is needed for each simulation.  As a further exercise, modify the script to generate a unique seed value for each simulation, which is a common practice in ensemble computations.
+
+
+Example 7: MPI Hello
+~~~~~~~~~~~~~~~~~~~~
+
+p7.swift is a basic "Hello World!" example that shows you how to run MPI applications.
+Here we have a simple MPI code `mpi_hello.c` that has each MPI rank sleep for a user-specified duration
+and then print the processor name on which the rank is executing followed by "Hello World!".
+Note that unlike the previous examples the mpi application is not called directly in the app definition.
+Instead it is called as an argument to `mpiwrap`. `mpiwrap` manages the system specific invocation such as mpiexec or srun,
+required to launch an MPI task and takes the number of processes to launch as an argument followed by the path to the mpiapp and it's arguments.
+
+Now we will explore configuration options that are used to specify the shape of the compute resource.
+The nersc.conf file shows two configurations for Edison, `edison` and `edison_multinode`. First we will now look at the configuration
+that we used for running regular tasks and how that needs to be modified in order to run MPI tasks. In the site configuration `edison`
+we set the following in the site execution options block :
+
+----
+options {
+    maxJobs         : 1           # Max jobs submitted to LRM
+    nodeGranularity : 1           # Nodes requested will be multiples of this
+    maxNodesPerJob  : 1           # Max Nodes that can be requested per job
+    tasksPerNode    : 24          # Tasks per Node, This is not used here
+    maxJobTime      : "00:25:00"  # Time requested per job
+    jobQueue        : "debug"
+}
+----
+
+Here is a brief description of the config options:
+
+* `maxJobs`: Upper limit on the number of jobs that could be submitted to the Compute resource's Resource manager(slurm, pbs etc).
+Swift may submit fewer job to the resource if it determines that fewer jobs are sufficient to complete the workflow.
+
+* `nodeGranularity`: This is the granularity of the increments by which additional nodes might be requested per Job.
+For eg, if you set nodeGranularity=2 and maxNodesPerJob=4, Swift will request either 2 or 4 nodes per Job.
+
+* `maxNodesPerJob`: This is the upper limit on the number of nodes that could be requested per Job submitted to the resource manager.
+
+* `tasksPerNode`: These are the number of tasks that the swift-worker running on each node is allowed to run in parallel.
+
+* `jobQueue`: This is the queue to which we submit our resource requests to.
+
+The `edison` config gets you a single node, which runs 24 tasks per node. Next we see the
+configuration that we will use for our MPI application `edison_multinode`.
+
+----
+options {
+   maxJobs         : 1                       # Max jobs submitted to LRM
+   nodeGranularity : 2                       # Nodes requested will be multiples of this
+   maxNodesPerJob  : 2                       # Max nodes that can be requested per job
+   maxJobTime      : "00:25:00"              # Time requested per job
+   jobQueue        : "debug"
+   jobOptions {
+      jobType     : "single"                   # Submit jobs via aprun mechanism
+   }
+}
+----
+
+Here we request a single job which requests nodes in multiple of 2 with a maximum of 2 nodes.
+With jobOptions.jobType set to "single" we specify that we will launch only a single swift-worker per block of resources.
+The swift worker also launches a single task per block of 2 nodes with tasksPerNode not set. This allows us to launch MPI apps which often use multiple node.
+
+.p7.swift
+----
+sys::[cat ../part07/p7.swift]
+----
+
+To run:
+
+----
+$ cd swift-tutorial/part07
+# Run the test locally on the login node itself
+$ swift p7.swift
+Swift trunk git-rev: 8873d3d69e3beebde12642c2e4c344a46a60f9af heads/master 6284 (modified locally)
+RunID: run004
+Progress: Tue, 13 Dec 2016 22:16:01-0800
+Progress: Tue, 13 Dec 2016 22:16:02-0800  Active:10
+Final status: Tue, 13 Dec 2016 22:16:05-0800  Finished successfully:10
+
+
+# Run the test on the cluster
+$ swift -config nersc.conf -sites edison_multinode p7.swift
+Swift trunk git-rev: 8873d3d69e3beebde12642c2e4c344a46a60f9af heads/master 6284 (modified locally)
+RunID: run002
+Progress: Thu, 08 Dec 2016 13:13:03-0800
+Progress: Thu, 08 Dec 2016 13:13:04-0800  Submitted:10
+Progress: Thu, 08 Dec 2016 13:13:34-0800  Submitted:10
+Progress: Thu, 08 Dec 2016 13:14:04-0800  Submitted:10
+Progress: Thu, 08 Dec 2016 13:14:34-0800  Submitted:10
+Progress: Thu, 08 Dec 2016 13:15:04-0800  Submitted:10
+Progress: Thu, 08 Dec 2016 13:15:34-0800  Submitted:10
+...
+Progress: Thu, 08 Dec 2016 13:53:06-0800  Active:10
+Progress: Thu, 08 Dec 2016 13:53:36-0800  Active:10
+Progress: Thu, 08 Dec 2016 13:54:06-0800  Active:10
+Progress: Thu, 08 Dec 2016 13:54:36-0800  Active:10
+Progress: Thu, 08 Dec 2016 13:54:41-0800  Active:9  Finished successfully:1
+Progress: Thu, 08 Dec 2016 13:54:53-0800  Active:8  Finished successfully:2
+Progress: Thu, 08 Dec 2016 13:55:03-0800  Active:7  Finished successfully:3
+Progress: Thu, 08 Dec 2016 13:55:17-0800  Active:6  Finished successfully:4
+Progress: Thu, 08 Dec 2016 13:55:34-0800  Active:5  Finished successfully:5
+Progress: Thu, 08 Dec 2016 13:55:44-0800  Active:4  Finished successfully:6
+Progress: Thu, 08 Dec 2016 13:56:00-0800  Active:3  Finished successfully:7
+Progress: Thu, 08 Dec 2016 13:56:12-0800  Active:2  Finished successfully:8
+Progress: Thu, 08 Dec 2016 13:56:42-0800  Active:2  Finished successfully:8
+Progress: Thu, 08 Dec 2016 13:56:45-0800  Active:1  Finished successfully:9
+Final status: Thu, 08 Dec 2016 13:56:57-0800  Finished successfully:10
+
+
+# cat output/mpi_0.out
+Executing with srun :
+[Rank:29]Hello World!
+[Rank:30]Hello World!
+[Rank:31]Hello World!
+[Rank:32]Hello World!
+[Rank:33]Hello World!
+[Rank:34]Hello World!
+[Rank:35]Hello World!
+[Rank:36]Hello World!
+[Rank:37]Hello World!
+...
+
+----
+
+
+Example 8: A two stage MPI workflow
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Expanding on the previous example, we will look at a simple workflow that has a distributed phase followed by an aggregation phase. For this example we are using an MPI program `hipi.c` that calculates the value of `Pi` $pi in a distributed fashion.
 
 Additional information and references
 -------------------------------------

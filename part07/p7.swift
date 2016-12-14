@@ -4,7 +4,6 @@ string curdir = java("java.lang.System","getProperty","user.dir");
 
 app (file out, file err) mpi_hello (int time, int nproc)
 {
-    #mpirun "-np" nproc mpiapp time stderr=filename(err) stdout=filename(out);
     mpiwrap nproc mpiapp time stdout=@out stderr=@err;
 }
 
