@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# This is a wrapper that launches the mpi binary using the appropriate mpi launcher.
+# On edison/cori the launch will be done using srun
+
+MPI_RANKS=$1
+MPI_APP_PATH=$2
+shift 2
+
+if which srun &> /dev/null    ; then
+
+    echo "Executing with srun :"
+    srun -n $MPI_RANKS $MPI_APP_PATH $*
+
+elif which mpirun &> /dev/null ; then
+
+    echo "Executing with mpirun :"
+    mpirun -np $MPI_RANKS $MPI_APP_PATH $*
+
+fi
+
+
