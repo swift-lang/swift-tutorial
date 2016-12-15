@@ -60,7 +60,7 @@ elif hostname -f | grep "edison" ; then
 
     pushd .
     cd part08/ ; rm hipi
-    make -f makefile.edison
+    make clean ; make
     popd
 
 
